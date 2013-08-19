@@ -1,0 +1,1342 @@
+%
+\documentclass[11pt]{book}            
+\usepackage[margin=0.75in]{geometry}
+
+\pagestyle{empty}
+\newcommand{\nwc}{\newcommand}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage[sc]{mathpazo}
+\usepackage{array,wrapfig,etoolbox,datetime,parskip,graphicx,mathrsfs,mathtools}
+%\usepackage[all]{xy}
+\renewcommand{\dateseparator}{-} \yyyymmdddate        % <- To revert to default, use \usdate.
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{prop}{Proposition}  
+\theoremstyle{definition}    
+\newtheorem*{remark}{Remark}
+\newtheorem{defintion}{Definition}
+\everymath{\displaystyle}
+\let\oldhat\hat
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\renewcommand{\hat}[1]{\oldhat{\mathbf{#1}}}
+
+% \cal = regular calligraphy, \eucal = Euler calligraphy, and misc other changes
+\let\cal\mathcal \usepackage{eucal} \let\eucal\mathcal \let\mathcal\cal
+\newcommand{\height}{\operatorname{ht}} 
+\newcommand{\ext}{\operatorname{\mathscr{E}\!{\it xt}}}
+\renewcommand{\hom}{\operatorname{\mathscr{H}\!{\it om}}} 
+\renewcommand{\frak}[1]{\mathfrak{#1}}    
+\renewcommand{\S}{\mathbb{S}}
+\newcommand{\taxi}[1]{| #1 |_{\textup{taxi}}}
+\renewcommand{\P}{\mathbb{P}}
+\renewcommand{\H}{\mathbb{H}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+
+% Define lots of things all together
+\nwc{\LoopDef}[3]{\expandafter #3\csname #1\endcsname{#2{#1}}}
+\nwc{\MathOp}[1]{\LoopDef{#1}{}{\DeclareMathOperator}} \nwc{\MathOps}{\forcsvlist{\MathOp}} 
+\nwc{\Category}[1]{\LoopDef{#1}{\mathsf}{\def}}            \nwc{\Categories}{\forcsvlist{\Category}}
+\nwc{\BBold}[1]{\LoopDef{#1}{\mathbb}{\def}}               \nwc{\BBolds}{\forcsvlist{\BBold}}  \MathOps{im,Hom,id,coker,rad,Ann,codim,Ass,depth,GL,SL,PGL,PSL,Res,End,Aut,Gal,mSpec,Spec,Ext,Tor,ord,lcm,Supp,sech,csch,disc,Mor,Ob,dom,cod,nil,Br,tr,pd,vol,Irr}
+\Categories{Set,Grp,Ab,Ring,CRing,Top,Toph,Mod,Vect,Cat,Poset,PreSh,Sh,Mon,Haus,Nat,Field,Fun,Sch,Grph,Smgrp,FinSet,TopMan,Man}
+\BBolds{N,Z,Q,R,C,F,G,T,A,B,D,E}
+\DeclareMathOperator{\spn}{\,span}
+\usepackage[pdftex,pdfpagelabels,bookmarks,hyperindex,hyperfigures]{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+} 
+\begin{document}
+\title{Complex Analysis Problems and Solutions}
+\author{Abraham Engle}
+\maketitle
+\tableofcontents
+\chapter{Class}
+\section{MATH 534}
+\subsection{Chapter 1}
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item We wish to show the hypothesis of part (b) holds.
+\begin{proof}
+By the assumption of this problem, $|f(x)|\leq A$ for all $x\in[a,b]$. We have then
+$\int_a^b |f(x)|dx\leq \int_a^b |A|dx = \left|\int_a^b f(x)dx\right|$. We next show the reverse inequality. Let $\lambda = \dfrac{|\int_a^bf(x)dx|}{\int_a^bf(x)dx}$. If the denominator of $\lambda$ is zero, then $\int_a^b f(x)dx=0$ implies $0=\left|\int_a^b f(x)dx\right|\geq\int_a^b |f(x)|dx$, so that $|f(x)|=0$, by continuity, or that $f(x)$ is a constant identically zero. Since we require $\arg(f)\neq 0$, we do not consider this case. Now let $\lambda$ be given as above. Then we have
+\begin{align*}
+\left|\int_a^b f(x)dx\right| &= \lambda\int_a^b f(x)dx \\
+&= \int_a^b \lambda f(x)dx \\
+&= \int_a^b Re(\lambda f(x))dx \text{ (since this integral is equal to a real number)} \\
+&\leq \int_a^b |\lambda f(x)|dx \text{ (by monotonicity of the integral)} \\
+&= \int_a^b |f(x)|dx,
+\end{align*}
+%\end{proof}
+so that $\left|\int_a^b f(x)dx\right|\leq \int_a^b |f(x)|dx$, from which we conclude $\int_a^b|f(x)|dx=\left|\int_a^bf(x)dx\right|$. Therefore by the conclusion of (b) we have $\mathrm{arg}(f)$ is constant. Next we prove $|f(x)|$ is constant over $[a,b]$, and it will follow that $f(x)$ is constant. By the Cauchy Schwarz inequality applied to $1, f(x)$,
+\begin{align*}
+\left(\int_a^b |f(x)|dx\right)^2 &\leq \left(\int_a^b |f(x)|^2dx\right)(b-a) \\
+&\leq |A|(b-a)\int_a^b |f(x)|dx \text{ (by the problem hypothesis)}\\
+&= \left|\int_a^b f(x)dx\right|\int_a^b |f(x)|dx \\
+&= \left(\int_a^b |f(x)|dx\right)^2
+\end{align*}
+Therefore we actually have an equality in Cauchy-Schwarz so we know $|f(x)|=c\cdot 1$, for $c\in\R$, which, together with $\mathrm{arg}(f)$ being constant, implies that $f(x)$ is constant.
+\end{proof}
+%PART 5B
+\item 
+Assume $|A|=(1/(b-a))\int_a^b |f(x)|dx$. Define $\lambda = \dfrac{|\int_a^bf(x)dx|}{\int_a^bf(x)dx}$. If the denominator of $\lambda$ is zero, then $\int_a^b f=0$ together with the hypothesis of the problem implies $0=\int_a^b |f(x)|dx$, so that $|f(x)|=0$, by continuity, or that $f(x)$ is a constant identically zero, and the result follows anyway.
+\begin{proof}
+Assume the denominator of $\lambda$ is nonzero. By the hypothesis of this problem, $\int_a^b \lambda f(x)dx=\left|\int_a^b f(x)dx\right| = \int_a^b |f(x)|dx=\int_a^b|\lambda f(x)|dx$, which implies $\int_a^b Re(\lambda f(x))dx = \int_a^b |\lambda f(x)|dx$. Equivalently, $\int_a^b |\lambda f(x)| - Re(\lambda f(x))dx =0$, but since the integrand is nonnegative and continuous, we have $Re(\lambda f(x))=|\lambda f(x)|$, which tells us $\lambda f(x) \in \R_{\geq 0}$, or that for some nonnegative function $g(x)$, $\lambda f(x)=g(x)$. Solving for $f(x)$ yields $f(x)=\lambda^{-1}g(x)$, or that $f(x)$ is the product of a fixed complex number times a real valued function, as required.
+\end{proof}
+\end{enumerate}
+\item
+\begin{enumerate}
+\item Consider the equation $ax^3+bx^2+cx+d=0$. We substitute $x=u+t$ and set the coefficient for $u^2$ equal to zero. Direct computation shows the coefficient of $u^2$ is $3at+b=0\Rightarrow t=\dfrac{-b}{3a}$.
+\item If the coefficient of $u$ is zero, then $a(u+t)^3+b(u+t)^2+c(u+t)+d=0$ simplifies to $au^3+at^3+bt^2+ct+d=0$, and we can simply take the cube root to find $u=((-1/a)(at^3+bt^2+ct+d))^{1/3}$.
+\\ \\
+If the coefficient of $u$ is nonzero, then we set $u=kv$ for some nonzero constant $k$ and choose $k$ so that $v^3=3v+r$ for some constant $r$. With this transformation, the cubic polynomial becomes $ak^3v^3+3at^2kv+at^3+bkvt+bt^2+ckv+ct+d=0$. Equivalently, $ak^3v^3=-kv(3at^2+bt+c)-(at^3+bt^2+ct+d)$. After dividing by $ak^3$, we set $3=\dfrac{-v(3at^2+bt+c)}{ak^2}$ to obtain a quadratic in $k^2$ that corresponds to the choice of $k$ we're interested in.
+\item Set $v=z+1/z$ so that $v^3=3v+r$ becomes $z^3+1/z^3=r$ or that $z^6-rz^3+1=0$. Introduce the variable $w=z^3$ to obtain a quadratic in $w$: $w^2-rw+1=0$. The quadratic formula yields roots $w=(1/2)(r\pm\sqrt{r^2-4})$, and after resubstituting $w=z^3$, we see $z=((1/2)(r\pm\sqrt{r^2-4}))^{1/3}$
+\end{enumerate}
+\end{enumerate}
+\subsection{Chapter 2}
+\begin{enumerate}
+%
+%P1
+%
+\item
+\begin{itemize}
+%%
+%%P1 a
+%%
+\item Let $z=Re^{i\theta}$ and $w=Se^{i\alpha}$. Then the equation $z^n=w$ implies $R^ne^{in\theta}=Se^{i\alpha}$. Therefore by equating polar coordinates, we have $R^n=S$ and $\alpha +2\pi k= n\theta$, so that $z=S^{1/n}e^{i(\alpha+2\pi k)/n}$.
+%%
+%%P1 b
+%%
+\item 
+%%
+%%P1 c
+%%
+\item
+\end{itemize}
+%
+%P2
+%
+\item Suppose $\sum_{n=0}^\infty |a_n|^2 < \infty$. We first show $f(z)=\sum_{n=0}^\infty a_nz^n$ is analytic in $\{z\in\C\mid |z|<1\}$. We will show that the radius of convergence $R\geq 1$. Assume not, then by Theorem 2.2 (Root Test), we have $\liminf \frac{1}{|a_n|^{1/n}}<1$. Therefore all but finitely many $n\in \N$ satisfy $\frac{1}{|a_n|^{1/n}} < 1\Rightarrow 1 < |a_n|^2$. Summing, we obtain $\infty = \sum 1 < \sum |a_n|^2 < \infty$, a contradiction to the hypothesis of the problem. Therefore we have $f$ analytic over $\{z\mid |z|<R\}$. We wish to compute $\int_0^{2\pi} |f(re^{i\theta})|^2\dfrac{d\theta}{2\pi} = \frac{1}{2\pi} \int_0^{2\pi} \left(\sum_{n=0}^\infty a_nr^ne^{in\theta}\right)\left(\sum_{n=0}^\infty \overline{a_n}r^ne^{-in\theta}\right)d\theta = \frac{1}{2\pi}\int_0^{2\pi} \sum_{n=0}^\infty\sum_{k=0}^n a_k\overline{a_{n-k}}r^ne^{i(n-2k)\theta}d\theta$. Since $f$ is analytic, and our limit is taken as $r\uparrow1$, we know the power series for $f$ evaluated at $z\in \{z\in\C\mid |z|<1\}$ will converge uniformly to $f(z)$. Therefore integration along along a circle of fixed radius $r<1$ may be switched with the infinite summation, to obtain $\frac{1}{2\pi}\sum_{n=0}^\infty \sum_{k=0}^na_k\overline{a_{n-k}}r^n\int_0^{2\pi}e^{i(n-2k)\theta}d\theta$. But since $\int_0^{2\pi} e^{in\theta}d\theta = \begin{cases} 2\pi &\mbox{if } n=0 \\ \frac{e^{i(n+1)\theta}}{i(n+1)}\bigg|_0^{2\pi}=0 & \mbox{otherwise.} \end{cases}$, we conclude that $\frac{1}{2\pi}\sum_{n=0}^\infty \sum_{k=0}^na_k\overline{a_{n-k}}r^n\int_0^{2\pi}e^{i(n-2k)\theta}d\theta = \frac{1}{2\pi} \sum_{n=0}^\infty 2\pi |a_n|^2 r^{2n}$, and since for $r<1$, the preceding infinite sum is finite and converges uniformly, $\lim_{r\uparrow 1}\frac{1}{2\pi} \sum_{n=0}^\infty 2\pi |a_n|^2 r^{2n}= \sum_{n=0}^\infty |a_n|^2 = \lim_{r\uparrow1}\int_0^{2\pi} |f(re^{i\theta})|^2\dfrac{d\theta}{2\pi}$.
+%WORRY ABOUT CONVERGENCE OF CONJUGATE!
+%%ALSO WORRY ABOUT THE PROOF BY CONTRADICTION
+%
+%P3
+%
+\item Let $f$ have a power series $f(z)=\sum_{n=0}^\infty a_nz^n$ expansion at $0$ which converges in all of $\C$. Further suppose $\int_\C |f(x+iy)|dxdy=0$. We wish to show $f(z)$ is a polynomial. Changing to polar coordinates, we have $\int_\C |f(x+iy)|dxdy = \int_0^\infty \int_0^{2\pi} |f(re^{i\theta})|rdrd\theta = \int_0^\infty \int_0^{2\pi} \sum_{n=0}^\infty a_nr^{n+1}e^{in\theta}d\theta dr$. For a fixed radius $R<\infty$, since $f$ is entire, the power series for $f(z)$ converges uniformly on the disk $\{z\in \C\mid |z|\leq R\}$. Therefore we may switch the inner integral with the sum to obtain $\int_0^\infty \int_0^{2\pi} \sum_{n=0}^\infty a_nr^{n+1}e^{in\theta}d\theta dr = \int_0^\infty \sum_{n=0}^\infty a_nr^{n+1}\int_0^{2\pi}e^{in\theta}d\theta dr$. But as in the previous problem, $\int_0^{2\pi} e^{in\theta}d\theta = \begin{cases} 2\pi & \mbox{if } n=0 \\ 0 & \mbox{if } n> 0\end{cases}$. After integration, only one term remains in the sum and we are left with $\int_0^\infty 2\pi a_0r dr$, but by assumption, this is equal to zero, and we conclude $a_0=0$. Now for $z\neq 0$, let $g(z)=f(z)/z$. $g$ will have a power series $\sum_{n=0}^\infty a_{n+1}z^n$ that agrees with $g(z)$ for all $z\neq 0$. Now since $|f(z)/z| = |g(z)| \leq |f(z)|$ for $|z|\geq 1$, by monotonicity of integration, we have $0\leq\int_1^\infty \int_0^{2\pi} |g(z)| \leq \int_1^\infty\int_0^{2\pi} |f(z)| \leq \int_0^\infty\int_0^{2\pi} |f(z)|dz = 0$. We repeat the above argument for $g(z)$ to conclude $a_1=0$: for fixed $R>1$, $g(z)$ is analytic in the annulus $1\leq |z|\leq R$, so that we actually have uniform convergence and the inner integration and summation may be switched. Again by the properties of the integral of $e^{in\theta}$ over an arc of $2\pi$, we conclude $a_1=0$. Inductively, we conclude that for all $n\in \N$, $a_n=0$. Since $f(z)$ is entire and agrees with its power series on the whole complex plane, we have $f\equiv 0$.
+%
+%P4
+%
+\item Let $f$ be analytic in a connected open set $U$ such that for each $z\in U$, there exists $n\in\N$ so that $f^{(n)}(z)=0$. Consider the collection $s_n=\{z\in U\mid f^{(n)}(z)=0\}$. By the hypothesis of the problem, $\bigcup_n s_n = U$. Since $U$ is uncountable, at least one of these sets must be uncountable. Choose $k$ so that $s_k$ is uncountable. Assume for contradiction that all $z\in s_k$ are isolated points. Since $\C$ is a Hausdorff space, we may separate distinct pairs of points $z_1,z_2\in s_k$ by disjoint open sets $z_1\in B_1, z_2\in B_2$ with $B_1\cap B_2=\emptyset$. We can choose rational coordinates $(p_i,q_i)\in B_i$ corresponding to the open set containing $z_i$. This yields an injection from $s_k\hookrightarrow \Q\times\Q$. By Schoder-Bernstein, we arrive at a contradiction in the cardinality of $s_k$. Therefore there exists a point $z_0\in s_k$ that is not an isolated point, and by Corollary 3.3, $f\equiv 0$ over $U$.
+%
+%P5
+%
+\item Let $f$ be analytic in a region $U$ containing the point $z=0$. $f$ therefore has a power series $f(z)=\sum_{n=0}^\infty a_nz^n$ that converges to $f(z)$ for each $z\in U$. Suppose $|f(1/n)|<e^{-n}$ for $n\geq n_0$. We therefore have $0\leq \lim_{n\to\infty} |f(1/n)| < \lim_{n\to\infty} e^{-n} = 0$, and by continuity we conclude $f(0)=0$ and therefore $a_0=0$. Now choose $N$ so that $a_N$ is the first nonzero coefficient of the power series for $f$. Over $U$, we may write $f(z)=\sum_{n=N}^\infty a_nz^n$. We can write $f(z)=z^N\sum_{n=0}^\infty a_{n+N}z^n$. Define $g(z)=f(z)/z^N$. Computing $|g(0)|=\lim_{n\to\infty}|g(1/n)|=\lim_{n\to\infty}\left|\dfrac{f(1/n)}{1/n^m}\right| < \lim_{n\to\infty}e^{-n}n^m = 0$, so that $a_N=0$, a contradiction.
+\end{enumerate}
+\subsection{Chapter 3}
+\begin{enumerate}
+%
+%P9
+%
+\item Let $\Omega$ be an open set and let $f$ be an analytic function one-to-one map of $\Omega$ onto $f(\Omega)$. If $z_n\in\Omega\to \partial\Omega$, we show that $f(z_n)\to\partial f(\Omega)$ in the sense that $f(z_n)$ eventually lies outside each compact subset of $f(\Omega)$. Since $f$ is bijective onto its image $f(\Omega)$, there is an inverse $f^{-1}$ and because $f$ is analytic and an open mapping, we know that $f^{-1}:f(\Omega)\to\Omega$ is continuous. Therefore $f$ is actually a homeomorphism between $\Omega$ and $f(\Omega)$. Now assume that $z_n\in\Omega\to\partial\Omega$ but $f(z_n)$ does not converge to $\partial f(\Omega)$. Therefore there exists some compact subset $A\subset f(\Omega)$ so that $f(z_n)\in A$ for all $n\in\N$. Because $f^{-1}$ is continuous, we know $f^{-1}(A)$ is compact and we can conclude $z_n\in f^{-1}(A)$ for all $n\in \N$, which is a contradiction since $z_n$ would not converge to $\partial \Omega$. 
+%
+%P10
+%
+\item
+\begin{enumerate}
+%%
+%%P10a
+%%
+\item Assume $\varphi$ is an analytic one-to-one map of $\D$ onto $\D$. Since $\varphi$ is one-to-one, there exists a unique point $a\in \D$ so that $\varphi(a)=0$. By corollary 4.4, we may write $\varphi(z)=\left(\dfrac{z-a}{1-\overline{a}z}\right)g(z)$, where $g$ is analytic in $\D$ and $|g(z)|\leq 1$ for all $z\in\D$. We first prove $g(a)\neq 0$ by contradiction. Assume $g(a)=0$, then we have $\varphi(z)-\varphi(a)=\sum_{m=n}^\infty a_m(z-a)^m$ with  nonzero coefficient for $a_2$, which tells us by Corollary 3.3 that for each $\epsilon>0$ there is a $\delta>0$ so that $f(z)-w$ has 2 distinct roots in $\{z:0<|z-a|<\epsilon\}$, provided $0<|w-f(z_0)|<\delta$, contradicting the injectivity of $\varphi$. What we know so far is that $|g(z)|\leq 1$ in $\D$, and we wish to now show $|g(z)|\geq 1$ in $\D$. We now examine $1/g$, an analytic function with no zeros in $\D$ by the previous argument and by injectivity of $\varphi$. Since $1/g = T_a(z)/\varphi(z)$, as $z_n\to \partial\D, |T_a(z)|\to 1$, as proved in the notes, and $|\varphi(z)|\to 1$ by the previous problem, so that $|1/g|\to 1$ as $z_n\to\partial\D$. By the maximum modulus principle, we conclude $|1/g|\leq 1$ over $\D$, so that $|g|\equiv 1$, or that $g(z)=c$ for all $z\in\D$ with $|c|=1$, as required.
+\\ \\
+Now assume $\varphi(z)=c\left(\dfrac{z-a}{1-\overline{a}z}\right)$, where $|c|=1$ and $|a|<1$. We show $\varphi$ is analytic and one-to-one onto $\D$. As $\varphi$ is the quotient of analytic functions, $\varphi$ is analytic away from the zeros of $1-\overline{a}z$, which is zero when $z=(\overline{a})^{-1}$, whose modulus is greater than 1. Therefore analyticity over $\D$ is established. Injectivity is established as follows. Assume $\varphi(z)=\varphi(w)$. We show $w=z$:
+\begin{align*}
+\dfrac{z-a}{1-\overline{a}z} &= \dfrac{w-a}{1-\overline{a}w} \\
+\Leftrightarrow (1-\overline{a}w)(z-a) &= (1-\overline{a}z)(w-a) \\
+\Leftrightarrow z+|a|^2w &= w + |a|^2z \\
+\Leftrightarrow z = w,
+\end{align*}
+where the cancellation of $(1-|a|^2)$ is valid since $|a|<1$ by hypothesis. Surjectivity is easily established as well: given $x\in\D$, consider the equation $\varphi(z)=x$, where $|x|<1$:
+\begin{align*}
+c\dfrac{z-a}{1-\overline{a}z}&=x \\
+\Rightarrow cz-ca&=x-\overline{a}xz \\
+\Rightarrow z&=\dfrac{x+ca}{c+\overline{a}x},
+\end{align*}
+which actually gives us a formula for any $z\in \D$ for the inverse function $\varphi^{-1}(z)=\dfrac{z+ca}{c+\overline{a}z}$.
+%%
+%%P10b
+%%
+\item Assume $f$ is analytic in $\D$ and that $|f(z)|\to 1$ as $|z|\to 1$. By the maximum modulus principle, we have $|f(z)|\leq 1$ in $\D$. Since $|f(z)|\to 1$ as $|z|\to 1$, there is some $R>0$ so that all the zeros of $f(z)$ are contained in the closed ball $B(0,R)$ of radius $R$. Therefore since $|z_k|\leq R$, we have by Corollary 4.5, $\infty > \sum_k (1-|z_k|) \geq \sum_k (1-R) = \infty$, which is a contradiction. Therefore there are only finitely many zeros of $f(z)$ in $\D$. By Corollary 4.4, we may write $f(z)=\prod_{k=1}^n \left(\dfrac{z-z_k}{1-\overline{z_k}z}\right)g(z)$, where $g$ is analytic in $\D$, $|g(z)|\leq 1$ on $\D$, and $z_1,z_2,\dotsc,z_n$ are the zeros of $f(z)$ in $\D$. If $g(z)$ has any zeros, we may rewrite $f(z)=\prod_{i=1}^n \left(\dfrac{z-z_k}{1-\overline{z_k}z}\right)\prod_{j=1}^m (z-a_j)^{n_j}h(z)$, where $a_1,\dotsc,a_m$ are the zeros of $g(z)$ with multiplicities $n_j$, $1\leq j\leq m$. What's left to show is that $|h(z)|=M$ for some constant $M$. 
+\end{enumerate} 
+%
+%P11
+%
+\item
+\begin{enumerate}
+%%
+%%P11a
+%%
+\item Let $p(z)$ be a polynomial. By corollary 2.2, we may write $p(z)=c\displaystyle\prod_{i=1}^n (z-z_i)$, where $z_1,\dotsc,z_n$ are the complex zeros of $p(z)$ and $c$ is a complex constant. We have $p'(z)=c\displaystyle\sum_{i=1}^n\prod_{j\neq i}^n (z-z_j)$ so that $\dfrac{p'(z)}{p(z)}=\displaystyle\dfrac{\sum_{i=1}^n\prod_{j\neq i}^n (z-z_j)}{\prod_{i=1}^n (z-z_i)}=\sum_{i=1}^n\dfrac{1}{1-z_i}$. Clearly if $a$ is a zero of $p(z)$ and a zero of $p'(z)$, then $a\in \H$. Therefore assume $a$ is a zero of $p'(z)$ but not a zero of $p(z)$. We therefore have $0=\displaystyle\sum_{i=1}^n \dfrac{1}{a-z_i}=\sum_{i=1}^n \dfrac{\overline{a}-\overline{z_i}}{|a-z_i|^2}$. Splitting the numerator, moving to opposite sides, and taking conjugates, we have $a\left(\sum_{i=1}^n \dfrac{1}{|a-z_i|^2}\right) = \sum_{i=1}^n\dfrac{z_i}{|a-z_i|^2}$. This tells us
+\[
+a=\left(\sum_{i=1}^n \dfrac{1}{|a-z_i|^2}\right)^{-1}\sum_{i=1}^n \dfrac{z_i}{|a-z_i|^2},
+\]
+so that we may write $a=\sum_{i=1}^n a_iz_i$, where 
+\[
+a_i=\dfrac{1}{|a-z_i|^2}\left(\sum_{i=1}^n \dfrac{1}{|a-z_i|^2}\right)^{-1}, \quad1\leq i\leq n
+\] 
+Clearly $a_i$ is positive and $\sum_{i=1}^n a_i=1$. By assumption, $\Im(z_i)>0$ for $1\leq i\leq n$ and since $a_i>0$, $\Im(a_iz_i)=a_i\Im(z_i)>0$, from which we conclude $\Im(a)=\sum_{i=1}^n a_i\Im(z_i)>0$ so that $a\in \H$, as required.
+%%
+%%P11b
+%%
+\item We really have an almost identical argument. For $n$ points $z_1,\dotsc,z_n$ in the plane, the convex hull $C=\{\sum_{i=1}^n \lambda_iz_i\mid \lambda_i\geq0, \sum_{i=1}^n \lambda_i = 1\}$ is the set of all convex combinations with appropriate weights $\lambda_i$. We write $a=\sum_{i=1}^n a_iz_i$ again as done in part (a), and since these $a_i$ defined above satisfy $a_i\geq0$ for each $i$ and further satisfy $\sum_{i=1}^n a_i=1$, this is exactly a convex combination of the points $z_i$ and thus $a$ lies in the convex hull of the zeros of $p$.
+\end{enumerate}
+%
+%P12
+%
+\item We apply Schwarz' Lemma in the Invariant Form to obtain the inequality $\left|\dfrac{f(1/3)-f(0)}{1-\overline{f(0)}f(1/3)}\right|=\left|\dfrac{f(1/3)-1/2}{1-(1/2)f(1/3)}\right|\leq \left|\dfrac{1/3-0}{1-0(1/3)}\right|=1/3$. We are therefore left to show that
+\[
+\left|\dfrac{f(1/3)-1/2}{1-(1/2)f(1/3)}\right|\leq 1/3
+\]
+implies $|f(1/3)|\geq 1/5$. To this end, we square both sides and rearrange to obtain
+\[
+	(f(1/3)-1/2)(\overline{f(1/3)}-1/2)\leq (1/9)(1-(1/2)f(1/3))(1-(1/2)\overline{f(1/3)}),
+\]
+which can be simplified to
+\[
+	(35/36)|f(1/3)|^2 - (8/9)\Re(f(1/3)) + 5/36 \leq 0,
+\]
+so that we obtain
+\[
+\dfrac{35|f(1/3)|^2 + 5}{32} \leq \Re(f(1/3)) \leq |f(1/3)|,
+\]
+giving us the quadratic $35|f(1/3)|^2 - 32|f(1/3)| + 5 \leq 0$ in $|f(1/3)|$. This is an upward opening parabola with zeros $1/5, 5/7$, so we conclude that if the original inequality from Schwarz Lemma holds, then we must have $1/5\leq |f(1/3)|\leq 5/7$, as required.
+%
+%P13
+%
+\item Suppose $f(z)$ is analytic in $\D$ and $|f(z)|\leq M$ on $\D$. We first show that $f(z)$ has only finitely many zeros on the disk of radius $1/4$. Assume there were infinitely many zeros, $z_k$ satisfying $|z_k|\leq 1/4$. By Corollary 4.5, we have $\infty > \sum_{k} (1-|z_k|) \geq \sum_k (1-(1/4)) > \infty$, a contradiction, so there are only finitely many zeros of $f(z)$ in the disk of radius 1/4. Let $g(z)=f(z)/M$ for $z\in \D$. Clearly $g(z)$ is analytic and by construction $|g(z)|\leq 1$. Therefore by Corollary 4.4, we may write $g(z)=\displaystyle\prod_{j=1}^n \left(\dfrac{z-z_j}{1-\overline{z_j}z}\right)h(z)$, where $z_1,\dotsc,z_n$ are the zeros of $g(z)$ in the disk of radius $\frac{1}{4}$ and $h(z)$ is analytic on $\D$ and $|h(z)|\leq 1$. We therefore have $|g(0)|=(\displaystyle\prod_{j=1}^n |z_j|)|h(0)|\leq \prod_{j=1}^n|z_j|$ so that $|f(0)|\leq M\displaystyle\prod_{j=1}^n |z_j|\leq M4^{-n}$, since $|z_j|\leq \frac{1}{4}$ for $1\leq j\leq n$. We therefore have $|f(0)|\leq M4^{-n}$, and by solving we obtain $n\leq \dfrac{1}{\log4}\log\left|\dfrac{M}{f(0)}\right|$.
+\end{enumerate}
+\begin{proof}
+Assume $f\in H(\D)$. Compute $\lim_{r\uparrow 1} \int_0^{2\pi} |f(re^{i\theta})|^2\frac{d\theta}{2\pi}$. %(Left hand limit blah blah $0<1-t<\delta\Rightarrow |\cdot|<\epsilon$). $f\in H(\D)$ means $f(z)=\sum_{n=0}^\infty a_nz^n$, where $1=\limsup|a_n|^{1/n}$ is the radius of convergence also $n!a_n=f^{(n)}(0)$. Note the radius of convergence means that for each $0<r<1$ the left-hand side of $f(z)$ converges absolutely and uniformly on $|z|\leq r$. Since the partial sums $s_n\to s$ (which follows from absolute convergence), clearly $\overline{s_n}\to \overline{s}$, so that $|f|^2=f\overline{f}=\left(\sum_{n=0}^\infty a_nr^ne^{in\theta}\right)\left(\sum_{n=0}^\infty \overline{a_m}r^me^{-im\theta}\right)$. Moreover the limsup shit still holds, but that doesn't mean it's analytic since we pick up $\overline{z}$. We don't need  that though. We just need that the right-hand multiplicand be absolutely convergent. $\sum_{n=0}^\infty\sum_{m=0}^\infty a_n\overline{a_m}r^{n+m}e^{i(n+m)\theta}=\sum_{n=0}^\infty |a_n|^2r^{2n}$, so by the monotone convergence theorem, we have $\lim_{r\uparrow1}\sum_{n=0}^\infty |a_n|^2r^{2n}=\sum_{n=0}^\infty \lim_{r\uparrow1}|a_n|^2r^{2n}=\sum_{n=0}^\infty |a_n|^2$. More explicitly, we apply the ratio test to $\sum_{n=0}^\infty |a_n|^2r^{2n}$. We compute $\limsup_{n\to\infty}||a_n|^2r^{2n}|^{1/n}=r^2\limsup_{n\to\infty}|a_n|^{2/n}\leq r^2<1$, and by the ratio test this series converges. Therefore the partial sums are bounded, and ?
+$f\in H(\D)$ means $f(z)=\sum_{n=0}^\infty a_nz^n$, and $f(z)$ converges absolutely and uniformly on $|z|\leq r$. Since the partial sums $s_n(z)\to s(z)$ uniformly and absolutely, clearly $\overline{s_n(z)}\to \overline{s(z)}$ uniformly and absolutely, so that $|f|^2=f\overline{f}=\left(\sum_{n=0}^\infty a_nr^ne^{in\theta}\right)\left(\sum_{n=0}^\infty \overline{a_m}r^me^{-im\theta}\right)$. Therefore 
+\[
+\int_0^{2\pi}\left(\sum_{n=0}^\infty a_nr^ne^{in\theta}\right)\left(\sum_{m=0}^\infty \overline{a_m}r^me^{-im\theta}\right)\frac{d\theta}{2\pi}=\int_0^{2\pi}\sum_{n=0}^{\infty}\sum_{m=0}^\infty a_n\overline{a_m}r^{n+m}e^{i\theta(n-m)}\frac{d\theta}{2\pi},
+\]
+and that we may interchange the integral and outer sum is as follows (keeping in mind $r$ is fixed). First $\left|\sum_{m=0}^\infty \overline{a_m}r^me^{-im\theta}\right|\leq \sum_{m=0}^\infty |a_m|r^m=C_r$ which is finite, by hypothesis. But this means the partial sums in the variable $n$ [denoted $f_n(\theta)]$ converge uniformly for $\theta\in [0,2\pi]$ to the limit function, since we have terms like $f_n(\theta)g(\theta)\to f_n(\theta)g(\theta)$ uniformly, which is the case since $|g(\theta)|\leq C_r<\infty$ independent of $\theta$. The convergence is uniform since we may simply find $N$ so that $|f_n(\theta)-f(\theta)|<\epsilon/C_r$ for large enough $n$. At this point, we have
+\[
+\int_0^{2\pi} |f(re^{i\theta})|^2\frac{d\theta}{2\pi} = \sum_{n=0}^\infty a_nr^n\int_0^{2\pi}\sum_{m=0}^\infty \overline{a_m}r^me^{i(n-m)\theta}\frac{d\theta}{2\pi},
+\]
+and since $\overline{f(z)}$ converges uniformly and absolutely on compact subsets (in particular for fixed $r$ and $\theta\in [0,2\pi]$), we have
+\[
+\int_0^{2\pi} |f(re^{i\theta})|^2\frac{d\theta}{2\pi} = \sum_{n=0}^\infty a_nr^n\sum_{m=0}^\infty \overline{a_m}r^m\int_0^{2\pi}e^{i(n-m)\theta}\frac{d\theta}{2\pi},
+\]
+and since $\int_0^{2\pi}e^{ik\theta}\frac{d\theta}{2\pi} = \begin{cases} 1 & \text{if } k=0 \\ 0 & \text{otherwise,}\end{cases}$ the sum is only nonzero when $n=m$ and we reduce to
+\[
+\int_0^{2\pi} |f(re^{i\theta})|^2\frac{d\theta}{2\pi} = \sum_{n=0}^\infty |a_n|^2r^{2n}.
+\]
+Denote the right-hand member as $s(r)$ and its partial sums as $s_n(r)$. Since $s_k(r)\leq s(r) \leq \sum_{n=0}^\infty |a_n|^2$ (the first inequality follows by the partial sums increasing and the second since $r<1$), we take $r\uparrow 1$ to obtain
+\[
+s_k(1)=\lim_{r\uparrow1}s_k(r) \leq \lim_{r\uparrow 1}s(r) \leq \sum_{n=0}^{\infty} |a_n|^2,
+\]
+and since this inequality is independent of $k$, we may take $k$ to infinity and obtain $\lim_{r\uparrow 1} s(r) = \sum_{n=0}^\infty |a_n|^2$.
+\end{proof}
+\subsection{Chapter 4}
+\begin{enumerate}
+%
+%P1
+%
+\item Define $\zeta(z)=\sum_{n=1}^\infty n^{-z}$, where $n^{-z}=e^{-z\log{n}}$. We show the series is absolutely convergent for $\Re(z)>1$. Consider $|n^{-z}|=|e^{-z\log(n)}|=e^{-\Re{z\log(n)}}=e^{-\log{n}\Re{z}}=n^{-\Re{z}}$, so that the absolute series becomes $\sum_{n=1}^\infty \dfrac{1}{n^{\Re(z)}}$. By the $p-$series test, this series converges if and only if $\Re(z)>1$. Since the series converges absolutely for $\Re(z)>1$, we have $\zeta(z)$ is analytic for $\Re(z)>1$, as required.
+\\ \\
+We now show $n^{-z}-\int_n^{n+1} x^{-z}dx = \int_n^{n+1}\int_n^x zt^{-z-1}dtdx$ by integrating the right-hand side. We have
+\begin{align*}
+\int_n^{n+1}\int_n^x zt^{-z-1}dtdx &= z\int_n^{n+1}\int_n^x t^{-z-1}dtdx \\
+&=z\int_n^{n+1}\left(\dfrac{t^{-z}}{-z}\bigg|_n^x\;\right)dx \\
+&= \int_n^{n+1} (-x^{-z} + n^{-z}) dx \\
+&= n^{-z} - \int_n^{n+1} x^{-z}dx,
+\end{align*}
+as required.
+\\ \\
+We have $(z-1)\zeta(z) = 1+z(z-1)\sum_{n=1}^\infty \int_n^{n+1}\int_n^xt^{-z-1}dtdx$. Now we switch the integration to obtain $(z-1)\zeta(z)=1+z(z-1)\sum_{n=1}^\infty \int_n^{n+1}\int_t^{n+1} t^{-z-1}dxdt$. Since $n+1-t<1$, we have
+\[
+(z-1)\zeta(z) \leq 1 + z(z-1) \sum_{n=1}^\infty \int_n^{n+1}t^{-z-1}dt = 1+(1-z)\sum_{n=1}^\infty (n+1)^{-z}-n^{-z}.
+\]
+We first note that the partial sums $S_N= \sum_{n=1}^N (n+1)^{-z}-n^{-z} = (N+1)^{-z}-1$ are telescoping. We now examine the modulus of the partial sums, we have as $N\to \infty$ $|(N+1)^{-z}-1|\leq 1+|(N+1)^{-z}| = 1+(N+1)^{-\Re{z}}\to 1$ whenever $\Re{z}>0$. 
+%
+%P2
+%
+\item For $r>1/2$, by Cauchy's integral formula, we have $f'(z)=\int_{C_r(0)} \dfrac{f(\zeta)d\zeta}{(z-\zeta)^2}$, which is valid for $|z|<r$. Consider a parameterization $\gamma(t) = re^{it}$, $0\leq t\leq 2\pi$. Then our integral becomes
+\[
+f'(z) = \dfrac{1}{2\pi i}\int_0^{2\pi} \dfrac{f(re^{it})rie^{it}dt}{(z-re^{it})^2}.
+\]
+We integrate with respect to $r$ the modulus of both sides of the above equation from $r=3/4$ to $r=1$ to obtain
+\[
+ \int_{3/4}^1|f'(z)|dr \leq \dfrac{1}{2\pi} \int_{3/4}^1\int_0^{2\pi} \dfrac{|f(re^{it})|rdtdr}{|z-re^{it}|^2}.
+\]
+Since $|z|\leq1/2$, we have $|z-re^{it}|\geq 1/4$, since the closest $z$ and $re^{it}$ can be is when $r=3/4$ and $z$ lies on the disk of radius $1/2$. Therefore we have $|z-re^{it}|^2 \geq 1/16$ and therefore our estimate becomes
+\[
+ |f'(z)|\leq \dfrac{32}{\pi} \int_{3/4}^1\int_0^{2\pi} |f(re^{it})|rdtdr \leq \dfrac{32}{\pi}\int_0^1 \int_0^{2\pi} |f(re^{it})|rdtdr = \dfrac{32}{\pi}\int_{\D}|f(x+iy)|dxdy
+\]
+%
+%P3
+%
+\item Consider the three closed and bounded rectangles defined for each $n\in \N$ as $A_n:=[1/n,n]\times[-n,n]$, $B_n:=[-1/(n+1),1/(n+1)]\times [-n,n]$, and $C_n:=[-n,-1/n]\times [-n,n]$. For each $n$, we have $\C\setminus(A_n\cup B_n\cup C_n)$ is connected. The function $f_n(z)=\begin{cases} 1 &\mbox{if } z\in A_n \\ 0 &\mbox{if } z\in B_n \\ -1 &\mbox{if } z\in C_n \end{cases}$ is analytic on the union $A_n\cup B_n\cup C_n$ for each $n\in\N$, so by Runge's theorem and the fact that $\C\setminus(A_n\cup B_n\cup C_n)$ is connected, we may approximate $f_n(z)$ arbitrarily closely by polynomials $\{f_{nk}(z)\}_{k=1}^\infty \to f_n(z)$ uniformly. If we define $p_k(z)=f_{kk}(z)$ for each $k\in \N$, then $\lim_{k\to\infty} p_k(z) = \begin{cases} 1 & \mbox{if } \Re(z)>0 \\ 0 & \mbox{if} \Re(z)=0 \\ -1 & \mbox{if } \Re(z) < 0 \end{cases}$, as required.
+%
+%P4
+%
+\item
+\end{enumerate}
+\subsection{Chapter 5}
+
+\begin{itemize}
+%P6
+\item 6. Let $\Omega$ be a region and assume $p_n(z)$ is a sequence of polynomials converging uniformly to a function $f(z)$ on $\Omega$. Consider $S^2\setminus \pi(\Omega)=A_{\infty}\cup \bigcup_{\alpha\in J}A_{\alpha}$, the complement of $\Omega$ in the Riemann Sphere. We have one component, $A_{\infty}$ containing the north pole, the point at infinity, and the latter union our collection of ``holes" as in the notes. Let $\tilde{\Omega}=\Omega\cup\bigcup_{\alpha\in J}A_{\alpha}$. First note that $\Omega\subset\tilde{\Omega}$. $\tilde{\Omega}$ is open since it is the complement of the closed $A_{\infty}$ and is connected since $\pi$ is a homeomorphism and preserves connectedness. $\tilde{\Omega}$ is simply connected since the complement is connected in the Riemann sphere. I claim first that $\partial \tilde{\Omega}\subset\partial\Omega$. To see this, take $x\in\partial\tilde{\Omega}$. Then any neighborhood $U$ of $x$ satisfies $U\cap \tilde{\Omega}\neq\emptyset$ and $U\cap \tilde{\Omega}^C\neq\emptyset$. Since $\tilde{\Omega}^C\subset\Omega^C$, we have $U\cap \Omega^C\neq\emptyset$. What's left is to show $U\cap \Omega\neq\emptyset$. Assume the intersection is empty, then we know $U\subset \Omega^C$. Therefore $U$ is in some component of $\Omega^C$ (note here we can say that $U$ is actually contained entirely within one of the components of $S^2\setminus\pi(\Omega)$ in the Riemann sphere). $U\not\subset A_{\infty}$ since then $U\cap\tilde{\Omega}=\emptyset$, so we must have $U\subset A_{\alpha}$ for some $\alpha\in J$. Since $A_{\alpha}\subset \tilde{\Omega}$, we have $U\cap \tilde{\Omega}\neq\emptyset$, a contradiction. Therefore $U\cap \Omega\neq\emptyset$, so that $x\in \partial\Omega$. Since we have uniform convergence of the sequence of polynomials $\{p_n(z)\}_{n=1}^\infty$ on $\Omega$, we know that the sequence is Cauchy. Therefore for all $\epsilon>0$ there exists $N>0$ so that for all $n,m\geq N, |p_n(z)-p_m(z)|<\epsilon$ for $z\in\Omega$. Since the difference of any two polynomials is another polynomial and thus entire, by continuity we have $|p_n(z)-p_m(z)|\leq \epsilon$ on $\partial \Omega$, so that $|p_n(z)-p_m(z)|\leq \epsilon$ on $\partial \tilde{\Omega}$ since we are taking a supremum over a smaller set. By the maximum modulus principle applied to the difference of polynomials over the region $\tilde{\Omega}$, $|p_n(z)-p_m(z)|<\epsilon$ on $\tilde{\Omega}$ as well, so that the sequence uniformly converges on both $\Omega$ and $\tilde{\Omega}$, as required.
+%P7
+\item 7.
+\begin{enumerate}
+\item $\dfrac{z^2+1}{e^z}\mapsto e^{-1/z}(z^{-2}+1)=\dfrac{z^2+1}{z^2}e^{-1/z}=(z^2+1)\sum_{n=0}^\infty \dfrac{(-1)^n}{z^{n+2}n!}$, so at $z=0$ there is an essential singularity at $z=0$.
+\item $\dfrac{1}{e^{1/z}-1}-z\mapsto \dfrac{1}{e^z-1}-\dfrac{1}{z}=\dfrac{z+1-e^z}{z(e^z-1)}=\dfrac{z-(z+\dfrac{z^2}{2!}+\cdots)}{z(z+\dfrac{z^2}{2!}+\cdots)}=\dfrac{-z^2(\dfrac{1}{2}+\dfrac{z}{6}+\cdots)}{z^2(1+\dfrac{z}{2}+\cdots)}$, so at $z=0$, the function evaluates to $-1/2$. This expansion was  valid for all $|z|<\infty$ from the Taylor series of $\exp(z)$. Therefore there is a removable singularity at $z=0$.  
+\item $e^{z/(1-z)}\mapsto e^{1/(z-1)}$. This function is analytic away from $z=1$. At $z=0$ the function is $e^{-1}$.
+\item $ze^{1/z}\mapsto \dfrac{e^z}{z}=\sum_{n=0}^\infty \dfrac{z^{n-1}}{n!}$, which is valid for all $z\in\C\setminus{\{0\}}$. This expansion tells us we have a simple pole at $z=0$.
+\item $z^2-z\mapsto \dfrac{1}{z^2}-\dfrac{1}{z}=\dfrac{1-z}{z^2},$ which is a rational function with a pole of order $2$ at $z=0$.
+\item $\dfrac{1}{z^3}e^{1/z}\mapsto z^3e^z$, which is an entire function with a zero of order 3 at $z=0$.
+\end{enumerate}
+%P8
+\item 8. $\dfrac{z}{(z^2+4)(z-3)^2(z-4)} = \dfrac{A}{z-4}+\dfrac{B}{z-3}+\dfrac{C}{(z-3)^2}+\dfrac{Dz+E}{z^2+4}$ by partial fraction decomposition. We deal with each term individually. For the first term, we write $\dfrac{A}{z-4}=\dfrac{A}{-4(1-z/4)}=-A\sum_{n=0}^\infty \dfrac{z^n}{4^{n+1}}$, which is valid for $|z|<4$, which contains our annulus. For the second term, we write $\dfrac{B}{z-3}=\dfrac{B}{z(1-3/z)}=B\sum_{n=0}^\infty \dfrac{3^n}{z^{n+1}}$, which is valid for $|z|>3$, which again contains our annulus. For the next term, we write $\dfrac{C}{(z-3)^2}=-C\dfrac{d}{dz}\left(\dfrac{1}{z-3}\right)=-C\sum_{n=0}^\infty \dfrac{d}{dz}\left(\dfrac{3^n}{z^{n+1}}\right)=C\sum_{n=0}^\infty\dfrac{(n+1)3^n}{z^{n+2}}$. Finally, for $\dfrac{Dz+E}{z^2+4}$, we write $\dfrac{Dz+E}{z^2(1+4/z^2)}=\dfrac{Dz+E}{z^2}\sum_{n=0}^\infty \dfrac{(-1)^n4^n}{z^n}=D\sum_{n=0}^\infty \dfrac{(-1)^n4^n}{z^{n+1}}+E\sum_{n=0}^\infty \dfrac{(-1)^n4^n}{z^{n+2}}$, which is valid for $2<|z|$, which again contains our annulus. Therefore
+\[
+\dfrac{z}{(z^2+4)(z-3)^2(z-4)} =-A\sum_{n=0}^\infty \dfrac{z^n}{4^{n+1}}+ B\sum_{n=0}^\infty \dfrac{3^n}{z^{n+1}}+ C\sum_{n=0}^\infty\dfrac{(n+1)3^n}{z^{n+2}}+D\sum_{n=0}^\infty \dfrac{(-1)^n4^n}{z^{n+1}}+E\sum_{n=0}^\infty \dfrac{(-1)^n4^n}{z^{n+2}}
+\]
+%P9
+\item 9. See looseleaf page.
+%P10
+\item 10. Let $p(z)=3z^5 +21z^4 +5z^3+6z +7$. Consider $|p(z)-21z^4|$ on $|z|=2$. We have $|p(z)-21z^4|\leq 3(2^5)+5(2^3)+6(2)+7=155<336=21|z|^4$ on $|z|=2$. By Rouche, we know $p(z)$ and $21z^4$ have the same number of zeros in $\{z:|z|<2\}$, namely four zeros. Now consider $|z|=1$. We have $|p(z)-21z^4|\leq 21=21|z|^4$, so we have a possible equality. From the triangle inequality, we have $|3z^5+5z^3+6z+7|\leq |3z^5+5z^3|+|6z+7|\leq |3z^5+5z^3|+6|z|+7\leq 3|z|^5+5|z|^4+6|z|+7=21$. If there is an equality at the last step, there must be an equality at all steps, so we consider $|6z+7|=6|z|+7=13$ on $|z|=1$. We have two solutions, namely $z=1$ and $z=-10/3$. The second solution does not satisfy our constraints, so we must have $z=1$ for equality at this step. But then we see $|p(z)-21z^4|<21+p(1)$, since $p(1)=42>0$. Therefore $p(z)$ and $21z^4$ also share the same number of zeros on $|z|<1$, namely four. Therefore on $\D$ $p(z)$ has exactly four zeros (none of which are on the boundary), and no zeros inside the annulus $\{z:1<|z|<2\}$.  
+%P11
+\item 11. Let $p(z)=z^n+c_{n-1}z^{n-1}+\cdots+c_0$. Let $f(z)=z^n$. We wish to compare $p(z)$ to $f(z)$. Let $R=\sqrt{1+|c_0|^2+\cdots+|c_{n-1}|^2}$, then on $|z|=R$, we have
+\begin{align*}
+|p(z)-f(z)|&\leq (|c_0|^2+\cdots+|c_{n-1}|^2)^{1/2}(1+|z|^2+\cdots+|z|^{2n-2})^{1/2} \\
+&= \sqrt{R^2-1}(1+R^2+\cdots+R^{2n-2})\\
+&= \sqrt{R^2-1}\sqrt{\dfrac{R^{2n}-1}{R^2-1}} \\
+&< \sqrt{R^{2n}}=|f(z)|,
+\end{align*}
+so that by Rouche's theorem all the zeros of $p(z)$ lie within the disk centered at zero of radius $\sqrt{|c_0|^2+\cdots+|c_{n-1}|^2+1}$, as required.
+\end{itemize}
+\subsection{Chapter 6}
+\subsection{Chapter 7}
+\section{MATH 535}
+\subsection{Chapter 8}
+\begin{enumerate}
+    \setcounter{enumi}{4}
+    %5
+  \item Throughout, let $v$ be a real-valued twice continuously differentiable function on a region $\Omega$.
+
+    $(i)\Rightarrow (iii)$.  Suppose $v$ is subharmonic.  Let $B$ be a disk such that $\overline B \subset \Omega$, and suppose $u$ is harmonic on $\overline B$.  It is easy to see from the definition of harmonic and subharmonic that $v-u$ subharmonic.  By Theorem~1.3 (the Maximum Principle for Subharmonic Functions), we see that $v-u$ satisfies the maximum principle.   
+
+    $(iii) \Rightarrow (i)$.  Since subharmonicity is a local property, it suffices to show that $v$ is subharmonic at a point $z_0\in \Omega$.  Suppose that if $B$ is a disk containing $z_0$ with $\overline B \subset \Omega$ and if $u$ is harmonic on $\overline B$, then $v-u$ satisfies the maximum principle.  Fix a disk $B$ centered at $z_0$ with $\overline B \subset \Omega$.  Let $P(z)$ be the Poisson integral of $v|_{\partial B}$ on $B$.  By a version of Schwarz's Theorem that applies to disks that aren't necessarily the unit disk (whose proof mimics the proof of the Schwarz Theorem in the notes), we know that $P(z)$ is harmonic in $B$ and that $\lim_{z\rightarrow \zeta} P(z) = v(\zeta)$ for all $\zeta \in \partial B$.  But, by hypothesis, $v-P$ satisfies the maximum principle, so we deduce that $v(z) - P(z) \leq 0$, or $v(z) \leq P(z)$, for $z\in B$.  In particular, $v(z_0) \leq P(z_0)$.  This inequality holds for $B$ (and corresponding Poisson integral $P$) of arbitrarily small radius containing $z_0$.  This is exactly what it means for $v$ to be subharmonic.   
+
+    $(ii) \Rightarrow (i)$.  Suppose that $\Delta v \geq 0$ in $\Omega$.  Fix $z_0\in \Omega$ and $r>0$ so that the closure of the disk $D(z_0, r)$ centered at $z_0$ of radius $r$ is contained in $\Omega$. Put $u=1$ in the version of Green's Theorem stated in Exercise~3.  Then we obtain 
+    \[ \int_{\partial D(z_0, r)}  \frac{\partial v}{\partial \eta} \, |dz| = \int_{D(z_0,r)} \Delta v \, dxdy. \]  (Here, $\eta(\zeta)$ is the outward-facing unit normal at $\zeta\in \Omega$, just as in Exercise~3.  We can parametrize $\partial D(z_0, r)$ by the circle $ \gamma(\theta) = z_0 + re^{i\theta}$, $\theta\in [0,2\pi]$.  If we set $M(r) = \frac{1}{2\pi} \int_{0}^{2\pi} v(z_0 + re^{i\theta}) \, d\theta$, then differentiating under the integral, we see that $M'(r) = \frac{1}{2\pi} \int_0^{2\pi} e^{i\theta} v'(z_0+re^{i\theta}) \, d\theta$.  We can rewrite $\frac{\partial v}{\partial \eta} |dz|$ in another useful way.  Note that $|dz| = r \, d\theta$.  Also, using the relations $x=r \cos \theta$, $y = r\sin \theta$, $r=\sqrt{x^2+y^2}$, and $\theta = \arctan(y/x)$,  we easily find (the plug-and-chug part omitted) using the chain rule that 
+    \begin{align*}
+        \frac{\partial v}{\partial \eta} &= (v_x, v_y) \cdot (\cos \theta, \sin \theta) \\
+        &= v_x \cos \theta + v_y \sin \theta\\
+        &= (v_\theta \theta_x + v_r r_x) \cos \theta + (v_\theta \theta_y + v_r r_y) \sin\theta \\
+        &= \cdots \text{(substitute in partials and make cancellations)} \\
+        &=  \frac{\partial v}{\partial r} 
+    \end{align*}
+    It follows now that
+    \[r  M'(r) =  \int_0^{2\pi} re^{i\theta} v'(z_0+re^{i\theta}) \, d\theta = \int_{\partial D(z_0,r)} \frac{\partial v}{\partial \eta} |dz| = \int_{D(z_0,r)} \Delta v \, dxdy. \]  If we regard the radius $r>0$ as varying subject to the constraing that $\overline D(z_0, r) \subset \Omega$, then since $\Delta v \geq 0$ by assumption, we see that $M'(r)\geq 0$, i.e., $M(r)$ is nondecreasing.   Since $v(z_0) = 0$, we have, for all sufficiently small $r>0$,
+    \[ v(z_0) \leq M(r) = \frac{1}{2\pi} \int_{0}^{2\pi} v(z_0+re^{it}) \, dt. \] Hence, $v$ is subharmonic at $z_0$.  Since $z_0$ was arbitrary, $v$ is subharmonic in $\Omega$.  
+
+    $(i) \Rightarrow (ii)$.  The proof of this part is very similar to the last.  Suppose $v$ is subharmonic in $\Omega$.  Suppose for a contradiction that $\Delta v (z_0) < 0$ for some $z_0\in \Omega$.  By continuity of $v$, $\Delta v (z_0 + re^{it}) < 0$ for all $r<\epsilon$, where $\epsilon > 0$ is taken to be sufficiently small.   In the last part, we computed
+    \[ rM'(r) = \int_{D(z_0, r)} \Delta v \, dxdy. \] Hence, in our case, $M(r)$ is decreasing for $0 <r<\epsilon$.  But then 
+    \[ \frac{1}{2\pi} \int_{0}^{2\pi} u(z_0+re^{it}) \, dt < u(z_0) \] for all $0< r < \epsilon$, contradicting subharmonicity of $v$. We conclude that $\Delta v (z) \geq 0$  for all $z\in \Omega$. 
+
+    %6
+  \item Let $u$ be a real-valued harmonic function in $\mathbb D$ with $|u| \leq 1$ and $u(0) = 0$.  Let $f(z)$ be analytic in $\mathbb D$ such that $\Re f = u$ and $f(0) = 0$.  Note that it is possible to find such a function $f$ by Corollary 1.7 and since $u(0) = 0$.  
+    
+    Let $g(z) = e^{i\pi f(z) / 2}$. Since $|\Re f(z)| = |u(z)| \leq 1$, we see that $\tfrac{\pi |\Re f(z)|}{2} \in [- \tfrac \pi 2, \tfrac \pi 2]$.  Hence, $\arg g(z) \in [-\tfrac \pi 2, \tfrac \pi 2]$, so $\Re g(z) \geq  0$.  Geometrically, this means that $\Re g(z)$ is no farther from the point $1$ than it is from the point $-1$.  Hence, if we set
+    \[ h(z) = \frac{g(z) - 1}{g(z) + 1} = \frac{e^{i\pi f(z)/2} - 1}{e^{i\pi f(z)/2} + 1},  \]   we see that $|h(z)| \leq 1$.   Note that $h(0) = 0$ and that $h(z)$ is analytic in $\mathbb D$.  Therefore, the ordinary Schwarz Lemma for analytic functions on the disk applies, and we conclude 
+    \begin{align}
+      \left| \frac{e^{i\pi f(z)/2} - 1}{e^{i\pi f(z)/ 2} + 1} \right|    
+      = |h(z)| 
+      \leq |z|  \label{eq:1}
+    \end{align} 
+    for all $z\in \mathbb D$.  Schwarz's Lemma also tells us that equality holds for some nonzero $z\in \mathbb D$ if and only if $h(z)$ is a rotation of the disk fixing $0$. 
+
+    Note that $e^{i\pi f(z)/2} = \frac{1+h(z)}{1-h(z)}$.  Hence, $\tan |\frac{\pi u}{2} | = \tan | \arg \frac{1+h}{1-h} |$.  Write $z=re^{i\theta}$, $h(re^{i\theta}) = se^{i\phi}$.  Note that Schwarz's Lemma implies $s < r$.  Also,
+    \[ \frac{1+h}{1-h} = \frac{1+se^{i\phi}}{1-se^{i\phi}} = \frac{1-s^2 + 2is \sin \phi}{1 + s^2 - 2s \cos \phi}. \] The denominator of the right-hand side is purely real, and we deduce 
+    \[ \tan \frac{1+h}{1-h} = \frac{2s |\sin \phi|}{1-s^2} \leq \frac{2s}{1-s^2}. \]  All this implies that 
+    \[ \frac \pi 2 |u| = \arctan ( \tan | \arg \frac{1+h}{1-h} | ) \leq \arctan(\frac{2s}{1-s^2} ) = 2 \arctan s \leq 2 \arctan r = 2 \arctan |z|. \]  Here, we have used the basic real trigonometric identity  $\arctan \frac{2 \alpha}{1-\alpha^2} = 2 \arctan \alpha$ and the fact that $\arctan$ is increasing.   Hence, 
+    \begin{align}
+      |u| \leq  \frac{4}{\pi} \arctan |z|,  \label{eq:myschwarz}
+    \end{align} as desired. 
+
+    It is clear that if equality does not hold in~\eqref{eq:1} at any nonzero point $z\in \mathbb D$, then equality cannot hold in~\eqref{eq:myschwarz} at any nonzero point $z\in \mathbb D$.  In fact, it is not much harder to see from the above manipulations between equations~\eqref{eq:1} and~\eqref{eq:myschwarz} that if equality holds in~\eqref{eq:myschwarz} at some nonzero $z\in \mathbb D$, then equality also holds in~\eqref{eq:1} at the same point, which in turn holds if and only if $h$ is a rotation of the disk.  
+
+
+
+    %7
+  \item Let $u(z) = u(x,y)$ be a harmonic function in $\mathbb D$.  Since $\mathbb D$ is simply connected, $u(z)$ is the real part of some function $g(z)$ analytic in $\mathbb D$.  The function $g(z)$ has a power series $\sum_{n=0}^\infty c_n z^n$ based at $0$ that converges at every point in $\mathbb D$, as $\mathbb D$ itself is the largest disk centered at $0$ that is contained in the region of analyticity of $g$.  Write $c_n = a_n + ib_n$, where $a_n, b_n$ are real. For $z = x+iy\in \mathbb D$ (here, $x,y$ are real), we have
+    \begin{align*}
+      g(z) = \sum_{n=0}^\infty c_n (x+iy)^n &= \sum_{n=0}^\infty c_n \left( \sum_{k=0}^n {n\choose k} x^{n-k} i^k y^k \right) 
+    \end{align*}
+    In this form, the real part of $g(z)$ is given by 
+    \[ \Re g(x+iy) = u(x, y) = \sum_{n=0}^\infty c_n \left( \sum_{k=0}^{\lfloor n/2 \rfloor} {n\choose k} x^{n-2k} (-1)^k y^{2k} \right). \] 
+    Define $f(z) = 2 u( \tfrac z 2, \tfrac{z}{2i} ) - u(0, 0)$ by formally replacing $x$ by $\tfrac z 2$ and $y$ by $\tfrac{z}{2i}$.  This substitution yields
+    \begin{align*}
+      f(z) &= 2c_0 - u(0,0) + 2\sum_{n=1}^\infty c_n \left( \sum_{k=0}^{\lfloor n/2 \rfloor} (-1)^k{n\choose k}  \frac{z^{n-2k}}{2^{n-2k}}  \frac{z^{2k}}{(2i)^{2k}} \right) \\
+      &= a_0 + 2i b_0 + \sum_{n=1}^\infty c_n z^n \left( \frac{1}{2^{n-1}} \sum_{k=0}^{\lfloor n/2 \rfloor} (-1)^k {n\choose k} \right)  \\
+      &= a_0 + 2ib_0 + \sum_{n=1}^\infty c_n z^n, 
+    \end{align*}
+    where we have used the well known identity $\sum_{k=0}^{\lfloor n/2\rfloor} (-1)^k {n\choose k} = 2^{n-1}$, which is valid for integers $n\geq 1$. 
+    
+    Since $g$ and $f$ differ by a constant, we see that $f$ is analytic in $\mathbb D$.  In particular, since the power series representation above for $f$ converges at all points $z\in \mathbb D$, $f$ is indeed meaningfully defined in terms of the power series.  Finally, it is now clear that $\Re f = u$. 
+    
+    %8
+  \item  Suppose $u$ is harmonic in $\mathbb C$ and satisfies $|u(z)| \leq M |z|^k$ for some fixed $k$ and all $|z| > R$, where $R>0$ is some fixed large number.  Since $\mathbb C$ is simply connected, there exists an entire function $f(z)$ such that $\Re f = u$.  Moreover, we may choose $f$ so that $\Im f(0) = 0$.  
+    
+    Fix $z_0$ with $|z_0| > R$, and put $S = 2|z_0|$.  By an analogous version of Corollary~1.7 to disks of radius not necessarily $1$, the uniqueness assertion of the corollary gives 
+    \[ f(z) = \frac{1}{2\pi} \int_0^{2\pi} \frac{Se^{it} + z}{Se^{it} -z} u(Se^{it}) \, dt.\]  Note that $|Se^{it} + z_0| \leq \tfrac{3S}{2}$ and that $|Se^{it}- z_0| \geq \tfrac S 2$.  It follows that 
+    \begin{align*}
+      |f(z_0)| &\leq \frac{1}{2\pi} \int_{0}^{2\pi} \left|   \frac{Se^{it} + z}{Se^{it} -z} u(Se^{it}) \right| \cdot |u(Se^{it})| \, dt \\
+      & \leq \frac{M\cdot S^k}{2\pi} \cdot \frac{3S/2}{S/2}\int_0^{2\pi}  \, dt \\
+      &= 3\cdot 2^k  M |z_0|^k. 
+    \end{align*}
+    This bound is independent of $R$, so it holds for $z_0$ provided $|z_0| > R$.  We conclude that the analytic function $f$ satisfies  $|f(z)| \leq A |z|^k$ for some constant $A$ and all $z$ with $|z| > R$.  By an exercise from long ago, we know that this implies that $f$ is a polynomial of degree at most $k$.  Hence, $u$ is the real part of a polynomial of degree at most $k$. 
+  
+  %9
+  \item   Suppose $u$ is harmonic in $\mathbb C$ and $\liminf_{r\rightarrow \infty} M(r) / \log r \leq 0$, where $M(r) = \sup_{|z|=r} u(z)$.  
+
+    Fix $\delta > 0$.  Fix $r_0 > 0$ small so that $M(r_0) < u(0) + \delta$, which is possible by continuity of $u$.  Choose $\epsilon > 0$ so small that $M(r_0) - \epsilon \log r_0 < u(0) + \delta$.  Choose $R>r_0 > 0$ large so that $M(R) / \log R \leq \epsilon$, which is possible by the assumption that $\liminf_{r\rightarrow \infty} M(r) / \log r \leq 0$.   It will be important later on to note that there exist arbitrarily large $R$ satisfying this inequality.  
+
+    The function $u(z) - \epsilon \log |z|$ defined in the annulus $A = \{ z : r_0 \leq |z| \leq R \}$ is harmonic, being the difference of two harmonic functions.  Hence, by the maximum principle, it takes its maximum on $\partial A$.  Letting $M = \max \{ 0, u(0) + \delta \}$, it follows that $u(z) - \epsilon \log |z| \leq M$.  Note in particular that the bound $M$ depends only on $u$ and $\delta$. Since $\epsilon > 0$ can be made arbitrarily small, we conclude that $u(z) \leq M$ for all $z\in A$.  In fact, we can conclude that $u(z) \leq M$ for all $z\in \mathbb C$, we can choose $r_0>0$ as small as we want and since we can always find $R$ as large as we want so that $M(R) / \log R \leq \epsilon$ for fixed $\epsilon>0$.
+
+    We have shown so far that $u(z)$, which is harmonic everywhere, is bounded by $M$. Hence, $M- u(z)$ is a positive function that is harmonic in $\mathbb C$.  We will show that $M-u(z)$ must be constant.  One can prove the following version of Harnack's Inequality by mimicking the proof of the version of Harnack's Inequality in the notes: if $s(z)$ is a positive harmonic function on the open disk of radius $R>0$, then for all $|z| < R$,
+    \[ \frac{R - |z|}{R+|z|} s(0) \leq s(z) \leq \frac{R+|z|}{R-|z|}s(0). \] 
+    We apply this version of Harnack's Theorem to the present case.  Fix $z_0\in \mathbb C$, and fix $R>|z_0|$, and consider the function $v(z)$ defined on $\{ z : |z| < R \}$ given by $v(z) = M - u(z)$.  Then 
+    \[ \frac{R - |z_0|}{R+|z_0|} v(0) \leq v(z_0) \leq \frac{R+|z_0|}{R-|z_0|}v(0), \] and letting $R\rightarrow \infty$, we conclude $v(z_0) = v(0)$.  Hence, $v$ is constant, hence so is $u(z)$.  This completes the proof. 
+
+    %10
+  \item  Suppose $v$ is subharmonic in $\mathbb C$. Fix $\rho_0 > 1$ and let $r > \rho_0$.  Let $C_1$ and $C_2$ be the circles centered at $0$ of radii $\rho_0$ and $r$, respectively.  Orient both $C_1$ and $C_2$ in the positive direction.  The cycle $C_2 - C_1$ bounds an annulus $A$ in $\mathbb C$.  Applying Green's Theorem to the functions $\log |z|$ and $v$ on $A$, we see that
+    \[ \int_A (\log |z| \, \Delta v - v \Delta u) \, dx dy 
+      = 
+      \int_{C_2 - C_1} \left( \log |z| \frac{\partial v}{\partial \eta} - v \frac{\partial}{\partial \eta} \log |z| \right) |dz|. 
+      \]  In fact, since $\log |z|$ is harmonic on $A$, we know that $\Delta u = 0$.  Also, by exercise~5, $\Delta v \geq 0$, as $v$ is subharmonic on $A$, so that $\log |z| \, \Delta v \geq 0$ everywhere in $A$.  %Letting the outer radius $r$ of $A$ increase (while keeping $\rho_0$ fixed), we now see that  
+      We now see that
+    \[ \int_A (\log |z| \, \Delta v - v \Delta u ) \, dxdy  = \int_A  \log |z| \, \Delta v \, dxdy\] is nonnegative and increases with $r$ (keeping $\rho_0$ fixed), and hence the same is true of %increasing as a function of $r$, and hence so is 
+    \[  \int_{C_2 - C_1} \left( \log |z| \frac{\partial v}{\partial \eta} - v \frac{\partial}{\partial \eta} \log |z| \right) |dz|. \]
+    
+    If we put $K = \int_{C_1}\left( \log |z| \frac{\partial v}{\partial \eta} - v \frac{\partial}{\partial \eta} \log |z| \right) |dz|$, which is a constant independent of $r$, we we see that  
+    \begin{align}
+      \int_{C(r)} \left( \log |z| \frac{\partial v}{\partial \eta} - v \frac{\partial}{\partial \eta} \log |z| \right) |dz| - K \geq 0,  \label{eq:green}
+    \end{align}where $C(r)$ is the circle of radius $r$ centered at $0$ oriented counterclockwise, and that, in fact, the left-hand side increases with $r$.  
+
+    Since $C(r)$ is a circle, we have that $\frac{\partial v}{\partial \eta} |dz| = r \, \frac{\partial v}{\partial r}  \, d\theta$, as was computed in Exercise~5.  Similaly, $\frac{\partial}{\partial \eta}( \log r)  \, |dz| = r \, \frac{\partial}{\partial r} (\log r) \, d\theta = d\theta$.  Hence, parametrizing $C(r)$ by the curve $\gamma(t) = re^{i\theta}$, $\theta\in [0,2\pi]$, we see that~\eqref{eq:green} can be rewritten as 
+    \begin{align}
+      \int_{0}^{2\pi} \left( r \log r \frac{\partial v}{\partial r} - v \right) \, d\theta - K &= r \, \log r \int_0^{2\pi} \frac{\partial v}{\partial r} \, d\theta - 2\pi M_1(r) - K,  \label{eq:o1}
+    \end{align}
+    where $M_1(r) = \frac{1}{2\pi} \int_0^{2\pi} v(re^{i\theta}) \, d\theta$. Note that 
+    \begin{align} 
+      M_1'(r) &= \frac{\partial}{\partial r} \left[ \frac{1}{2\pi} \int_0^{2\pi} v(re^{i\theta}) \, d\theta \right] 
+      = \frac{1}{2\pi} \int_0^{2\pi} \frac{\partial v}{\partial r} \, d\theta. \label{eq:o2}
+    \end{align} It follows from~\eqref{eq:green},~\eqref{eq:o1}, and~\eqref{eq:o2} that  
+    \begin{align*}
+          M_1'(r) \log r -  \frac{M_1(r)}{r} - \frac{K}{r} \geq 0. 
+    \end{align*}
+    If we trace back through the logic, we see that equality holds for all $r>\rho_0$ in the above line if and only if $\Delta v (z) = 0$ for all $|z| > \rho_0$.  If $\Delta v \neq 0$ at some point $z$ with $|z|> \rho_0$, then by continuity $\Delta v \neq 0$ in some small neighborhood, and we see that there exists $\delta > 0$ such that for all sufficiently large $r$, 
+    \[ M_1'(r) \log r - \frac{M_1(r)}{r} - \frac{K}{r} > \delta > 0.\]    In this case, since $K$ is constant, it is straightforward to see that for sufficiently large $r$, 
+    \[ M_1'(r) \log r - \frac{M_1(r)}{r} \geq 0. \] 
+    In either case ($\Delta v \equiv 0$ or $\Delta v \not \equiv 0$), we deduce that 
+    \[ \frac{d}{dr} \left( \frac{M_1(r)}{\log r} \right) = \frac{(\log r) M_1'(r) - \tfrac{1}{r} M_1(r)}{(\log r)^2} \] is nonnegative for sufficiently large $r$, hence
+    \[ \frac{M_1(r)}{\log r} \] is increasing for sufficiently large $r$, hence has a limit (possibly infinite). 
+
+
+\end{enumerate}
+\subsection{Chapter 9}
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    %1
+  \item We wish to find a conformal map from the upper half-plane $\mathbb H$ onto the region $\{ x  + iy : x^2 - y^2 > 1 \text{ and } x > 0 \}$.  We will build up the map in intermediate stages. 
+
+    %Put $\Omega_0 = \mathbb H$.  Let $\varphi_1 (z) = \tfrac{z-i}{z+i}$.  As we have seen many times now, $\varphi_1$ maps $\mathbb H$ conformally onto the unit disk $\Omega_1:= \mathbb D$.   
+
+    Put $\Omega_1 = \mathbb H$.  Let $\varphi_1 (z) = \sqrt{z} = e^{\tfrac 1 2 \log z}$, where $\log z$ is defined on the simply connected region $\mathbb C \setminus (-\infty, 0]$ and is chosen so that $\log 1 = 0$.  Then, as we have seen many times over the course, $\varphi_1$ maps $\mathbb H$ conformally onto the first quadrant $\Omega_2 := \{ z : x > 0, y > 0 \}$.   
+
+    Let $\varphi_2(z) = \tfrac{1+z}{1-z}$.  Since $\varphi_2$ is an LFT, it takes  disks to disks and their boundary circles to boundary circles.  (Here, ``disk'' can mean half-plane, as in Chapter VI of the notes.)  The first quadrant $\Omega_2$ is the intersection of two disks, namely, the upper half-plane and the right half-plane.  The map $\varphi_2$ takes the real line to the real line. Hence, $\varphi_2$ will map the upper half-plane to either the upper or lower half-plane.   But, $\varphi_2(1) = \infty$, $\varphi_2(0) = 1$, and $\varphi_2(-1) = 0$.  As we run from $-1$ to $0$ to $1$, the upper half-plane lies to our left.  Hence, since $\varphi_2$ is orientation-preserving, as we run from $\varphi_2(-1) = 0$ to $\varphi_2(0) = 1$ to $\varphi_2(1) = \infty$, the image $\varphi_2(\mathbb H)$ better lie to our left.  We conclude that $\varphi_2(\mathbb H)  = \mathbb H$.   Now we argue that $\varphi_2$ takes the right half-plane to the unit disk $\mathbb D$.  Each point $z$ in the right half-plane is closer to $1$ in distance than to $-1$, so $|1-z| < |1+z|$ for each $z \in \{ z : x > 0 \}$.  Hence, $\varphi_2(z) > 1$ for each $z\in \{ z : x > 0\}$, and, of course, $\varphi_2(z) = 1$ if $\Re z = 0$. Since $\varphi_2$ takes disks to disks and their bounding circles to bounding circles, we conclude that $\varphi_2 ( \{ z : \Re z >0 \} ) = \mathbb C \setminus \overline{\mathbb D}$.  By injectivity of $\varphi_2$, it follows that $\varphi_2(\Omega_2) = \varphi_2(\mathbb H \cap \{ z : \Re z > 0 \} ) = \mathbb H \cap \{ z : |z| > 1 \}$.  Set $\Omega_3 := \mathbb H \cap \{ z : |z| > 1 \}$. 
+
+
+    Let $\varphi_3(z) = z^{1/4} = e^{\tfrac 1 4 \log z}$, where $\log z$ is defined on $\mathbb C \setminus (-\infty, 0]$ and $\log 1 = 0$.  If $z = re^{i\theta}$, where $r> 0$ and $0 < \theta < \pi$, then $\varphi_3(z) = r^{1/4} e^{i\theta/4}$.  From this, it is easy to see that $\varphi_3$ maps $\Omega_3$  onto the region $\Omega_4 := \{ z : |z| > 1 \text{ and } 0 < \Im z < \Re z \}$.  The map is conformal, as well, as we have seen before. 
+
+    Let $\varphi_4(z) = \tfrac{1}{\sqrt 2} ( z + \tfrac 1 z)$.  %Of course, $\varphi_4(\partial \Omega_4) = \partial \varphi_4(\Omega_4)$.  
+    Note that $\varphi_4( [1,\infty) ) = [\sqrt 2, \infty)$.  Analogous to the behavior of $\tfrac 1 2 (z + \tfrac 1 z)$, we know from Chapter VI that $\varphi_4$ maps the unit circle to the line segment $[-\sqrt 2,\sqrt 2]$.  In fact, the arc $\{ e^{i\theta} : 0\leq \theta \leq \tfrac \pi 4 \}$ is mapped under $\varphi_4$ to the segment $[1, \sqrt 2]$.  Now we examine how the half-line $\{ z : |z| \geq 1, \Re z = \Im z \}$ is mapped under $\varphi_4$.  Let $z = a + ia$, where $a \geq \tfrac{1}{\sqrt 2}$.  We find 
+    \[ \frac{1}{\sqrt 2} ( z + \frac 1 z ) =  u  + iv , \] where $u =\tfrac{1}{\sqrt 2}( a + \tfrac{1}{2a})$ and $v =\tfrac{1}{\sqrt 2} ( a - \tfrac{1}{2a})$.  Note that $u^2 - v^2 = 1$.  Moreover, if $a = \tfrac{1}{\sqrt 2}$, $\varphi_4(a + ia) = 1$, and we see that $\varphi_4( \{ z : |z| \geq 1, \Re z = \Im z \}$ is in fact the top half of the branch of the hyperbola $u^2 -v^2  = 1$, $u>0$.  
+
+    Up to this point, we have determined that $\varphi_4(z)$ maps $\partial \Omega_4$ onto $ \{ u + iv : u^2 - v^2 = 1, u > 0, v \geq 0\} \cup [1, \infty)$.  It is now easy to see, e.g., by evaluating $\varphi_4$ at a point of $\Omega_4$, that, in fact, $\varphi_4$ maps into the ``interior'' of the half-branch of the hyperbola, i.e., $\varphi_4$ maps $\Omega_4$ conformally onto $\Omega_5 := \{ u  + iv : u > 0, v> 0, u^2 - v^2 > 1 \}$.  
+
+
+      We have a conformal map $\varphi := \varphi_4 \circ \varphi_3 \circ \varphi_2 \circ \varphi_1$ from $\mathbb H$ onto $\Omega_5$.  We would like a conformal map from $\mathbb H$ onto the whole interior of the branch of $u^2 - v^2 = 1$ lying in the half-plane $\{ u \geq 0 \}$.  To obtain such a map, we will need the Schwarz Reflection Principle.
+
+      It is straightforward to trace through the conformal mappings to determine that $\varphi$ maps $(-\infty, 1] \subset \partial \mathbb H$ one-to-one onto $[1, \infty) \subset \partial \Omega_5$.  By a variant of the Schwarz Reflection Principle (Corollary IX.1.3), we can extend $\varphi$ to a one-to-one analytic function $\widetilde \varphi$ on $\widetilde \Omega := \mathbb H \cup \mathbb H^- \cup (-\infty, 1)$ (where $\mathbb H^-$ is the lower half-plane) that maps onto the branch of the hyperbola $\{ u + iv : u^2 - v^2 > 1, u > 0 \}$.  In fact, 
+      \[ \widetilde \varphi(z) = \begin{cases}
+            \varphi(z) & \text{if $z\in \mathbb H$,}\\
+            \overline{\varphi(\overline z)} & \text{if $z\in \mathbb H^-$,}\\
+            \lim_{\substack{w \rightarrow z\\w \in \mathbb H}} \varphi(w) & \text{if $z\in (-\infty, 1)$.}\\
+        \end{cases}
+        \] 
+
+        Finally, if we define $\tau : \mathbb H \rightarrow \mathbb C \setminus [1,\infty)$  by $\tau(z) = 1+z^2$, we see that $\varphi \circ \tau$ maps $\mathbb H$ conformally onto $\{ u + iv : u^2 -v^2 > 1, u > 0 \}$, as desired. 
+
+
+
+    %%Now we apply the Schwarz Reflection Principle to the map $\varphi_4$ defined on $\Omega_4$.  Precisely, let $\widetilde \Omega_4$ be the region obtained by unioning $\Omega_4 = \Omega_4^+$ with its reflection $\Omega_4^-$ through the real axis, along with the interval $(\tfrac{1}{\sqrt 2}, \infty)$.  A variant of the Schwarz Reflection Principle (Corollary~1.3 in Chapter IX) says we can extend $\varphi_4$ to a one-to-one analytic map $\widetilde \varphi_4$ defined on $\widetilde \Omega_4$.  In fact, 
+    %  \[ \widetilde{\varphi_4} (z) =  \begin{cases} \varphi_4(z) & \text{if $z \in \Omega_4^+$, } \\
+    %      \overline{\varphi_4(\overline z)} & \text{if $z\in \Omega_4^-$,}\\
+    %      \frac{1}{2}(a + \tfrac 1 a ) & \text{if $a\in (\tfrac{1}{\sqrt 2}, \infty).$}
+    %    \end{cases}
+    %    \] and $\widetilde \varphi_4(z)$ maps $\widetilde \Omega_4$ onto the region $\{ u + iv : u^2 - v^2 > 1 , u > 0\}$. 
+
+    %      Now, the map $\widetilde \varphi_4 \circ \varphi_3 \circ \varphi_2 \circ \varphi_1$ maps $\mathbb H$ conformally onto the region $\{ u + iv : u^2 - v^2 > 1 , u > 0\}$. 
+    %%Let $\varphi_2(z) = \tfrac 1 z$.  Again, we have seen many times that $\varphi_2$ maps $\Omega_1 = \mathbb D$ conformally onto $\Omega_2 := \mathbb C \setminus \overline{\mathbb D}$. 
+
+    %Let $\varphi_3(z) = \sqrt z = e^{\tfrac 1 2 \log z}$, where we define $\log z$ on the simply connected region $\mathbb C \setminus (-\infty, 0]$ such that $\log 1 = 0$.  Then $\varphi_3$ maps 
+    %2
+        \item  Let $f: 0 \leq t \leq \pi$ be a given real-valued continuous function.  Define a function $\widetilde f$ on $\partial \mathbb D$ by
+          \[ \widetilde f(e^{i\theta}) = \begin{cases}
+              f(\theta) & \text{if $0\leq \theta \leq \pi$,} \\    
+              f(2\pi - \theta) & \text{if $\pi \leq \theta \leq 2\pi$.}
+            \end{cases}
+            \]
+            Using the fact that $f$ is continuous, it is easy to see that $\widetilde f$ is continuous on $\partial \mathbb D$.  Define 
+            \[ G(z) = \frac{1}{2\pi} \int_0^{2\pi} \frac{e^{i\theta} + z}{e^{i\theta} - z} \widetilde f(e^{i\theta}) \, d\theta ,\]  the Herglotz integral of $\widetilde f$ on $\mathbb D$.  Let $u(z) = \Re G(z)$.  By Schwarz's Theorem, $u(z)$ is harmonic in $\mathbb D$, and we can extend $u$ to be continuous on $\partial \mathbb D$ so that $u$ and $\widetilde f$ agree on $\partial \mathbb D$.  As we have seen, another way to write $u$ is $u(z) = \tfrac{1}{2\pi} \int_0^{2\pi} \frac{1 - |z|^2}{|e^{i\theta} - z|^2} \widetilde f(e^{i\theta}) \, d\theta$. 
+
+            It remains to check that $u_y = 0$ on $(-1,1)$.  First, note that for all $z\in \mathbb D$, $|e^{i\theta} - \overline z| = |e^{-i\theta} - z|$, and $\widetilde f(e^{-i\theta}) = \widetilde f(e^{i\theta})$ for all $\theta$, so that 
+            \begin{align*}
+              u(\overline z) &= \frac{1}{2\pi} \int_0^{2\pi} \frac{1 - |\overline z|^2}{|e^{i\theta} - \overline z|^2} \widetilde f(e^{i\theta}) \, d\theta \\
+              &=  \frac{1}{2\pi} \int_0^{2\pi} \frac{1 - |z|^2}{|e^{-i\theta} - z|^2} \widetilde f(e^{- i\theta}) \, d\theta \\ 
+              &=  \frac{1}{2\pi} \int_0^{2\pi} \frac{1 - |z|^2}{|e^{it} - z|^2} \widetilde f(e^{it}) \, dt \\  
+              &= u(z)
+            \end{align*}
+            where we have made the change of variables $t=-\theta$ to obtain the second to last equality.  
+            
+            Since \[ \frac{\partial u}{\partial y}(x+iy) = i u'(x+iy)  \quad \text{ and } \quad \frac{\partial u}{\partial y} (x-iy) = -i u'(x-iy), \]  we see that if $x+iy$ is on $(-1,1)$, i.e., if $y=0$, then 
+            \[ \frac{\partial u}{\partial y}(x) = i u'(x) = -i u'(x) \] which implies $\frac{\partial u}{\partial y}(x) = 0$. 
+            %{\color{red} change}It follows that for fixed $x\in (-1,1)$ and any $y_n \rightarrow 0$, $y_n > 0$,             \[  \lim_{n\to \infty} \frac{u(x+iy_n) - u(x-iy_n)}{2y_n}  = \lim_{n\rightarrow \infty} \frac{u(x+iy_n) - u(\overline{x+iy_n})}{2y_n}  = 0. \]  But, the analytic function $G$ satisfies the strong derivative property that if $w_n$ and $z_n$ are any sequences tending to $z_0$, with $w_n \neq z_0 \neq z_n$, then 
+            %\[ G'(z_0) = \lim_{n\rightarrow \infty} \frac{G(w_n) - G(z_n)}{w_n - z_n} .\]  In particular, if $w_n = x+iy_n$ and $z_n = x-iy_n$, which each tend to $x$ along opposing vertical lines of approach, we see from considering the imaginary part of $G'(x)$ that 
+           % \[ 0 = \lim_{n\to \infty} - \frac{u(x+iy_n) - u(x+iy_n)}{2y_n} = \Im G'(x) =- \frac{\partial u}{\partial y} (x) . \]  
+
+            We have produced a function $u$ that satisfies the desired criteria (and more): $u$ is harmonic on $\mathbb D$, $\frac{\partial u}{\partial y} = 0$ on $(-1,1)$, $u$ is continuous on $\partial \mathbb D$, and $u=f$ on $\partial \mathbb D \cap \{ \Im z > 0 \}$. 
+            
+    %3
+          \item Let $g$ be continuous on $\partial \mathbb D$ and suppose $\int_0^{2\pi} g(e^{i\theta}) \, d\theta = 0$.  Define $\widetilde g(e^{i\theta})$ on $\partial \mathbb D$ by $\widetilde g(e^{i\theta}) = \int_0^{\theta} g(e^{it}) \, dt$.  The function $\widetilde g$ is continuous at all points in $\partial \mathbb D$, including at $1$, by the condition $\int_0^{2\pi} g(e^{i\theta}) \, d\theta = 0$.  Now define 
+            \[ F(z) = \frac{1}{2\pi} \int_0^{2\pi} \frac{e^{i\theta} + z}{e^{i\theta} - z} \widetilde g(e^{i\theta}) \, d\theta, \]  which by Schwarz's Theorem is analytic in $\mathbb D$.  Also, $\Re f$ tends to $\widetilde g$ on the boundary of the disk.  
+            
+            Let $v = \Re F$ and $u = - \Im F$.   Inside $\mathbb D$, we know that $u_x = -v_y$ and $u_y  = v_x$ by the Cauchy-Riemann equations.  Also,  the directional derivative of $v$ in the direction of the tangent vector at a point $re^{i\theta}$ with $0 < r < 1$ is given by
+            \begin{align*}
+                \frac{\partial v}{\partial s} &= v_x( -\sin \theta) + v_y \cos \theta \\
+                &= u_y (-\sin \theta) + (-u_x) \cos \theta\\
+                &= \frac{\partial u}{\partial \eta} 
+            \end{align*}
+            where $\eta$ is the inward pointing unit normal at $re^{i\theta}$.  But, on $|z| = r$,  we also have
+            \[ \frac{\partial v}{\partial s} = \frac{\partial v}{\partial \theta}. \](We did a similar computation showing $\frac{\partial u}{\partial \eta} = -\frac{\partial u}{\partial r}$ on last homework, so we omit the similar calculation here.)  
+            
+            Using the integral representation for $v$ (and hence for $v_\theta$) and a difference quotient argument applied to $|v_\theta(z) - g(e^{it_0})|$ as $z\to e^{it_0}$, as in the proof of the boundary condition in Schwarz's Theorem, one can show that
+            \[ \lim_{z \to \zeta} \frac{\partial v}{\partial \theta} (z) = \frac{d}{d\theta} \widetilde g(\zeta) = g(\zeta) \] for all $\zeta \in \mathbb D$. Hence,
+            \[ \lim_{z \to \zeta} \frac{\partial u}{\partial \eta}(z) = \lim_{z \to \zeta}\frac{\partial v}{\partial \theta}(z) =   g(\zeta ) \] for $\zeta\in \mathbb D$, so the function $u$ satisfies the desired criteria. 
+
+
+    %4
+  \item  Define $\widetilde g$ on the real line by 
+    \[ \widetilde g(x) = \begin{cases} 
+        g(x) & \text{if $x\in (-1,1)$,}\\
+        0 & \text{else.}
+      \end{cases} \] and put $h(x) = \int_{-\infty}^x \widetilde g(t) \, dt$.  Note that $h$ is continuous on the real line. Using the Poisson kernel for the upper half-plane, define for $z=x+iy$ with $\Im z> 0$:
+      \[ v(x+iy) = \frac{1}{\pi} \int_{-\infty}^{\infty} \frac{y}{(x-t)^2 + y^2} h(t) \, dt .\] 
+      Then $v$ is harmonic in $\mathbb H$ with boundary values $h(z)$, since $h$ is continuous on the whole real line, by an analog of Schwarz's Theorem for the upper half-plane Poisson kernel.  Using the integral representation of $v$ (and hence that of $v_y$) and a difference quotient argument as in the proof of Schwarz's Theorem, one can show that 
+      \[ \lim_{y\rightarrow 0^+} \frac{\partial v}{\partial y} (x+iy) = \frac{d}{dx} h(x) = \widetilde g(x), \] which is equal to $g$ on $(-1,1)$. 
+
+      Now we look for a function $w$ that is harmonic on $\mathbb D^+$ such that $w = f-v$ on $\partial \mathbb D^+ \cap \{ \Im z  > 0 \}$ and $\frac{\partial w}{\partial y} = 0$ on $(-1,1)$.  This is essentially Problem \#4, so we simply mention the solution here.  Let $\widetilde f$ be defined as in Problem \#4 and set 
+      \[ w(z) = \Re \frac{1}{2\pi} \int_0^{2\pi} \frac{e^{i\theta} +z}{e^{i\theta} - z} ( \widetilde f(e^{i\theta}) - v(e^{i\theta}) )\, d\theta .\]  Then $w(z)$ is continuous on $\overline{\mathbb D^+} \setminus \{ \pm 1\}$, $w = f-v$ on $\partial \mathbb D^+ \cap \{ \Im z > 0 \}$, $w$ is harmonic on $\mathbb D^+$, and $\frac{\partial w}{\partial y} = 0$ on $(-1,1)$. 
+
+      Now, set $u(z) = w(z) + v(z)$ (where sensible).   Then $u$ is harmonic in $\mathbb D^+$, continuous on $\overline{\mathbb D^+} \setminus \{ \pm 1\}$, $u=f$ on $\partial \mathbb D^+ \cap \{ \Im z > 0\}$, and $\frac{\partial u}{\partial y} = g$ on $(-1,1)$, as desired. 
+
+
+    %5
+  \item[8.] %We will prove the desired result by induction on $n$, where $n\geq 1$ is the number of given (distinct) points $z_1, \ldots, z_n$.  
+    The geodesic algorithm constructs a conformal map of $\mathbb H$ onto a simply connected region $\Omega_c$ whose computed boundary consists of curves $\gamma_1,\ldots, \gamma_n$, where $\gamma_1$ has endpoints $z_1$ and $z_2$, $\gamma_2$ has endpoints $z_2$ and $z_3$, and so on, with the last curve $\gamma_n$ having endpoints $z_n$ and $z_1$.  By Theorem IX.3.4, we know that the computed boundary $\gamma_1 \cup \cdots \cup \gamma_n$ is $C^1$, and in particular, that $\gamma_j$ and $\gamma_{j+1}$ meet at an angle of $\pi$ at $z_{j+1}$.  As noted in the proof of Theorem IX.3.4, the first arc $\gamma_1$ is a chord of $D_1^+$ and of $D_1^-$, and hence $\gamma_1$ lies in $L_1$, except for at endpoints, and so $\gamma_1$ is not tangent to either $D_1^+$ or $D_1^-$.  
+    %By Jorgensen's Lemma, $\gamma_1$ lies entirely in $L_1$, exiting only at its endpoints. 
+    The angle at $z_2$ between $\gamma_1$ and $\gamma_2$ is $\pi$, and by the tangency of $\partial D_1^+$ and $\partial D_2^-$, as well as the tangency of $\partial D_1^-$ and $\partial D_2^+$, we see that $\gamma_2$ must enter $L_2 = D_2^+ \cap D_2^-$. As in Theorem IX.3.4, we know that $\gamma_2$ is a hyperbolic geodesic in $\mathbb C^* \setminus \gamma_1$.  But, $D_2^+$ does not intersect $L_1$, so $D_2^+$ cannot intersect $\gamma_1$.  Hence, we can apply Jorgensen's Lemma to deduce that $\gamma_2$ remains in $D_2^+$, except at the endpoints $z_2$ and $z_3$, where it exits. Also, $\gamma_2$ is not tangent to $\partial D_2^+$.  In the same way, $\gamma_2$ enters and exits $D_2^-$ at $z_2$ and $z_3$, remaining inside $D_2^-$ between, and is not tangent to $\partial D_2^-$.  Hence, $\gamma_2$ lies in $L_2 \cup \{ z_2, z_3 \}$, and because $\gamma_3$ and $\gamma_2$ form an angle of $\pi$ at $z_3$, we see by the tangency condition on the lenses that $\gamma_3$ enters $D_3^+ \cap D_3^-$, and we use the fact that $\gamma_3$ is a hyperbolic geodesic in $\mathbb C^* \setminus (\gamma_1 \cup \gamma_2)$ and Jorgensen's Lemma, as before, to conclude that $\gamma_3$ stays inside $L_3$ between its endpoints.   Continuing inductively in this fashion, we conclude that $\gamma_1 \cup \cdots \cup \gamma_n$ is contained in $\bigcup \overline{L_i}$.
+\end{enumerate}
+\subsection{Chapter 10}
+\begin{enumerate}
+    %1
+  \item (IX.12) In order to construct a conformal map of $\mathbb D$ onto the interior of an ellipse, we will start by constructing a conformal map of $\mathbb D^+ = \mathbb D \cap \{ \Im z > 0 \}$ onto the upper half of the interior of an ellipse.  As per the sketch on the next page, we are also interested in following what this conformal map does to the interval $(-1,1) \subset \partial \mathbb D^+ \cap \mathbb R$. 
+
+    Let $\varphi_1 : \mathbb D^+ \to \mathbb H$ be defined by $\varphi_1(z) = \frac{1}{2} \left( z + \frac{1}{z} \right)$.  We have seen before that this map is analytic, one-to-one, and onto $\mathbb H$.  Note that $\varphi_1$ takes the interval $(-1,1) \in \partial \mathbb D^+$ onto $(-\infty, -1) \cup (1, \infty) \in \partial \mathbb H$. 
+
+    We will determine a conformal map $\varphi_2 : \mathbb H \to \mathbb H$ after we determine a conformal map $\varphi_3 : \mathbb H \to R$, where $R$ is defined in the next paragraph.
+
+    Let $R$ be the open rectangle with sides parallel to the coordinate axes and with top-left vertex $0$ and bottom-right vertex $\pi-i$ on its boundary $\partial R$.  Let $v_1 = 0$, $v_2 = -i$, $v_3 = \pi - i$, and $v_4 = \pi$ be the vertices of $R$, listed in counterclockwise order. By the Schwarz-Christoffel Theorem, there exists a conformal map of $\mathbb H$ onto $R$ of the form
+    \[ \varphi_3(z) = A \int_0^z \frac{1}{[(\zeta-x_1) (\zeta-x_2) (\zeta-x_3) (\zeta-x_4)]^{1/2}} \, d\zeta + B , \] where $x_1, x_2, x_3, x_4$ are some prevertices on the real line satisfying $ -\infty < x_1< x_2 < x_3 < x_4 < \infty$ and $A,B$ are constants.  (Here, the branch $\sqrt{\zeta - x_j}$, $j=1,2,3,4$, that we are talking about is the branch defined on a slit plane where the slit runs along a vertical ray from $x_j$ in the downward direction to $\infty$, chosen so that $\sqrt{\zeta - x_j}$ is positive for $\zeta  > x_j$.)   Moreover, $\varphi_3$ maps $(-\infty, x_1) \cup (x_4, \infty) \cup \{ \infty \}$ onto the top edge $(v_1, v_4) = (0, \pi)$ of the rectangle and $(x_1,x_2)$ and $(x_3, x_4)$ onto the vertical sides. 
+
+    Now we go back and deal with $\varphi_2$.  Let $\varphi_2$ be a conformal map of $\mathbb H$ onto itself by sending $\infty \mapsto \infty$, $-1 \mapsto x_2$, and $1 \mapsto x_3$. 
+
+    Now let $\varphi_4 : R \to A^+$ be given by $\varphi_4 (z) = e^{iz}$, where $A^+$ is the top half of the annulus $\{ z : 1 < |z| < e , \Im z > 0 \}$.  We have seen before that $\varphi_4$ is a conformal map from $R$ onto $A^+$.
+
+    Let $\varphi_5 : A^+ \to E^+$ be defined by $\varphi_5(z) = \frac{1}{2} \left( z + \frac 1 z \right)$, where $E^+ = \varphi_5(A^+)$.  As we have seen before when studying the map $\frac{1}{2} \left( z + \frac 1 z \right)$, $E^+$ is in fact the top half of the interior of an ellipse centered at $0$ with major and minor axes parallel to the $x$- and $y$-axes.  
+
+    The composition $\varphi = \varphi_5 \circ \varphi_4 \circ \varphi_3 \circ \varphi_2 \circ \varphi_1$ gives a conformal map of $\mathbb D^+$ onto $E^+$.  If we consider the sketches, we see that as $z$ tends to the interval $(-1,1)$, $\Im \varphi(z)$ tends to $0$.  By the Schwarz Reflection Principle, we can reflect to obtain a conformal map  which we also denote by $\varphi$ from the disk $\mathbb D$ onto the full ellipse $E$ obtained by unioning $E^+$ with the reflection of $E^+$ through the real line, as well as the obvious points on the real line.  
+    
+
+
+
+    %2
+  \item (IX.13) We wish to find a conformal map of $\mathbb D$ onto a regular $n$-gon.  If we travel along the boundary of the $n$-gon and ``turn'' at a vertex, we turn an angle of $\tfrac{2\pi}{n}$.  For $j=1,2,\ldots, n$, let $\zeta_j = e^{2\pi i j /n}$, so $\zeta_1, \ldots, \zeta_n$ are precisely the roots of $\zeta^n - 1$.  For convenience, put $\zeta_0 = \zeta_n$.  We will show that the Schwarz-Christoffel map on $\mathbb D$
+    \[ F(z) = \int_1^z \frac{d\zeta}{(\zeta^n - 1)^{2/n}} \] maps the unit disk conformally onto a regular $n$-gon.  
+    
+    By the Schwarz-Christoffel Theorem, we know $F(z)$ maps $\mathbb D$ conformally onto a polygon with $n$ vertices, one vertex corresponding to each of the prevertices $\zeta_1, \ldots, \zeta_n$. 
+
+    Since 
+    \[ (\zeta^n-1)^{2/n} = (\zeta-\zeta_1)^{2/n} \cdots (\zeta-\zeta_n)^{2/n}, \] we see (as we saw in the proof of Schwarz-Christoffel) that the interior angle at each vertex of the image polygon will indeed be $(1-2/n)\pi = \tfrac{n-2}{n} \pi$, which is necessary for the polygon to be regular.  All we need to check now is that the sides of the image polygon all have the same length.  The length of the polygonal side with prevertices $\zeta_j$ and $\zeta_{j+1}$ is given by
+    \[ \left| \int_{\zeta_j}^{\zeta_{j+1}} \frac{d\zeta}{(\zeta-\zeta_1)^{2/n} \cdots (\zeta-\zeta_n)^{2/n}} \right|.\]  We can parametrize this integral by $\zeta(t) = e^{it}$, where $t$ runs from $2\pi  j / n$ to $2\pi  (j+1)/n$, and the integral becomes 
+    \begin{align*}
+      \int_{2\pi  j/n}^{2\pi  (j+1)/n} \frac{ie^{it} \, dt}{(e^{it} - \zeta_1) \cdots ( e^{it} - \zeta_n) } 
+      &= \int_{0}^{2\pi /n} \frac{i e^{it}e^{2\pi i j/n} \, dt }{(e^{it}e^{2\pi i j/n} - \zeta_1) \cdots ( e^{it}e^{2\pi i j/n} - \zeta_n)}\\ 
+      &=  \int_0^{2\pi /n} \frac{i e^{it} \, dt}{(e^{it} - \zeta_1) \cdots (e^{it} - \zeta_n)} \\
+      &= \int_{\zeta_0}^{\zeta_1}  \frac{d\zeta}{(\zeta - \zeta_1)^{2/n} \cdots (\zeta - \zeta_n)^{2/n}}
+    \end{align*}  
+    where we have obtained the middle equality by dividing the top and bottom of the expression 
+    \[ \frac{i e^{it}e^{2\pi i j/n}}{(e^{it}e^{2\pi i j/n} - \zeta_1) \cdots ( e^{it}e^{2\pi i j/n} - \zeta_n)} \] by $e^{2\pi i j/n}$ and noting that dividing $\zeta_1, \ldots, \zeta_n$ by $e^{2\pi i j/n}$ permutes the $\zeta_j$'s.  From the above computation, we see that integrating from $\zeta_j$ to $\zeta_{j+1}$ gives a value that is independent of $j$.  Hence, the sides of the image polygon all have the same length.    
+
+    We have shown that $F(z)$ maps $\mathbb D$ conformally onto a regular $n$-gon. 
+
+
+    %3
+  \item (IX.14)  We want to produce a version of Schwarz-Christoffel from the upper half plane $\mathbb H$ onto a polygonal region $P$ that is unbounded.  In this case, we will regard $\infty$ as a vertex.  Also, as in the case when the polygonal region is bounded, the region $P$ is allowed to contain ``slits'', i.e., if we traverse the boundary and arrive at a vertex $v$, we may turn away from $v$, head to the next vertex $w$, do a full turn of $2\pi$, and head back towards $v$.  
+
+	Let $v_1, v_2, \ldots, v_n$ be the vertices of the polygonal region $P$, as seen as we travel along $P$ in positive order.  Note that $\infty$ may be represented in this list, possibly more than once (if there are slits emanating from $\infty$).   Suppose we traverse the vertices in order.  We start at $v_1 \neq \infty$, and when we arrive at $v_2$, we make a turn of $\beta_2\pi$, where $-1 < \beta_2 \leq 1$, provided $v_2\neq \infty$.  Then we arrive at $v_3$ and turn at an angle of $\beta_3\pi$, provided $v_3\neq \infty$.   When we arrive at an infinite vertex, we stipulate that we make a turn of $\pi$, so $\beta_j=-1$ in this case.  If we come from $\infty$, arrive at a vertex $v_j$, and head back to $\infty$, then we stipulate that $\beta_j = 1$.   Also, if we start from a vertex $v_j$, go to $v_{j+1} = \infty$, and come back to $v_j$ immediately, we stipulate that $\beta_{j+1} = -1$. 
+
+	Now that we have the setup, the proof is nearly identical to the proof of the Schwarz-Christoffel Theorem from $\mathbb H$ onto bounded polygonal regions.  In particular, in the bounded case, we were allowed to have two-sided arcs (corresponding to ``slits'' in our region), and this is still a possibility in the unbounded case, treated the exact same way.   By the Schwarz Reflection principle, if $\varphi$ is a conformal map of $P$ onto $\mathbb D$, then $\varphi$ extends analytically and one-to-one across the interior each boundary segment.  (If one of these segments is a two-sided arc, the extensions may not agree, but that is fine.)  If $B_j$ is a small ball centered at $v_j\neq \infty$, then the map $(z-v_j)^{1/(1-\beta_j)}$ is one-to-one and analytic in $P \cap B_j$.  If $v_j = \infty$, the map $(z-v_j)^{-1}$ is analytic in a neighborhood $B_j$ of $\infty$ not containing any other $v_k$'s.  In either case, $\varphi$ maps $\partial P \cap B_j$ onto a straight line segment.  By the Schwarz Reflection principle, the inverse of this map composed with $\varphi$ then extends to be analytic and one-to-one in a neighborhood of $0$, hence $\varphi$ extends to be one-to-one and continuous from $\overline P$ onto $\mathbb D$, from which it follows that if $f(z)$ is conformal from $\mathbb H$ onto $P$, then $f(z)$ extends to be one-to-one and continuous on $\overline{\mathbb H}$ and analytic at all $x_j = f^{-1} (v_j)$, where the prevertices can be assumed to be in order $-\infty < x_1 < \cdots < x_n < \infty$.  Writing out the definition of $f'(z)$ as $\lim_{h\to 0} \frac{f(x+h) - f(x)}{h}$, we see as in the bounded case that $f'(x)$ points in the right direction, as $\arg f'(x)$ is given by the direction of the line segment from $v_j$ to $v_{j+1}$.  Note that the correct change in direction is made at a prevertex corresponding to a vertex of $\infty$.  Since $f'(z) \neq 0$ on $\mathbb H$, we can define $\log f'(z)$ to be analytic on $\mathbb P$, hence $\arg f'(z)$ is a bounded harmonic function on $\mathbb H$ which is continuous at all boundary points except the finitely many prevertices.  The function $\pi - \arg (z-a) = 0$ for $z<a$ and equals $\pi$ for $z>a$, $a,z\in \mathbb R$, and an application of the Lindel\"{o}f Maximum Principle shows that $\arg f'(z) = c_0 + \sum_{j=1}^n \beta_j (\pi - \arg(z-x_1))$, so $f'(z) = A \prod_{j=1}^n (z-x_j)^{-\beta_j}$.  The singularity at a prevertex $x_j$ corresponding to $\infty$ is not integrable, but we take the integral to mean that the large value of the integral over a small neighborhood $(x_j - h, x_j)$ cancels with the integral over the interval $(x_j, x_j+h)$.  
+
+	
+
+	
+
+    %4
+  \item (X.6) Suppose $b_1,b_2,\ldots  \to \infty$ with the $b_k$ pairwise distinct, and let $a_1,a_2,\ldots$ be given with $|a_k| \leq M < \infty$ for all $k$.  Fix $R>0$. The sum  
+    \begin{align} \sum_{k=1}^\infty \left( \frac{a_k}{z-b_k} - \left( \frac{a_k}{-b_k} \right) \sum_{j=0}^k \left( \frac{z}{b_k} \right)^j \right) \label{eq:0} \end{align}
+    can be split into two sums
+    \begin{align} \sum_{k : |b_k| < 2R} \left( \frac{a_k}{z-b_k} - \left( \frac{a_k}{-b_k} \right) \sum_{j=0}^k \left( \frac{z}{b_k} \right)^j \right)  + \sum_{k : |b_k| \geq 2R} \left( \frac{a_k}{z-b_k} - \left( \frac{a_k}{-b_k} \right) \sum_{j=0}^k \left( \frac{z}{b_k} \right)^j \right) . \label{eq:1} \end{align} 
+      Since $b_k \to \infty$, there are only finitely many $b_k$ with $|b_k| < 2R$.  Therefore, the left-hand sum in~\eqref{eq:1} is finite, hence meromorphic in $|z|\leq R$.  We will show that the right-hand sum in~\eqref{eq:1} is analytic in $|z|\leq R$.  Note that each summand in the right-hand sum is analytic in $|z|\leq R$.  Since there are only finitely many $b_k$ with $|b_k| < 2R$, we can fix $N$ so that $|b_k| \geq 2R$ whenever $k\geq N$.   Consider the tail-end of the right-hand sum starting from $k=N$.  Since $|a_k| \leq M$ and $|b_k|$ and using the fact that $\frac{a_k}{z-b_k} = \left( \frac{a_k}{-b_k} \right) \left( \frac{1}{1-z/b_k} \right) = \frac{a_k}{-b_k} (1 + (z/b_k) + (z/b_k)^2 + \cdots)$ for $|z| \leq R$ when $k\geq N$, we compute
+    \begin{align*}
+      \sum_{k\geq N}  \left| \frac{a_k}{z-b_k} - \left( \frac{a_k}{-b_k} \right) \sum_{j=0}^k \left( \frac{z}{b_k} \right)^j \right|  &\leq \sum_{k\geq N}  \left( \left| \frac{a_k}{b_k} \right| \cdot  \sum_{j=k+1}^\infty \left| \frac{z}{b_k} \right|^j \right) \\
+      &\leq \sum_{k\geq N}\left( \frac{M}{2R} \sum_{j=k+1}^\infty \left( \frac{R}{2R} \right)^j \right) \\
+      &\leq \frac{M}{2R} \sum_{k\geq N} 2^{-k}  \\
+      &\leq \frac{M}{2R}. 
+    \end{align*}
+    This shows that the right-hand sum in~\eqref{eq:1} converges absolutely and, in fact, uniformly (by the above computation) on $|z| \leq R$.  Hence, the series~\eqref{eq:0} converges to a meromorphic function on $|z|\leq R$.  Since $R$ is arbitrary,~\eqref{eq:0} converges to a meromorphic function in $\mathbb C$. 
+
+    By construction, the partial sums of~\eqref{eq:0} are analytic at all $z$ such that $z\neq b_k$ for all $k$. Since the partial sums converge uniformly on compact subsets containing $z$, we conclude~\eqref{eq:0} is analytic at $z$, by Weierstrass's Theorem. 
+    
+    If $z=b_{k_0}$ for some $k_0$, then break the sum~\eqref{eq:0} into two parts: the part consisting of the one summand corresponding to $k=k_0$, and the sum over all $k\neq k_0$.  The first part ($k=k_0$) clearly has a simple pole at $z=b_{k_0}$.  We reason as above that the second part (the sum over all $k\ngeq k_0$ in~\eqref{eq:0}) is analytic at $z=b_{k_0}$ since the $b_k$'s do not cluster at $b_{k_0}$.  Hence, the series~\eqref{eq:0} is the sum of an analytic function at $z=b_{k_0}$ and a meromorphic function with a simple pole at $z=b_{k_0}$, hence the series~\eqref{eq:0} has a simple pole at $z=b_{k_0}$.   This completes the proof. 
+    
+    %5
+  \item (X.7)  We wish to find an explicit entire function $g$ with $g(n\log n) = n^\pi$ for $n=1,2,3,\ldots$.  We will follow the method given in Corollary~X.2.10 for constructing an interpolating function.  Note that the conditions of Corollary~X.2.10 are indeed satisfied: $n\log n\to \infty$ as $n \to \infty$.  
+
+    Note that $\sum_{n=2}^\infty \frac{1}{(n\log n)^2} < \infty$.  Hence, Theorem~X.2.7 guarantees that the function 
+    \[ \widehat G(z) =  \prod_{n=2}^\infty \left( 1 - \frac{z}{n\log n} \right) e^{\tfrac{z}{n\log n}}  \]  represents an entire function with simple zeroes at $n\log n$ ($n\geq 2$) and no other zeroes.  Hence, the function 
+    \[ G(z) :=  z \widehat G(z) = z \prod_{n=2}^\infty \left( 1 - \frac{z}{n\log n} \right) e^{\tfrac{z}{n\log n}}  \] represents an entire function with simple zeroes at $n\log n$ ($n\geq 1$) and no other zeroes. 
+
+    Now, let 
+    \[ d_n = G'(n\log n).  \] In fact, we can give a product representation for each $d_n$ as follows.  For $N\geq 2$, put \[ G_N(z) = z \prod_{n=2}^N \left( 1 - \frac{z}{n\log n} \right) e^{\tfrac{z}{n\log n}}, \]  the $N$th partial product of $G(z)$.  If we denote by $F_n(z)$ the term $\left( 1- \frac{z}{n\log n} \right) e^{\frac{z}{n\log n}}$, then $G_N(z) = z \prod_{n=2}^N F_n(z)$, so 
+    \[ G_N'(z) = \frac{1}{z}\prod_{m=2}^N F_m(z) + \sum_{n=2}^N F_n'(z) \prod_{\substack{m=2\\ m\neq n}}^N F_m(z)\] 
+    but evaluating at $n\log n$ for fixed $2\leq n\leq N$, we see that most of these terms vanish and that 
+    \[ G_N'(n\log n) = -e \prod_{\substack{m=2\\ m\neq n}}^N \left( 1 - \frac{n\log n}{m\log m} \right) e^{\tfrac{n\log n}{m\log m}} .\]  Since the $G_N(z)$ converge uniformly on compact subsets of $\mathbb C$ to $G(z)$, we know by Weierstrass's Theorem that the $G_N'(z)$ converge uniformly on compact subsets to $G_N(z)$, so $G_N'(n\log n) \to G'(n\log n)$ for $n\geq 2$. 
+
+    Still following the plan laid out in Corollary~X.2.10 for finding the desired function $g$, we wish to find a meromorphic function $F$ on $\mathbb C$ with singular part 
+    \[ S_n(z) = \frac{n^\pi / G'(n\log n)}{z - n\log n} \] at $n\log n$ and no other poles in $\mathbb C$.   The existence of such a function $F(z)$ is guaranteed by Mittag-Leffler's Theorem.  Moreover, once we have such $F(z)$, the desired function $g(z)$ we want will be $g(z) = F(z) G(z)$, as proved in Corollary~X.2.10.  
+    
+    It would be nice to give $F(z)$ in more explicit form.  Put $r_n = n^\pi / G'(n\log n)$ and $p_n = n\log n$.  In order to produce $F(z)$, we wish to show that the sum (which we will take to be $F(z)$)
+    \begin{align}
+      \sum_{n=2}^\infty \left( \frac{r_n}{z - p_n} - \frac{r_n}{-p_n} \sum_{j=0}^n \left( \frac{z}{p_n} \right)^j \right) \label{bigmess}
+    \end{align} converges in, say, $|z|\leq R$.  If we examine the proof of Exercise X.6 above, we see that the crucial part is controlling 
+    \[ \left| \frac{r_n}{p_n} \right| \] in a disk of radius $R$.  Unfortunately, I haven't been able to estimate this quantity sufficiently well.  If I were able to prove that this quantity (or a similar ratio, possibly with exponents in the denominator and/or numerator) could be controlled appropriately in such a way that the sum~\eqref{bigmess} was convergent, then I would have an explicit representation for the function $F(z)$ whose singular parts are $S_n(z)$ at the points $n\log n$ and with no other singularities.  Then, as aforementioned, the function $g(z) = F(z)G(z)$ would be an entire function with $g(n\log n) = n^\pi$ for $n=1,2,\ldots$.  
+
+    %6
+  \item (X.8)  In order to find an entire function of least possible genus $g$, we need to find the smallest integer $g$ for which 
+    \begin{align}
+      \sum_{m, n} \frac{1}{|m+in|^{g+1}} 
+      \label{eq:gauss}
+    \end{align} converges, where the sum is taken over all integers $m,n$ such that $(m,n) \neq (0,0)$.   The ordinary Euclidean norm ($|x+iy| = \sqrt{x^2+y^2}$) is equivalent to the taxi cab norm $\taxi{x+iy} := |x| + |y|$ in the sense that there exists a constant $c>1$ such that  
+    \[ c^{-1} \taxi{x+iy} \leq |x+iy| \leq c\taxi{x+iy} \] for all points $x+iy$ in $\mathbb C$.  By this equivalence, it follows that the sum~\eqref{eq:gauss} converges (absolutely and independent of enumeration, since all terms are nonnegative) if and only if the sum 
+    \begin{align}
+      \sum_{m,n} \frac{1}{(|m| + |n|)^{g+1}} 
+      \label{eq:taxi}
+    \end{align} converges, where the sum is taken over all integer pairs $(m,n) \neq (0,0)$.
+
+    Consider the square in $\mathbb C$ centered at $0$ of side length $2N$, with sides parallel to the axes. Here, $N$ is a positive integer, and by ``square'' we mean the boundary of the square, and not any part of the interior.)  This square contains exactly $8N$ Gaussian integers.  Moreover, each Gaussian integer $m+in$ on this square satisfies $N \leq |m| + |n| \leq 2N$.  (The first inqeuality follows since no point on the square can be closer to $(0,0)$ than $(N,0)$ is with respect to the taxi cab metric, and the second inequality is clear since $|m|, |n| \leq N$.)   Reordering the sum~\eqref{eq:taxi}, we find
+    \[ 
+      \sum_{N\geq 1} \frac{8N}{(2N)^{g+1}} \leq \sum_{m,n} \frac{1}{(|m| + |n|)^{g+1}}  \leq \sum_{N\geq 1} \frac{8N}{N^{g+1}}. \]  The outer sums converge if and only if $g\geq 2$.  It follows that the genus $g$ of the sum~\eqref{eq:gauss} is equal to $2$. 
+
+      Now that we have the genus, the rest is a direct application of Theorem~X.2.7. Theorem~X.2.7 gives us that 
+      \[ \prod_{(m,n) \in \mathbb Z^2 \setminus \{ (0,0\} } \left( 1 - \frac{z}{m+in} \right) \exp \big( \frac{z}{m+in} + \frac{1}{2} \left(\frac{z}{m+in}\right)^2 \big) \] represents an entire function with simple zeroes at the Gaussian integers $m+in$ with $(m,n) \neq (0,0)$ and no other zeroes.  In order to ensure a simple zero at $0$, we tack on a factor of $z$, so the function
+      \[ z \prod_{(m,n) \in \mathbb Z^2 \setminus \{ (0,0\} } \left( 1 - \frac{z}{m+in} \right) \exp \big( \frac{z}{m+in} + \frac{1}{2} \left(\frac{z}{m+in}\right)^2 \big) \] represents an entire function with simple zeroes precisely at the Gaussian integers and no other zeroes. 
+\end{enumerate}
+\subsection{Chapter 11}
+\begin{enumerate}
+    \setcounter{enumi}{3}
+    %00000
+
+  \item[X.9]  Let $\Omega$ be a region and $H(\Omega)$ the complex algebra of analytic functions on $\Omega$.  Suppose $g_1,g_2\in H(\Omega)$ with no common zeroes.   Let $a_1, a_2, \ldots$ be the zeroes of $g_1$, with each zero repeated as many times as its multiplicity.  Also let $b_1, b_2, \ldots$ be the zeroes of $g_2$, with each zero repeated as many times as its multiplicity.   Note that the sequence $a_1, b_1, a_2, b_2, \ldots$ tends to $\partial \Omega$.  Indeed, if $a_1, b_1, a_2, b_2, \ldots$ had a subsequence converging to an accumulation point in $\Omega$, then either infinitely many points in this subsequence would be $a_i$'s or infinitely many would be $b_j$'s, which can't happen since the zeroes of $g_1, g_2$ do not accumulate in $\Omega$.   Put $z_{2n-1} = a_n$ and $z_{2n} = b_n$.  By Theorem~2.6 and Corollary X.2.10, there exists an analytic function $h(z)$ such that 
+    \[ h(z_n) = \begin{cases} 
+        1 & \text{if $n$ even;} \\ 
+        0 & \text{if $n$ odd}.
+      \end{cases}
+      \] 
+      and so that the multiplicity of the zero $z_{2n}$ of $h(z)$ is the multiplicity of the zero of the root $b_n$ of $g_2$, and so that the multiplicity of the root $z_{2n-1}$ of $1- h(z)$ is the multiplicity of the root $a_n$ of $g_1$.     Put $f_1 = \frac{h}{g_1}$ and $f_2 = \frac{1-h}{g_2}$.  By construction, $f_1$ is analytic in $\Omega$ since a zero of $g_1$ of order $m$ is also a zero of order $m$ of $h$ (so in fact $f_1$ has a removeable singularity at all zeroes of $g_1$).  Similarly, $f_2$ is analytic in $\Omega$.  Finally, 
+      \[ f_1 g_1 + f_2 g_2 = \frac{h}{g_1} g_1 + \frac{1-h}{g_2} g_2 = 1. \]  
+
+    \item[X.10] 
+      \begin{enumerate}
+        \item[a.]
+      Let $\Psi(z) = \frac{\Gamma'(z)}{\Gamma(z)}$.   Recall our definition of the Gamma function:
+      \[ \Gamma(z) = \frac{1}{zG(z)e^{\gamma z}} \] where $G(z) = \prod_{n=1}^\infty \Big(1 + \frac{z}{n} \Big) e^{-z/n}$.   Put $g_n(z) = \Big(1 + \frac z n \Big) e^{-z/n}$ and $G_N (z) =  \prod_{n=1}^N g_n(z)$.   Fix a compact set $K \subset \mathbb C$ not containing any of the nonpositive integers (which are the zeroes of $\Gamma$).  %Since $K$ is compact, there is some $N_0$ for which $g_n(z)$ is nonzero in $K$ whenever $n\geq N_0$.   
+      %For $z\in K$, we know that $\prod_{n=1}^N g_n(z)$ converges uniformly in $K$ to $\prod_{n=1}^\infty g_n(z)$ and by Weierstrass's Theorem that $\prod_{n=1}^N g_n'(z)$ converges uniformly in $K$ to $\prod_{n=1}^\infty g_n'(z)$.   Since $\prod_{n=1}^N g_n(z)$ is uniformly bounded from below on $K$, we conclude that 
+      %\[ \frac{\prod_{n=1}^N g_n'(z)}{\prod_{n=1}^N g_n(z)} \to \frac{\prod_{n=1}^\infty g_n'(z)}{\prod_{n=1}^\infty g_n(z)} \] uniformly in $K$.  
+    We know that $G_N(z)$ converges uniformly in $K$ to $G(z)$ and by Weierstrass's Theorem that $G_N'(z)$ converges uniformly in $K$ to $G'(z)$. Since $G_N(z)$ is uniformly bounded from below in $K$, we conclude that $G_N'(z) / G_N(z) \to G'(z) / G(z)$ uniformly in $K$.  It follows by Weierstrass's Theorem that  
+    \begin{align*}
+      \Psi(z) = \frac{\Gamma'(z)}{\Gamma(z)} = - \gamma - \frac{1}{z} - \sum_{n=1}^\infty \Big( \frac{1}{z+n} - \frac{1}{n}   \Big)
+    \end{align*}
+    uniformly on compact subsets not containing the nonpositive integers.  (This also shows that $\Psi(z)$ is meromorphic in the plane.)  We can differentiate this series term by term to obtain 
+    \[ \Psi'(z) = \sum_{n=0}^\infty \frac{1}{(z+n)^2} = \sum_{n=0}^\infty \frac{4}{(2z+2n)^2} \] on compact subsets not containing the nonpositive integers.  We also have, if $z + \tfrac 1 2$ is not a nonpositive integer, that 
+    \[ \Psi(z + \tfrac 1 2 ) =  \sum_{n=0}^\infty \frac{1}{(z + \tfrac 1 2 + n)^2} = \sum_{n=0}^\infty  \frac{4}{(2z + 1 + 2n)^2} .\] Combining the preceding two lines, we obtain
+    \[ 4\Psi'(2z) = \Psi'(z) + \Psi'(z+\tfrac 1 2) \] if $z$ is not a nonpositive integer.  
+    \item[b.]  If we integrate the preceding formula once, we obtain
+      \[ 4\Psi(2z) = \Psi(z) + \Psi(z+\tfrac 1 2) + a' \] for some constant $a'$.   Now let $z$ be a complex number such that $z, z+\tfrac 1 2$, and $2z$ are all nonpositive integers.   By considering a picture of the plane punctured at the nonpositive integers punctured,  it is clear that there is a simply connected region $\Omega$ missing the nonpositive integers and containing $z,z+\tfrac 1 2$, and $2z$.   On $\Omega$, we can define $\log \Gamma(z) = \int_{z_0} \frac{\Gamma'(z)}{\Gamma(z)} \, dz$, and we can integrate the previous equation to obtain
+      \[ 2 \log \Gamma(2z) = \log \Gamma(z) + \log \Gamma(z+\tfrac 1 2) + a'z + b'.\]  Here we should be careful: the constant $b'$ may depend on the simply connected region $\Omega$ and is only unique up to a factor of $2\pi i$, and $\log \Gamma(z)$ may not agree across different simply connected sets.  However, when we exponentiate, this problem goes away and we obtain (after combining constants and renaming)
+      \[ \Gamma(2z) = \Gamma(z) \Gamma(z+ \tfrac 1 2) e^{az + b}\]  for all $z$ such that $z,z+\tfrac 1 2$, and $2z$ are nonpositive integers. 
+
+    \item[c.]  To find $a$ and $b$, first set $z=\tfrac{1}{2}$ in the above relation.  Then we obtain 
+      \[ \Gamma(1) = \Gamma(\tfrac 1 2) \Gamma(1) e^{a/2 + b} \] which implies (since $\Gamma(1) \neq 0$ and $\Gamma(\tfrac 1 2)  = \sqrt \pi$) that 
+      \begin{align}
+        -\tfrac 1 2 \log \pi = \tfrac a 2  + b \label{eqq}
+      \end{align}
+      Now let $z  = \tfrac 1 4$.  We obtain
+      \[ \Gamma(\tfrac 1 2) = \Gamma(\tfrac 1 4) \Gamma( \tfrac 3 4) e^{a/4 + b}.\]   But by the relation $\Gamma(z)\Gamma(1-z) = \frac{\pi}{\sin \pi z}$ applied when $z=\tfrac 1 4$, and using again the fact that $\Gamma(\tfrac 1 2) = \sqrt \pi$, we find 
+      \[ \sqrt \pi = \frac{\pi}{\sin \tfrac{\pi}{4}} e^{a/4+b}, \]  or
+      \begin{align}
+           -\tfrac 1 2 \log \pi - \tfrac 1 2 \log 2 = \tfrac a 4 + b .    \label{eqb}
+         \end{align}  Equations~\eqref{eqq} and~\eqref{eqb} have the unique solution $a= 2 \log 2$ and $b= - \log 2 - \tfrac 1 2 \log \pi$.
+    \end{enumerate}
+
+
+  \item[X.11]
+    \begin{enumerate}
+        \item[a.]  Suppose $x>\tfrac 1 2$.   We substitute $t= (\sqrt x + v)^2$ in the integral formula 
+          \[ \Gamma(z) = \int_0^\infty t^{z-1} e^{-t} \, dt. \]  With this substitution, we have $dt = 2 ( \sqrt x + v) \, dv$.  Also, as $t$ runs from $0$ to $\infty$, $v$ runs from $-\sqrt x$ to $\infty$.  Hence,
+          \begin{align*}
+            \Gamma(x) &= \int_0^\infty t^{x-1} e^{-t} \, dt \\
+            &= \int_{-\sqrt x}^\infty (\sqrt x + v)^{2x-2} e^{-x} e^{-2\sqrt x v} e^{-v^2} \, dv. 
+          \end{align*}
+          Multiplying both sides by $e^x (\sqrt x)^{1-2x}$, we obtain
+          \[ \frac{\Gamma(x) e^x \sqrt x}{x^x} = 2 \int_{-\sqrt x}^\infty e^{-2\sqrt x v} \Big( 1 + \frac{v}{\sqrt x} \Big)^{2x-1} e^{-v^2} \, dv. \]  Letting 
+          \[ \varphi_x(v) = \begin{cases} 0 & \text{if $v\leq - \sqrt x$,} \\
+              e^{-2v\sqrt x} \Big(1  + \frac{v}{\sqrt x} \Big)^{2x-1} & \text{if $v\geq -\sqrt x$} \end{cases} \] we obtain
+              \[ \frac{\Gamma(x) e^x \sqrt x}{x^x} = 2 \int_{-\infty}^\infty \varphi_x(v) e^{-v^2} \, dv, \]  as desired. 
+
+            \item[b.]   In order to prove the desired formula, we first need to get good control over
+              \[ \varphi_x(v) = e^{\log \varphi_x(v)} = e^{-2v\sqrt{x} + (2x-1)\log(1+ \frac{v}{\sqrt(x)}})  . \]   %For fixed $v$, considering the Taylor series for $\log ( 1 + \frac{v}{\sqrt x} )$ shows that $x \log ( 1 + \frac{v}{\sqrt x}) - v\sqrt x \to -\frac{v^2}{2}$ as $x\to \infty$.   
+              %Note that $x\log ( 1 + \frac{v}{\sqrt x})$ vanishes at the origin with derivative (with respect to $v$) equal to $\sqrt x$ at $v=0$.  Since the second derivative of $x\log ( 1 + \frac{v}{\sqrt x})$ is the function $- \frac{1}{(1+\tfrac{v}{\sqrt x})^2}$, one easily obtains
+              %\[ x\log ( 1 + \frac{v}{\sqrt x} ) - v\sqrt x = - \int_0^v \frac{v-w}{(1 + \frac{v}{\sqrt x})^2} \, dw,\] which yields the bound 
+              %\[ x\log ( 1 + \frac{v}{\sqrt x} ) - v\sqrt x \leq  
+              Now fix $x$.   We have the Taylor series expansion
+              \[ x \log ( 1 + \frac{v}{\sqrt x} ) = \sum_{n=1}^\infty (-1)^{n-1} x \frac{v^n}{(\sqrt x)^n} = \sqrt x v - \frac{v^2}{2} + \frac{v^3}{3\sqrt x} - \cdots  \] which is valid for fixed $v$ whenever $x$ is large enough (specifically, when $|v| < \sqrt x$).  Hence, for fixed $v$, if we let $x$ tend to $\infty$, we obtain the pointwise convergence 
+              \[ x \log (1 + \frac{v}{\sqrt x}) - v \sqrt x  \to -\frac{v^2}{2}  \] and $\varphi_x(v) \to e^{-v^2}$.   Also, considering $\varphi_x(v)$ as a function of $v$, we see that $\varphi_x(v)$ has one critical point, which is where a global maximum occurs (as is easy to verify by considering first and second derivatives).  The critical point is $v=-\frac{1}{2\sqrt x}$, so  $\varphi_x(v) \leq e \cdot \Big(1 - \frac{1}{2x} \Big)^{2x-1}$ for all $v$.  But $\Big(1 - \frac{1}{2x} \Big)^{2x-1} \to \tfrac 1 e$ as $x\to \infty$, which means $\varphi_x(v)$ is bounded as $x\to \infty$, which means $\varphi_x(v) e^{-v^2}$ is absolutely integrable. 
+              %When $|v|\geq \sqrt x$, we  can increase $\alpha$ if necessary to obtain a uniform bound 
+              %\[  x \log ( x + \frac{v}{\sqrt x})  - v \sqrt x \leq - \alpha v \sqrt x. \]   
+             % This bound is enough to ensure that the integrals (for varying $x$) \[ \int_{-\sqrt x}^\infty e^{-2v\sqrt x + (2x-1) \log( 1 + \frac{v}{\sqrt x}) } \, dv\] are dominated by an integrable function on the real line.  Note also that the Taylor series above shows that if $v$ is fixed and if $x$ tends to $\infty$, $x\log ( 1 + \frac{v}{\sqrt x}) - v\sqrt x$ tends to $-\frac{v^2}{2}$.
+              Hence, we can apply the Lebesgue Dominated Convergence Theorem to obtain that 
+              \begin{align*}
+                \lim_{x\to \infty} \frac{\Gamma(x)e^x \sqrt x}{x^x} &=   \lim_{x\to \infty} 2 \int_{-\infty}^\infty \varphi_x(v) e^{-v^2} \, dv \\
+                &=  \lim_{x\to \infty} 2 \int_{-\infty}^\infty e^{-2v\sqrt x + (2x-1)\log ( 1+\frac{v}{\sqrt x})}  e^{-v^2} \, dv \\
+                &= 2\int_{-\infty}^\infty  e^{-2v^2} \, dv \\
+                &= \sqrt{2\pi},
+              \end{align*}
+              as desired. 
+        \item[c.]  Recall $\Gamma(n) = (n-1)!$.  Therefore, by the previous part, 
+          \[ \lim_{n\to \infty} \frac{\Gamma(n+1)e^{n+1}\sqrt{n+1}}{(n+1)^{n+1}} = \sqrt{2\pi}. \] Hence for large $n$,
+          \[ n! \approx  \frac{\sqrt{2\pi} (n+1)^{n+1}e^{-(n+1)}}{\sqrt{n+1}}.\] 
+    \end{enumerate}
+    %1
+  \item[XI.4]  We wish to compute $\int_{-\infty}^\infty \frac{x^3}{(x^2+1)^2}e^{i\lambda x} \, dx$ for $\lambda > 0$.   We will follow closely the Fourier transform example given in the notes.  
+
+    Let $A,B > 0$, and consider the closed rectangular contour consisting of the following four line segments: $\gamma_1 = [-A, B]$, $\gamma_2 = \{ B + iy : 0 \leq y \leq A + B \}$, $\gamma_3 = \{ x + i(A+B) : B \geq x \geq -A \}$, and $\gamma_4 = \{ -A  + iy  : A + B \geq y \geq 0\}$.  We orient the closed contour as indicated in the figure.    For $|z|\geq 3$, note that 
+    \[ \left| 2 + \frac{1}{z^2} \right| \leq 2 + \frac{1}{|z|^2} \leq \frac{1}{2} |z|^2 \] which implies
+    \[ \frac{1}{2}|z| \leq |z| - \frac{1}{|z|} \left( \left| 2 + \frac{1}{z^2} \right| \right) = |z| - \left| \frac{2}{z} - \frac{1}{z^3} \right| \leq \left| z + \frac{2}{z} + \frac{1}{z^3} \right|.  \]  Hence, for $|z| \geq 3$, 
+    \[ \left | \frac{z^3}{(z^2+1)^2} \right| = \left| \frac{1}{z+\frac{2}{z} + \frac{1}{z^3}} \right| \leq \frac{2}{|z|} . \]  
+    Using this estimate, we find on $\gamma_3$ for $A,B\geq 3$ that 
+    \begin{align*}
+      \left| \int_{\gamma_3} \frac{z^3e^{i\lambda z}}{(z^2+1)^2} \, dz \right| \leq \int_{-A}^B \frac{2}{A+B} e^{-\lambda (A+B)} \, dx 
+      \leq \frac{2e^{-\lambda (A+B)}}{A+B} \cdot (A+B)  \to 0
+    \end{align*} 
+    as $A,B$ tend independently to $\infty$. 
+
+    On $\gamma_2$, when $B\geq 3$, also using the above estimate, we find 
+    \[ \left| \int_{\gamma_2} \frac{z^3e^{i\lambda z}}{(z^2+1)^2} \, dz \right| \leq \int_0^{A+B} \frac{2}{B} e^{-\lambda y} \, dy \leq \frac 2 B \left( \frac{1- e^{-\lambda(A+B)}}{\lambda} \right) \to 0 \] as $B\to \infty$. 
+    A nearly identical calculation shows that 
+    \[  \left| \int_{\gamma_4} \frac{z^3e^{i\lambda z}}{(z^2+1)^2} \, dz \right| \to 0 \] as $B\to \infty$.   
+
+    By the Residue Theorem, the integral of $\frac{z^3e^{i\lambda z}}{(z^2+1)^2}$  around the complete closed contour (for $A,B$ large) is $2\pi i$ times the sum of the residues inside.  But the integrals along $\gamma_2, \gamma_3, \gamma_4$ tend to $0$ as $A,B\to \infty$, and the integrand has only one residue inside the large box (at $i$) so 
+    \begin{align*}
+      \int_{-\infty}^{\infty} \frac{x^3e^{i\lambda x}}{(x^2+1)^2} \, dx &= \lim_{A,B\to \infty} \int_{-A}^{B} \frac{x^3e^{i\lambda x}}{(x^2+1)^2} \, dx \\
+      &= 2\pi i \Res_i \frac{z^3e^i\lambda z}{(z^2+1)^2} .
+    \end{align*}
+    It remains to compute the residue of the integrand at $i$.  We will follow Example XI.2 in the notes.  Write $G(z) = \frac{z^3e^{i\lambda z}}{(z+i)^2}$.  Then $G(z)$ is analytic in the contour $\gamma_1 + \gamma_2 + \gamma_3 + \gamma_4$, and $\frac{z^3 e^{i\lambda z}}{(z^2+1)^2} = \frac{G(z)}{(z-i)^2}$.  Hence, by the Example in the notes, 
+    \[ \Res_i \frac{z^3 e^{i\lambda z}}{(z^2+1)^2} = G'(i). \]  It is straightforward to compute via the quotient rule that $G'(i) = \frac{2e^{-\lambda} - \lambda e^{-\lambda}}{4}$.  We have proved 
+    \[ \int_{-\infty}^{\infty} \frac{x^3e^{i\lambda x}}{(x^2+1)^2} \, dx  = 2\pi i \left(\frac{2e^{-\lambda} - \lambda e^{-\lambda}}{4} \right) .\] 
+
+    %2
+  \item[XI.5] We wish to compute $\int_0^\infty \frac{x^\alpha}{x(x+1)} \, dx$ for $0 < \alpha < 1$.  We will follow the Mellin transform example on p.~78 of the notes.  We will use the exact same keyhole contour as in the example.  Fix $\epsilon > 0$ and $0 < \delta < R$.  Consider the closed keyhole contour centered at $0$ which consists of a portion $C_R$ of a circle of radius $R>0$ and a portion $C_\delta$ of a circle of radius $\delta>0$, along with the two straight line segments $\gamma_1 = \{ x + i\epsilon : \delta < x < R \}$ and $\gamma_2 = \{ x- i\epsilon : \delta  < x < R \}$.  So, orienting these segments as in the figure, the closed curve is $\gamma := \gamma_1 + C_R  + \gamma_2  + C_\delta$.   We define $\log z$ on $\mathbb C \setminus [0,\infty)$ so that $\log z = \log |z| + i \arg z $ with $0 < \arg z < 2\pi$.  With this definition of $\log z$, we also define $z^\alpha = e^{\alpha \log z}$.   With these definitions, $\log z$ and $z^\alpha$ are analytic inside and on the closed contour $\gamma$. 
+    
+    
+    Put $f(z) = \frac{1}{z(z+1)}$.   By the Residue Theorem, for $R > 1$ and $0 < \delta < 1$, we have 
+    \[ \int_\gamma z^\alpha f(z) \, dz = 2\pi i \Res_{-1} z^\alpha f(z) = 2\pi i \cdot \lim_{z\to -1} (z+1) z^\alpha f(z) = -2\pi i e^{i\alpha \pi} \] since $-1$ is a simple pole of $z^\alpha f(z)$.  
+
+    %We first let $\epsilon$ tend to $0$, then we let $R$ and $\delta$ tend to $0$.  
+    For $R>1$, 
+    \[ \left| \int_{C_R} z^\alpha f(z) \, dz \right| \leq \int_0^{2\pi} \frac{R^\alpha}{R(R-1)} \cdot R \, d\theta \to 0 \] as $R\to \infty$.  Similarly, for $\delta< 1$, 
+    \[ \left| \int_{C_\delta} z^\alpha f(z) \, dz \right| \leq \int_0^{2\pi} \frac{\delta^\alpha}{\delta(\delta-1)} \cdot \delta \, d\theta \to 0 \]  as $\delta\to 0$. 
+
+    In computing the integrals over the horizontal line segments $\gamma_1$ and $\gamma_2$, first note the two different limits we obtain as we approach the positive real axis from the two different sides:
+    \[ \lim_{\epsilon \to 0} (x+i\epsilon)^\alpha f(x+i\epsilon) = e^{\alpha \log|x|} f(x) \] and 
+    \[ \lim_{\epsilon \to 0} (x-i\epsilon)^\alpha f(x-i\epsilon) = e^{2\pi i \alpha} e^{\alpha \log |x|} f(x). \]  Hence, letting $\epsilon \to 0$ while keeping $R,\delta$ fixed, we obtain
+    \begin{align*}
+      \int_{\delta}^R \frac{x^\alpha}{x(x+1)} \, dx &= \lim_{\epsilon \to 0} \left( \int_{\gamma_1} + \int_{\gamma_2}  \frac{z^\alpha}{z(z+1)} \, dz \right)  \\
+      &= (1-e^{2\pi i \alpha}) \int_\delta^R  x^\alpha f(x) \, dx .
+    \end{align*}
+    So, now letting $\delta\to 0$ and $R\to \infty$, we obtain
+    \[ \int_0^\infty \frac{x^\alpha}{x(x+1)} \, dx = \frac{-2\pi i e^{i\alpha \pi}}{1 - e^{2i   \alpha \pi }}  = \frac{-2\pi i}{e^{-i \alpha  \pi } - e^{i \alpha \pi}} = \frac{\pi}{\sin \pi \alpha} . \] 
+    
+
+    %3
+  \item[XI.6]   We want to find the inverse Laplace transform of $F(z) = \frac{3z^2 + 12z + 8}{(z+2)^2 (z+4)(z-1)}$.  The function $F(z)$ is analytic in $\{ \Re z > 1\}$.  We first need to show that the integral defining $f(t)$ 
+    \[ f(t) = \frac{1}{2\pi} \int_{-\infty}^\infty F(b+iy) e^{(b+iy)t} \, dy \] converges and that the integral defining $\mathcal L(f)$ converges absolutely in $\Re z > 1$.  Since $F(z)$ is a rational function with numerator of degree $2$ and denominator of degree $4$, for fixed $1 < \alpha  < 2$, there is a constant $C$ such that for all sufficiently large $|z|$,
+    \[ |F(z)| \leq \frac{C}{|z|^\alpha}, \]  and for $1 < p < \alpha$ and all sufficiently large $z$,
+    \[ |F(z)| \leq \frac{C}{|z|^\alpha} \leq \frac{C'}{(1+|z|)^p} .\]  This is enough to deduce convergence of $F(z)$, and from this, absolutely convergence of $\mathcal L(f)$ is obtained exactly as in the proof of Theorem~1.3.  
+    %\begin{align*}
+    %    |F(z)| = \
+    %\end{align*}
+    %\begin{align*}
+    %    |F(z)| &= \left| \frac{3z^2 + 12 z + 8}{z^4 + 7z^3 + 12z^2 -4z - 16} \right| \\
+    %    &= \frac{|3/z^2 + 12/z^3 + 8/z^4|}{|1 + 7/z + 12/z^2 - 4/z^3 - 16/z^4|} \\
+    %    &\leq \frac{3+12+8}{ }
+    %\end{align*} {\color{red}growth condition}  
+    We conclude as in Theorem XI.1.3 that the inverse Laplace transform $f$ of $F$ is independent of $b>1$.   
+
+    The function $F(z) e^{zt}$ is meromorphic in the plane with simple poles at $z=-4$ and $z=1$, and a pole of order $2$ at $z=-2$.   Fix $b>1$ and $R>0$.   Consider the contour consisting of the vertical line segment $\sigma_R = \{ b + iy : -R \leq y \leq R \}$ and the semicircle $C_R$ centered at $b$ of radius $R$ that lies to the left of the vertical line $\{ \Re z = b \}$.  See the figure below.  We orient the closed curve $\sigma_R + C_R$ as in the figure.    For $R$ sufficiently large, the contour encloses all residues of $F(z)e^{zt}$, and by the Residue Theorem,
+    \[ \int_{\sigma_R + C_R} F(z) e^{zt} \, dz = 2\pi i \big( \sum_{a \in \{ -4, -2, 1 \}} \Res_a F(z) e^{zt} \big)  . \] 
+
+    We estimate the integral along $C_R$ first.  We can parametrize $C_R$ by $z = b + Re^{i\theta}$ where $\theta\in [\tfrac \pi 2, \tfrac{3\pi}{2} ]$.  If $b > 8$ and $R>2b$, and if $z  = b + Re^{i\theta}$, we have the basic estimates
+    \[ |z| \leq b + R < 2R \] and for $|a|\leq 4$, 
+    \[ |z+a| = |b+Re^{i\theta} + a| \geq R - b- |a| \geq \frac{R}{4} .\]  Using these estimates, we find
+    \begin{align*}
+      \left| \int_{C_R} \frac{3z^2+12z+8}{(z+2)^2 (z+4) (z-1)} e^{zt} \, dz \right|  &\leq  \int_{\pi/2}^{3\pi /2} \frac{3(2R)^2 + 12(2R) + 8}{(R-2)^2 (R-4) (R-1)} R \, d\theta\\
+      &\leq \int_{\pi / 2}^{3\pi/2} \frac{44R^2}{(R/4)^4} R \, d\theta 
+    \end{align*}
+    where the last inequality comes from the above estimates plus the estimate $3(2R)^2 + 12(2R) + 8 \leq 44 R^2$ since $R>16$.  Hence, as $R\to \infty$, 
+    \[ \left| \int_{C_R} \frac{3z^2+12z+8}{(z+2)^2 (z+4) (z-1)} e^{zt} \, dz \right|  \to 0. \] 
+
+    Now we calculate the residues we need.  First, since $-4$ and $1$ are simple poles of $F(z)e^{zt}$, we have 
+    \[ \Res_1 F(z) e^{zt} = \lim_{z\to 1} (z-1) F(z) e^{zt} = \frac{23}{45}e^t \] 
+    and 
+    \[ \Res_{-4} F(z)e^{zt} = \lim_{z\to -4} (z - (-4)) F(z)e^{zt} = -\frac{2}{5} e^{-4t}. \]   For the pole  $z=-2$ of order $2$, put $G(z) = F(z) e^{zt} (z+2)^2$, so that $G(z)$ is analytic near $-2$.  By Example 2 of Chapter XI, we know 
+    \[ \Res_{-2} F(z) e^{zt} = G'(-2) = \frac{(6t-1)e^{-2t}}{9}. \]  Therefore,  letting $R\to \infty$ and applying the Residue Theorem to $F(z)e^{zt}$ over the contour $\sigma_R + C_R$, we obtain
+    \begin{align*}
+      f(t) &= \frac{1}{2\pi} \int_{-\infty}^\infty F(b+iy) e^{(b+iy)t} \, dy  \\    
+      &= \frac{1}{2\pi i} \lim_{R\to \infty} \int_{\sigma_R} F(z) e^{zt} \, dz \\
+        &=    \frac{23}{45}e^t - \frac{2}{5} e^{-4t} + \frac{6t-1}{9} e^{-2t} 
+      \end{align*}
+    
+
+    %4
+    \item[XI.7]  In order to compute $\sum_{n=0}^\infty \frac{(-1)^n}{(2n+1)^3}$, we will consider two similar but different contour integrals.   In both cases, the contour will be the following: let $N$ be a positive integer, and consider the square contour $S_N$ with bottom left vertex $(N+\tfrac 1 2)(-1-i)$ and top right vertex $(N + \tfrac 1 2)(1+i)$ whose sides are parallel to the coordinate axes.   We will first consider 
+    \[ \int_{S_N} \frac{\pi \cot \pi z}{(z+\tfrac 1 4)^3} \, dz .\]  As in the example on p.~81 of the notes, we note that 
+    \[ \cot \pi z =  i \frac{e^{2\pi i z} +1}{e^{2\pi i z}-1}. \]   Along the right-hand side of the square $S_N$, where $z = (N+\tfrac 1 2) + iy$, $-N-\tfrac \leq y \leq N + \tfrac 1 2$, we find by the reverse triangle inequality that 
+    \[ | 1-  e^{2\pi i z} | = |1 - e^{2\pi i (N+\tfrac 1 2)} e^{-2\pi y} |  \geq 1 - |e^{2\pi i (N+\tfrac 1 2)} | \cdot |  e^{-2\pi y}|  = 1 - |e^{-2\pi y}| >  1 - e^{-2\pi N} \geq 1 - e^{-2\pi}. \]  Similar computations show that this bound holds on all sides of the square $S_N$.  But $\frac{\zeta + 1}{\zeta -1}$ is bounded by some constant $C$ in the region $|\zeta - 1| > 1-e^{-2\pi}$.  This implies $\pi \cot \pi z$ is bounded uniformly on $S_N$ by $C$, independent of $N$.  It follows that 
+    \[ \left| \int_{S_N} \frac{\pi \cot \pi z}{(z+\tfrac{1}{4})^2} \, dz \right| \leq 4 \int_{-N-\tfrac 1 2}^{N+\tfrac 1 2} \frac{C}{( (N+\tfrac 1 2) - \tfrac 1 4)^3} \, ds \ \to 0 \] as $N\to \infty$.   But, inside the square $S_N$, $\frac{\pi \cot \pi z}{(z+\tfrac 1 4)^3}$ has simple poles at the integers $-N, -N+1, \ldots, N, N+1$ and a pole of order $3$ at $-\tfrac 1 4$.  Since $\pi \cot \pi z$ has residue $1$ at every integer (a fact we've seen in the notes and in class), the residue of $\frac{\pi \cot \pi z}{(z+\tfrac 1 4)^3}$ at each integer $n$ is $\frac{1}{(n + \tfrac 1 4)^3}$.   By Example 2 in the notes, the residue of $\frac{\pi \cot \pi z}{(z+\tfrac 1 4)^3}$ at $-\tfrac 1 4$  is given by 
+    \[ \frac{1}{2!} \left[ \frac{d^2}{dz^2} ( \pi \cot \pi z ) \right] _{z=-\tfrac 1 4} = -2\pi^3, \] by a simple computation.   Putting all the pieces together and letting $N\to \infty$, the Residue Theorem gives us that 
+    \[ 2\pi^3 = - \Res_{-1/4} \frac{\pi \cot \pi z}{(z+\tfrac 1 4)^3} = \sum_{n=-\infty}^\infty \Res_n \frac{\pi \cot \pi z}{(z+\tfrac 1 4)^3} = \sum_{n= -\infty}^\infty \frac{1}{(n+\tfrac 1 4)^3} ,\]  or 
+    \begin{align} \frac{\pi^3}{32} = \sum_{n=-\infty}^\infty \frac{1}{(4n+1)^3}. \label{eq1} \end{align} 
+      Now, a completely analogous argument with the function $\frac{\pi \cot \pi z}{(z-\tfrac 1 4)^3}$ instead of $\frac{\pi \cot \pi z}{(z+\tfrac 1 4)^3}$ shows that $\Res_{1/4} \frac{\pi \cot \pi z}{(z-\tfrac 1 4)^3} = 2\pi^3$, which gives the slightly different sum
+    \begin{align} -\frac{\pi^3}{32} = \sum_{n=-\infty}^\infty \frac{1}{(4n-1)^3} .  \label{eq2} \end{align}
+      Subtracting~\eqref{eq2} from~\eqref{eq1} and then halving the result (which is legal since the resulting double sum is invariant under $n\mapsto -n$), we find (after reindexing)
+      \[ \sum_{n=0}^\infty \frac{(-1)^n}{(2n+1)^3} = \frac{\pi^3}{32}. \] 
+
+    % real number 8 
+    \item[XI.8]  We wish to compute $\zeta(6) = \sum_{n=1}^\infty \frac{1}{n^6}$.  We will use the same square contours $S_N$ as in the previous problem, and we will consider this time the integral over $S_N$ of the function $\frac{\pi \cot \pi z}{z^6}$.  This function has simple poles at exactly the nonzero integers, and a pole of order $7$ at $z=0$.  Since $\pi \cot \pi z$ has residue $1$ at all integers, we see that for integers $n\neq 0$, $\Res_n \frac{\pi \cot \pi z}{z^6} = \frac{1}{n^6}$.   The hard part is computing $\Res_0 \frac{\pi \cot \pi z}{z^6}$.  For this, we note that there is a Laurent series about $0$ that starts out like 
+      \[ \frac{\pi \cot \pi z}{z^6} = \frac{b_{-7}}{z^7} + \frac{b_{-6}}{z^6}  + \frac{b_{-5}}{z^5} + \cdots. \]  We remark that $\frac{\pi \cot \pi z}{z^6}$ is an odd function, so $b_{-6} = b_{-4} = b_{-2} = \cdots = 0$.  Using this observation and rearranging a bit gives
+      \[ \pi \cos \pi z = \sin \pi z \left( \frac{b_{-7}}{z} + b_{-5} z + b_{-3}z^3  + \cdots \right). \]  Using the first few terms of each of the power series for $\sin \pi z$ and $\cos \pi z$, we find 
+      \[ \pi \left( 1 - \frac{(\pi z)^2}{2!} + \frac{(\pi z)^4}{4!} - \cdots \right)  = \left( \pi z - \frac{(\pi z)^3}{3!} + \frac{(\pi z)^5}{5!} - \cdots \right) \left( \frac{b_{-7}}{z} +b_{-5} z + b_{-3}z^3 + \cdots \right). \]   
+      Multiplying out the first few terms and equating coefficients yields the four equations
+      \begin{align*}
+        \pi &= \pi b_{-7} \\ 
+        -\frac{\pi^3}{2!} &= \pi b_{-5} - \frac{\pi^3}{3!} b_{-7} \\  
+        \frac{\pi^5}{4!} &= \pi b_{-3} - \frac{\pi^3}{3!} b_{-5} + \frac{\pi^5}{5!} b_{-7} \\
+        -\frac{\pi^7}{6!} &= \pi b_{-1} - \frac{\pi^3}{3!} b_{-3} + \frac{\pi^5}{5!} b_{-5} - \frac{\pi^7}{7!} b_{-7} 
+      \end{align*}
+      It is straightforward to solve these equations from top to bottom.  One finds $b_{-7}=1$, $b_{-5} = - \frac{\pi^2}{3}$, $b_{-3} = - \frac{\pi^4}{45}$, and $b_{-1} = - \frac{2\pi^6}{945}$.   Since $\int_{S_N} \frac{\pi \cot \pi z}{z^6} \, dz \to 0$ as $N\to \infty$, we conclude by the Residue Theorem that 
+      \[ - \Res_0 \frac{\pi \cot \pi z}{z^6} = \sum_{\substack{n=-\infty\\ n\neq 0}}^\infty \Res_n \frac{\pi \cot \pi z}{z^6} \] hence
+      \[ \frac{2\pi^6}{945} = \sum_{\substack{n=-\infty\\ n\neq 0}}^\infty  \frac{1}{n^6}. \] Since the right-hand sum is invariant under the transformation $n\mapsto -n$, we conclude 
+      \[\sum_{n=1}^\infty \frac{1}{n^6} = \frac{\pi^6}{945} .\] 
+
+
+    %6
+    \item[XI.9] Define $\log z$ on $\mathbb C \setminus [0, \infty)$ by $\log z = \log |z| + i \arg z $ with $0 < \arg z < 2\pi$.  We consider the same keyhole contour as in Exercise XI.5 above, and the notation $R, \delta, \epsilon, C_R, C_\delta, \gamma_1, \gamma_2$ will have the same meaning in this problem.  We have redrawn the contour below for convenience.
+
+
+        When $R>\sqrt 2$, 
+        \[ \frac{R\sqrt R \log R }{R^2-1} \leq \frac{2R\sqrt R \log R}{R^2} = \frac{2\log R}{R^{1/2}} .\] Also, $\frac{\log R}{R^{1/2}} \to 0$ as $R\to \infty$ by L'H\^opital's rule.  Hence, 
+        \[ \left| \int_{C_R} \frac{\sqrt z \log z}{(1+z^2)} \, dz \right| \leq \int_0^{2\pi } \frac{\sqrt R ( \log R + 2\pi ) }{R^2-1 } R \, d\theta  \to 0 \] as $R\to \infty$.  
+
+        To estimate the integral over $C_\delta$, note that 
+        \[\delta^{3/2} \log \delta =  \frac{\log \delta}{1 / \delta^{3/2}}  \to 0 \] as $\delta\to 0$ by L'H\^opital's rule.   Hence,
+        \[ \left| \int_{C_\delta} \frac{\sqrt z \log z}{(1+z^2)} \, dz \right| \leq \int_0^{2\pi} \frac{\sqrt \delta ( \log \delta + 2\pi )}{\delta^2-1} \delta \, d\theta \to 0 \] as $\delta \to 0$. 
+
+        
+        Now we compute the integral along the straight line segments $\gamma_1$ and $\gamma_2$.  As $\epsilon \to 0$, we obtain different limits for $\frac{\sqrt{x+ i\epsilon} \log(x+i\epsilon)}{1+(x+i\epsilon)^2}$ and $\frac{\sqrt{x- i\epsilon} \log(x-i\epsilon)}{1+(x-i\epsilon)^2}$ because of our definition of $\log z$.  For fixed $R,\delta$, we find 
+        \[ \lim_{\epsilon \to 0} \int_{\gamma_1} \frac{\sqrt{x+i\epsilon}\log (x+i\epsilon) }{1 + (x+i\epsilon)^2} \, dx = \int_\delta^R \frac{\sqrt x \log x}{ 1+ x^2 }   \]
+          whereas  (the minus sign is because we are traversing $\gamma_2$ in the opposite direction in the equality)
+          \[ -  \lim_{\epsilon\to 0} \int_{\gamma_2} \frac{\sqrt{x+i\epsilon} \log(x+i\epsilon)}{1 + (x+i\epsilon)^2} \, dx = \int_\delta^R \frac{(\sqrt{x} e^{2\pi i / 2}) (\log x + 2\pi i)}{1 + x^2} \, dx   \] 
+          hence
+          \[ \lim_{\epsilon\to 0} \int_{\gamma_2} \frac{\sqrt{x+i\epsilon} \log(x+i\epsilon)}{1 + (x+i\epsilon)^2} \, dx = \int_\delta^R \frac{\sqrt{x} (\log x + 2\pi i)}{1 + x^2} \, dx . \]   
+          Now letting $\delta\to 0$ and $R \to \infty$ gives the improper integrals $\int_0^\infty$. %{\color{red}, each of which is absolutely convergent by comparison with $\int_0^\infty \frac{\log x}{x^{3/2}} \, dx$ (this integral can be seen to be absolutely integrable by integrating by parts)}. 
+
+          The function $\frac{\sqrt z \log z}{1 +z^2}$ has residues $\pm i$ in the contour $\gamma_1 + C_R + \gamma_2 + C_\delta$, provided $R>1$ and $\delta<0$.   Each of $\pm i$ is a simple pole of this function, so 
+          \[ \Res_i \frac{\sqrt z \log z}{1 +z^2} = \lim_{z\to i} (z-i) \frac{\sqrt z \log z}{1 +z^2} = \frac{\sqrt i \log i}{2i} = - \frac{\pi i e^{i\pi/4}}{4} \] and 
+          \[ \Res_{-i} \frac{\sqrt z \log z}{1 +z^2} = \lim_{z\to -i} (z+i) \frac{\sqrt z \log z}{1 +z^2} = \frac{\sqrt{-i}\log(-i)}{-2i} =  \frac{3\pi i e^{3i\pi/4}}{4}.  \] 
+
+          Putting everything together, the Residue Theorem gives us in the limit, as $\epsilon \to 0$ and then as $R\to \infty$ and $\delta\to 0$,  that
+          \[ 2\pi i \left( - \frac{\pi i e^{i\pi/4}}{4} + \frac{3\pi i e^{3i\pi/4}}{4} \right) = 2 \int_0^\infty \frac{\sqrt x \log x}{1+x^2} \, dx + 2\pi i \int_0^\infty   \frac{\sqrt x}{1 + x^2} \, dx.  \] 
+          The left-hand side is equal to $\frac{\pi^2}{\sqrt 2} + \sqrt 2 \pi^2 i$, and the right-hand side is the sum of a real integral and $2\pi i$ times another real integral.   Equating real parts of both sides and dividing by $2$, we conclude
+          \[ \int_0^\infty \frac{\sqrt x \log x}{1+x^2} \, dx = \frac{\pi^2}{2\sqrt 2}. \] 
+           
+
+    %7
+        \item[XI.10]  We will compute $\int_0^\infty \frac{x^3+8}{x^5+1} \, dx$ by considering a contour integral of $\frac{z^3+8}{z^5+1} \log z$.  We define $\log z$ in $\mathbb C \setminus [0,\infty)$ by $\log z = \log |z| + i \arg z$, where $0 < \arg z < 2\pi$.   We consider the same keyhole contour as in the last problem, and the notation $R, \delta, \epsilon, C_R, C_\delta, \gamma_1, \gamma_2$ will keep its meaning.  We have redrawn the contour below for convenience. 
+
+
+    We first note that when $R\geq 4$,
+    \[ R \cdot \frac{R^3+8}{R^5-1} \log R \leq 4R \cdot \frac{R^3}{R^5} \log R = 4 \frac{\log R}{R}  \] and that, by L'H\^opital's rule, 
+    \[ \lim_{R\to \infty} \frac{\log R}{R} = 0. \]  Hence, as $R\to \infty$, 
+    \[ \left| \int_{C_R} \frac{z^3+8}{z^5+1}  \log z \, dz \right| \leq \int_0^{2\pi} \frac{R^3+8}{R^5-1} ( \log R + 2\pi ) R \, d\theta \to 0. \]
+    Also, by L'H\^opital's rule, $\delta \log \delta = \frac{\log \delta}{1/\delta} \to 0$ as $\delta \to 0$, and $\frac{\delta^3+8}{\delta^5-1} \to -8$ as $\delta \to 0$, so 
+    \[ \left| \int_{C_\delta} \frac{z^3+8}{z^5+1} \log z \, dz \right| \leq \int_0^{2\pi} \frac{\delta^3+8}{\delta^5-1} (\log \delta + 2\pi ) \delta \, d\theta \to 0 \] as $\delta \to 0$. 
+    
+    If we let $\epsilon$ tend to $0$ (while keeping $R,\delta$ fixed), we find 
+    \[ \lim_{\epsilon\to 0} \int_{\gamma_1} \frac{(x+i\epsilon)^3 + 8 }{(x+i\epsilon)^5+1} \log (x+i\epsilon) \, dx =  \int_\delta^R \frac{x^3+8}{x^5+1} \log x \, dx \] whereas  (the negative sign since we're traversing $\gamma_2$ in the ``wrong'' direction)
+    \[ - \lim_{\epsilon\to 0} \int_{\gamma_2} \frac{(x-i\epsilon)^3 + 8 }{(x-i\epsilon)^5+1} \log (x-i\epsilon) \, dx =  \int_\delta^R \frac{x^3+8}{x^5+1} (\log x + 2\pi i) \, dx . \] 
+    Putting all this together with the Residue Theorem, as $\epsilon \to 0$ first and then $R\to \infty$ and $\delta \to 0$, we have
+    \begin{align*}
+      2\pi i \sum_{a} \Res_a \frac{z^3+8}{z^5+1} \log z &=  \int_0^\infty \frac{x^3+8}{x^5+1} \log x \, dx - \int_0^\infty \frac{x^3+8}{x^5+1} (\log x + 2\pi i) \, dx \\
+      &= - 2\pi i \int_0^\infty \frac{x^3+8}{x^5+1} \, dx, 
+    \end{align*}
+    where the sum is over all residues of $\frac{z^3+8}{z^5-1} \log z$ contained in $\gamma_1 + C_R + \gamma_2 + C_\delta$ (this sum is independent of $R, \delta, \epsilon$, provided $R$ is larger than $1$ and $\delta$ and $\epsilon$ are smaller than $1$).  Put $\zeta = e^{\pi i / 5}$.   The residues occur at $\zeta, \zeta^3, \zeta^5, \zeta^7, \zeta^9$.   Each of these is a simple pole of $\frac{z^3+8}{z^5-1} \log z$, so the corresponding residue is 
+    \begin{align*}
+      \Res_{\zeta^k}  \frac{z^3+8}{z^5+1} \log z &= \lim_{z\to \zeta^k} (z-\zeta^k) \frac{z^3+8}{z^5-1} \log z \\ 
+      &= \lim_{z\to \zeta^k} \frac{z^3+8 \log z}{ (z^5 - (-1))/ (z-\zeta^k)} \\
+      &= (\zeta^{3k}+8) \log \zeta^k  \left[ \frac{1}{\frac{d}{dz} z^5} \right]_{z=\zeta^k} \\
+      &= \frac{1}{5} \zeta^{-4k} (\zeta^{3k}+8)  \log \zeta^k  \\
+      &= \frac{1}{5} \zeta^{-4k} (\zeta^{3k}+8)   \frac{k \pi}{5} i
+    \end{align*} for $k=1,3,5,7,9$.  
+    Hence,
+    \[ \int_0^\infty \frac{x^3+8}{x^5+1} \, dx = - \frac{1}{25} \sum_{k\in \{ 1,3,5,7,9\}}  k\pi i \zeta^{-4k} (\zeta^{3k} + 8). \] Mathematica simplifies this to $\frac{9 \pi }{5} \sqrt{ 2 + \tfrac{2}{\sqrt 5 } } \approx 9.621$. 
+    
+    %8
+  \item[XI.11]   Consider the dog bone contour in the figure, which consists of a portion $C_0$ of a circle of radius $\delta$ about $0$, a portion $C_1$ of a circle of radius $\delta$ about $1$, and the horizontal line segments $\gamma_+$ and $\gamma_-$, which are part of the lines $\{ \Im z = \epsilon \}$ and $\{ \Im z = - \epsilon \}$, respectively, such that the horizontal line segments connect the two circles as indicated in the figure below: 
+    
+
+    We define $\sqrt z$ and $\sqrt{1-z}$ via different branches of the logarithm as follows.  We define $\sqrt z = e^{\tfrac 1 2 \log z}$ on $\mathbb C \setminus (-\infty, 0]$ so that $\log 1 = 0$.  We define $\sqrt{1-z} = e^{\tfrac 1 2 \log z}$ on $\mathbb C \setminus (-\infty, 1]$ so that $\log 2 = \ln 2$ (technically, this is a different branch of $\log$ from the one in the last sentence!).  To avoid further confusion, we will not refer to $\log$ from now on.  Instead, we will refer only to $\sqrt z$ and $\sqrt{1-z}$.  
+
+    Defining $\sqrt z$ and $\sqrt{1-z}$ in this way gives rise to a function $\sqrt{z(1-z)}$ which is well defined and continuous on $\mathbb C \setminus [0,1]$.   How?  For clarity, put $f(z) = \sqrt z$ and $g(z) = \sqrt{1-z}$, and let $h(z)$ be the function we are trying to define on $\mathbb C \setminus [0,1]$.  There is no issue in defining $h(z)$ when $z \in \mathbb C \setminus (-\infty,1]$: in this case, take $h(z) = f(z)g(z)$, and $h(z)$ will be  analytic at $z$.   If $x < 0$,  $f(x)g(x)$ can now be made meaningful: if we approach the real axis from above and separately from below, the two limiting values of $f(x)$ differ by  a multiplicative factor of $-1$, as do the two limiting values of $g(x)$, but when we take their product, these multiplicative factors cause no confusion.  Thus, we can define $h(x)$ to be the limiting value of $f(x)$ from above the real line times the limiting value of $g(x)$ from above the real line, and $h$ will be continuous at $x$.   By this definition of $h(x)$, it is clear now that if $R \subset \mathbb C \setminus [0,1]$ is any rectangle about $x<0$ with sides parallel to the coordinate axes, then $\int_{\partial R} h(z) \, dz = 0$ (since the integral along opposite sides will cancel completely).  Hence, by Morera's Theorem,  $h(z)$ is analytic on $\mathbb C \setminus [0,1]$.  
+
+    We estimate the integral of $h(z)$ along $C_0$ and $C_1$ first.  On $C_0$, $z=\delta e^{i\theta}$ (for suitable $\theta$ so that the point is really in $C_0$).  Hence,  by the reverse triangle inequality, 
+    \[ \left| \frac{1}{\sqrt{z(1-z)}} \right| = \left| \frac{1}{\delta e^{i\theta} - \delta^2 e^{2i\theta}} \right| \leq \frac{1}{\sqrt{\delta - \delta^2}}   \] so that
+        \begin{align*}
+          \left| \int_{C_0} h(z) \, dz \right| \leq \int_0^{2\pi} \frac{\delta}{\sqrt{\delta-\delta^2}} \, d\theta.
+        \end{align*}
+        By L'H\^opital's rule, $\frac{\delta}{\sqrt{\delta-\delta^2}} \to 0$ as $\delta \to 0$.  Hence, first letting $\epsilon \to 0$, then letting $\delta\to 0$ yields $ \int_{C_0} h(z) \, dz  \to 0$.  which tends to $0$ as $\delta\to 0$ by L'H\^opital's rule.  A similar analysis   shows that $ \int_{C_1} h(z) \, dz  \to 0$ as $\epsilon\to 0$ then $\delta \to 0$, as well.   
+
+        Along the horizontal line segments, we find 
+        \[ \lim_{\epsilon \to 0} \int_{\gamma_+} h(x + i\epsilon) \, dx = -\int_0^1 \frac{1}{\sqrt{x(1-x)}} \, dx \] (where the negative sign is because we are traversing $\gamma_+$ in the ``wrong'' direction) and 
+        \[ \lim_{\epsilon \to 0} \int_{\gamma_-}  h(x-i\epsilon) \, dx = -\int_0^1 \frac{1}{\sqrt{x(1-x)}} \, dx \]  (the negative is introduced because as we approach a point  $x\in (0,1)$ from above and below the real axis, we get the same answer for the limiting value $f(x)$ but opposite-signed answers for the limiting value $g(x)$).  
+
+
+        In order to compute $\int_{\gamma_- + C_1 + \gamma_+ C_0} h(z) \, dz$, we can't use the Residue Theorem since there are infinitely many points in the dog bone at which $h(z)$ is not analytic.   But, $h(z)$ is analytic everywhere outside the dog bone.   Since $h(z) \to 0$ as $z\to \infty$, $h(z)$ can be extended to be analytic at $\infty$ by the Riemann Removeable Singularity Theorem (with $h(\infty) = 0$).   Hence, $h(z)$ has a valid Laurent series $\sum_{n=-\infty}^{-1} a_n z^n$  in the annulus $1 + \delta < |z| < \infty$.   About any positively oriented circle $C_R$ of radius $R>1+\delta$ centered at $0$, we have $a_{-1} = \frac{1}{2\pi i} \int_{|z|=R} f(z) \, dz$ by Cauchy's Integral Formula.   But, by Cauchy's Theorem, $\int_{C_R} h(z) \, dz - \int_{\gamma_- + C_1 + \gamma_+ C_0} h(z) \, dz = 0$, since $C_R - (\gamma_- + C_1 + \gamma_+ + C_0) \sim 0$ (the  cycle winds around no points outside the enclosed region).   But, 
+        \[ a_{-1} = \lim_{z\to \infty} z \cdot \frac{1}{\sqrt{z(1-z)}} \] and 
+        \[ z \cdot \frac{1}{\sqrt{z(1-z)}} = \frac{\sqrt{z}}{\sqrt{1-z}} = \frac{1}{1/z - 1} \to \sqrt{-1} \]  so either $a_{-1} = i$ or $a_{-1} = -i$.  But, up to this point, we know
+        \[ \int_0^1 \frac{1}{\sqrt{x(1-x)}} \, dx = -a_{-1} \pi i.\]  Since the integral is certainly nonnegative, we deduce $a_{-1}$ is $i$ and not $-i$.  Hence, 
+        \[ \int_0^1 \frac{1}{\sqrt{x(1-x)}} \, dx = \pi. \]
+
+
+        We can evaluate this integral another way by making the substitution $w = 1/x$.  Then $dw = - \frac{dx}{x^2}$, or $dx = -\frac{dw}{w^2}$.   Also, the limits of integration under this substitution are $w : \infty \to 0$ since $x : 0\to 1$.  Hence,
+        \begin{align*}
+            \int_0^1 \frac{1}{\sqrt{x(1-x)}} \, dx &= \int_{\infty}^1 \frac{1}{\sqrt{\tfrac{1}{w} ( 1 - \tfrac 1 w) }} \cdot \frac{-dw}{w^2} \\
+            &= \int_1^\infty \frac{dw }{w \sqrt{w-1}} 
+        \end{align*}
+        Now make the substitution $w = \sec^2 \theta$, so $\theta$ runs from $0$ to $\tfrac \pi 2$ as $w$ runs from $1$ to $\infty$.   Also, $dw = 2\sec^2 \theta \tan \theta$, and we find 
+        \begin{align*}
+            \int_1^\infty \frac{dw}{w \sqrt{w-1}}   &= \int_0^{\pi/2}  \frac{2\sec^2 \theta \tan \theta}{\sec^2 \theta \sqrt{\tan^2\theta}} \, d\theta \\
+            &= \int_0^{\pi/2} 2 \, d\theta \\
+            &= \pi,
+        \end{align*}
+        so we have computed in another way that $\int_0^1 \frac{dx}{\sqrt{x(1-x)}}  = \pi$. 
+\end{enumerate}
+\section{MATH 536}
+\subsection{Chapter 12}
+%%
+%%
+%%
+%%
+%NEXT CHAPTER 2
+%%
+%%
+%%
+%%
+\chapter{UW Prelims}
+\section{UW 2012}
+\begin{enumerate}
+\item
+\item
+\item
+\item Montel says that a family $\mathcal{F}$ is normal if and only if the family is locally uniformly bounded. Let $A=\sup_{f\in\mathcal{F}}|f'(1/2)|$. By the definition of $\mathcal{F}$, the functions are actually uniformly bounded by 1, so the family is normal. By Cauchy's theorem, the derivatives at $z=1/2$ are uniformly bounded as well. Therefore if $\{f_n(z)\}\subset\mathcal{F}$ is any sequence so that so that $|f_n'(1/2)|\to \sup_{f\in\mathcal{F}} |f'(1/2)|$, then normality implies there is a subsequence that converges normally on $D$ to some analytic $F(z)$. Now since each $|f_n(z)|\leq1$, it follows that $|F(z)|\leq1$, so that $F(z)\in \mathcal{F}$ and $|F'(1/2)|=A$. Next, Schwarz-Pick says that any holomorphic function on $\D$ satisfies the following inequality:
+\[
+\frac{|F(z_1)-F(z_2)|}{|1-\overline{F(z_1)}F(z_2)|}\leq\frac{|z_1-z_2|}{|1-\overline{z_1}z_2|},
+\]
+for any $z_1,z_2\in \D$. Now fix $z_1=1/2$ and let $z_2\to 1/2$ to obtain the inequality
+\[
+|F'(1/2)|\leq \frac{4}{3}(1-|F(1/2)|^2).
+\]
+Evidently to sharpen this inequality we want $F(1/2)=0$, so we reduce to those $f\in \mathcal{F}$ with the property that $f(1/2)=0$. Now we obtain $|F'(1/2)|\leq 4/3$. We know by Schwarz' lemma that if there is equality then $F$ is simply a rotation of the disk, i.e, the functions $F(z)=e^{i\theta}\frac{z-1/2}{1-z/2}$ are all those members of $\mathcal{F}$ with the property that $|F'(1/2)|=4/3=A$.
+\item
+\item Answer is $\frac{e^{-\pi/2}\pi}{1+e^{-\pi}}$. Take a rectangular contour. Zeroes are when $z=\frac{\pi(2k+1)i}{2}$. Rectangular contour with $x+i\pi$ as the upper line and starting/ending at $x=-N$ to $x=M$. Only the pole at $z=ipi/2$ is enclosed in the contour.
+\item Let $\tau\in \C\setminus\R$ and $\Lambda=\{a+b\tau\mid a,b\in \Z\}$. Let $f$ be a non constant meromorphic function with the property that $f(z+\omega)=f(z)$ for all $z\in \C$ and $\omega\in\Lambda$. For $a\in\C$, denote \[
+P_a=\{a+t+s\tau:0\leq t\leq 1,0\leq s\leq1\}.
+\]
+\begin{itemize}
+\item Note $f'(z)$ is also doubly periodic with same period. Therefore $\int_{P_a}f'/f dz=0$ since the opposite sides cancel. This is also the number of zeros times the number of poles, so they are equal. If there are zeros on the fundamental parallelogram, then since they are isolated, we can remove a bump or just move the parallelogram up. Need more details here.
+\item Degree zero makes no sense. If the degree is one, $f(z)$ has a simple pole in $P_a$. On the one hand, $\int_{P_a}f(z)dz=0$ as we know from the previous part, but by the residue theorem this is integral also gives $2\pi i$ times the residue at the pole in $P_a$. Since the pole is simple, this residue is nonzero. Therefore degree 1 cannot happen as well.
+\end{itemize}
+\item
+\end{enumerate}
+\section{UW 2011}
+\begin{enumerate}
+\item Omitted
+\item 
+\item Put $g(z)=\left(\overline{f(\overline{z})}\right)^{-1}$. Then $g(z)$ is a meromorphic function in the plane; moreover, for real $z, g(z)=f(z)$. Therefore, as meromorphic functions, $g(z)\equiv f(z)$ by the identity principle. But whenever $g(z)$ has poles, i.e. $f(\overline{z})=0$, the identity states that $f(z)$ will have a pole. Since $f(z)$ is entire, there can therefore be no poles of $g(z)$, equivalently zeros of $f(z)$. Therefore $f(z)$ is a non vanishing entire function, so we can define a logarithm of $g(z)$ to be analytic on $\C$, whence $f(z)=e^{g(z)}$, as required.  
+\item Jordan Curve Theorem!
+\item Fix $0<r<R$, let $\epsilon>0$, and put $u_{\epsilon}(z)=u(z)-U(z)+\epsilon\log\left|\frac{z-z_0}{r}\right|$, where $U(z)=PI_{|z-z_0|=r}(u(z))$. $u_{\epsilon}(z)$ is subharmonic in $D'(z_0,r)$, $u_{\epsilon}(z)\leq 2M$, and $u_{\epsilon}\to-\infty$ as $z\to z_0$. Since $\limsup_{z\in D'(z_0;r)\to \zeta\in|z-z_0|=r} u_{\epsilon}(z)\leq 0$, we have $\limsup_{z\to \zeta\in\partial D'(z_0,r)} u_{\epsilon}(z)\leq 0$. By the maximum principle, $u_{\epsilon}(z)\leq 0$ persists in $D'(z_0;r)$. Fix $z\in D'(z_0;r)$ and let $\epsilon\to0$ to obtain $u(z)\leq U(z)$. The same analysis applied to $v_{\epsilon}(z)=U(z)-u(z)+\epsilon\log\left|\frac{z-z_0}{r}\right|$ allows us to conclude $u(z)=U(z)$. But by Schwarz' theorem, the right-hand member is harmonic at $z_0$, so we can extend $u(z)$ to be $U(z_0)$ at $z=z_0$ and obtain a harmonic function in $D(z_0;r)$. Letting $r\to R$ proves the claim.
+\item Let $a_{n_k}=\left(1-\frac{1}{n^3}\right)\exp\left\{2\pi i\frac{k}{n}\right\}, 0\leq k<n$. Then $\sum_{n,k} 1-|a_{n_k}| < \infty$, so that $B(z)=\prod_{n,k}B(a_n,z)$ where $B(a_n,z)=\frac{|a|}{a}\frac{a-z}{1-\overline{a}z}$ has the property that $B(z)\in H^{\infty}(\D)$ and furthermore every point on the boundary is a limit point of the zeros of $B(z)$. Indeed, the zeros are scaled $n$th roots of unity which form a dense
+\item
+\item
+\end{enumerate}
+\section{UW 2010}
+\begin{enumerate}
+\item
+\item
+\item
+\item
+\item Define $-\pi \arg z < \pi$. With this choice we have a square root defined on the right-half plane. Therefore we can view $g(z^2)$ as a map from the right-half disk 
+\item
+\item We show that $\mathcal{F}$ is locally uniformly bounded in $\D$. Fix a disk $B=B(z_0,R_0)$ so that $\overline{B}\subset\D$. Then 
+\[
+\left|\iint_{B}f^2 dxdy\right|\leq \iint_{B} |f|^2 dxdy\leq \iint_{\D} |f|^2dxdy\leq 1,
+\]
+and since $f^2$ is analytic, we can change variables to $r,\theta$ and the left-most member in the above line becomes $\left|\int_{0}^{R_0} 2\pi f^2(z_0)rdr\right|=2\pi^2R_0^2|f(z_0)|^2\leq1$, so that $|f(z_0)|\leq \frac{1}{\pi^2R^2}$. Now, since $R<1-|z_0|$, we may apply this procedure to disks where $R$ increases to $1-|z_0|^2$, we obtain, after taking square roots, the inequality $|f(z_0)|\leq \frac{1}{\pi(1-|z_0|)}$. Now fix any disk $\Delta$ with $\overline\Delta\subset\D$. Then for each $z\in\Delta$, $|f(z)|\leq\frac{1}{\pi(1-|z|)}$. Since these disks are properly within $\Delta$, $1-|z|>0$, so that $|f(z)|\leq C$ for some appropriately chosen $C$. Therefore $\mathcal{F}$ is locally uniformly bounded, and by Montel's theorem $\mathcal{F}$ is a normal family.
+\item
+$F(z)=\int_0^{\infty} x^{z-1}e^{-x^2}dx$.
+\begin{itemize}
+\item Prove that $F$ is an analytic function on the region $\Re z>0$.
+\item Prove that $F$ extends to a meromorphic function on the whole complex plane.
+\item Find all the poles of $F$ and find the singular parts of $F$ at these poles.
+\end{itemize}
+\begin{proof}
+Let $S$ denote an arbitrary square contained in $\Re z>0$ whose sides are parallel to the coordinate axes. We show $\int_S F(z)dz=0$ for all such $S$, and from Morera's theorem it will follow that $F(z)$ is analytic in $t=\Re z>0$. We wish to switch the order of integration, so we show $\int_S \int_0^{\infty} x^{t-1}e^{-x^2}dx|dz|<\infty$. Split the inner integral into $\int_0^1 x^{t-1}e^{-x^2}dx+\int_1^{\infty} x^{t-1}e^{-x^2}dx$. The first integrand is bounded above by $\int_0^1 x^{t-1}dx$ and is finite by direct integration. For the latter integral, since $x\geq 1$, we may work instead with $\int_1^{\infty} x^te^{-x^2}dx$. Since $e^{x^2}=1+x^2+x^4/2!+\cdots$, choose $n_0$ so that $t-2n_0<-1$. Then $x^{2n_0}\leq e^{x^2}$ so that $\int_1^{\infty} x^te^{-x^2}dx \leq \int_1^\infty x^{t-2n_0}dx < \infty$ (functions like $1/x^{1+\epsilon}$ are integrable at infinity.) We may actually choose $n_0$ so that this relationship holds for all $t$ in the square by choosing the largest of the $n_0$'s. Integrating the outer integral, we simply use $|\int_S F(z)dz|\leq \ell(S)\sup_{\Re z=t\in S}|F(z)|$, which by our previous argument the right-hand term will be finite. Therefore we may switch the integrations to obtain $\int_S F(z)dz = \int _0^{\infty}\int_S x^{z-1}e^{-x^2}dzdx$, and for fixed $x>0$ the inner integral is zero by Cauchy's theorem, as $x^{z-1}=e^{(z-1)\log x}$ is an analytic function within the square. Actually to even apply Morera's theorem, we need $F(z)$ to be a continuous function of $z$. This follows from the dominated convergence theorem: Let $t_{max}$ denote the maximum value of $t$ in $S$. Then $|x^{z-1}e^{-x^2}|\leq x^{t_{max}-1}e^{-x^2}$, and we know already that the right-hand side is $L^1(\R,dx)$. Therefore continuity is established.
+\end{proof}
+\end{enumerate}
+\section{UW 2009}
+\begin{enumerate}
+\item
+\item
+\item Let $A_n=\{z\in \C: f^{(n)}(z)=0\}$. By the hypothesis of the problem, $\cup _{n\geq 0} A_n=\C$. By isolated zeros, we know that each $A_n$ is a discrete set and furthermore each $A_n$ is closed since $f(z)$ is continuous. Therefore we have written $\C$ as the countable union of nowhere-dense closed sets, which contradicts the Baire Category theorem. Therefore there is some $A_{n_0}$ with nonempty interior, which by isolated zeros implies $f^{(n_0)}(z)\equiv0$, and we deduce $f(z)$ is a polynomial.	 
+\item
+\item
+\item
+\item
+\item
+\begin{itemize}
+\item To show $\prod_{k=1}^\infty |1+\frac{i}{k}|$ converges, look at $\sum_{k=1}^\infty \log |1+\frac{i}{k}|=\sum_{k=1}^\infty \frac{1}{2}\log{(1+\frac{1}{k^2})}\leq\sum_{k=1}^\infty \frac{1}{2}(1/k^2)<\infty$, as required. Now if $\prod_{k=1}^\infty(1+i/k)$ converged, which is to say $\sum_{k=1}^\infty \log(1+i/k)=\sum_{k=1}^\infty \log|1+i/k|+i\arg(1+i/k)=\sum_{k=1}^\infty \log|1+i/k|+i\arctan(1/k)$ converged, then we would have $\sum_{k=1}^\infty i\arctan(1/k)$ converging. This follows from the fact that $\lim(a_n+b_n)-\lim(b_n)=\lim(a_n)<\infty$ if the left-hand members are both convergent. But since $\lim_{x\to0}\frac{\tan x}{x}=1$, we can find $x$ small enough so that $\frac{\tan x}{x}<2$, which implies $\arctan(1/k)>1/(2k)$ for $k$ large enough, which implies $\sum_{k=1}^\infty 1/k<\infty$, a contradiction.
+\item 
+\end{itemize}
+\end{enumerate}
+\section{UW 2008}
+\begin{enumerate}
+\item
+\item We use Jensen's theorem to derive the inequality $n(r)\log2\leq \log{M(2r)}$
+\item Otherwise $\forall r>0 \exists f$ such that $f(\D)\not\supset \D_r$. In particular select $r_n=1/n$ and find $f_n(z)$ so that $z_n\in \D_{1/n}$ is omitted from $f_n(\D)$. Put $g_n(z)=f_n(z)-z_n$. Then $\{f_n\}\subset\mathcal{F}$ so it has a subsequence that converges normally to some analytic $f$ by Weierstrass. Evidently $g_n(z)\to f$. By Hurwitz, $f(z)$ is either identically zero or nonzero on the compact. But by the assumption on the family, if $f$ is identically zero then the derivative condition is violated and if $f(z)$ is nonzero then zero at zero fails. 
+\item Assume $f(U)\neq \D$. By the maximum principle, $f(U)\subset\D$. By assumption, find $z_0\in \D$ so that $f(z)\neq z_0$ for any $z\in U$. The function $T(z)=\frac{f(z)-z_0}{1-\overline{z_0}f(z)}:U\to\D$ is nonvanishing and analytic. When $z\in\partial U$, $|T(z)|=1$ since $|f(z)|=1$. By the maximum and minimum modulus principles, $|T(z)|=1$ throughout $U$, so that $T(z)$ is a unimodular constant. Rearranging, we obtain $f(z)$ is constant as well.
+\item
+\item
+\item
+\item
+\end{enumerate}
+\section{UW 2007}
+\begin{enumerate}
+\item Answer is $\frac{\pi(a+1)}{4e^a}$. Semicircular contour. Very straight-forward.
+\item
+\item Let $p(z)=az^4+bz+1, a\in[1,\pi], b\in[2\pi-2,7]$. Then $p(z)$ and $bz$ have the same number of roots in $|z|<1$ and $p(z)$ and $az^4$ have the same number of roots in $|z|<2$. Therefore there are at most 3 roots in $1<|z|<2$, but there might be fewer if some of the three roots lie on $|z|=1$.
+\item Assume there is a univalent map $f(z)$ from the annulus $\Omega_1=\{z: 1/2 < |z| < 1\}$ onto the punctured disk $\Omega_2=\{z: 0<|z|<1\}$. Then $g(z)=f^{-1}(z)$ is analytic and is a map from the punctured disk to the annulus. Evidently $g(z)$ is bounded in a neighborhood of zero, and by Riemann's theorem on removable singularities, we can extend $g(z)$ to be defined at 0 to have $g(z)\in H(\D)$. Since one-to-one analytic maps are proper; that is, boundaries must map to boundaries, we see that $|g(0)|$ is either 1 or $1/2$. If $|g(0)|=1$, then by open mapping $g(z)$ maps a neighborhood of zero to a neighborhood of a point on $|z|=1$, which cannot happen. If $|g(0)|=1/2$, the same thing happens as a neighborhood of a point on $|z|=1/2$ will contain points whose modulus is smaller than $1/2$, contradicting the hypothesis. Therefore no such map exists.     
+\item
+\item If $\sum_{n\geq0}\frac{M_nz^n}{n!}$ converges in $\D$, then $\mathcal{F}\ni f(z)=\sum_{n\geq0}a_nz^n$ has a convergent power series centered at zero. Fix a compact subset of $\D$ and find $R<1$ so that $|z|<R$ contains the compact $K$. Such $R$ can be chosen since $K$ is a compact subset of $\D$ and thus $d(K,\partial\D)$ is positive. Choose $\epsilon$ small enough and consider a ball of radius $1-\epsilon$. Then for $z\in K$, $|f(z)|\leq \sum_{n\geq0}\frac{M_n}{n!}|z|^n\leq \sum_{n\geq0}\frac{M_n}{n!}(1-\epsilon)^n<\infty=C_K<\infty$, so by Montel's theorem $\mathcal{F}$ is locally uniformly bounded and thus a normal family.
+\\
+Conversely, suppose $\mathcal{F}$ is a normal family.
+\item Firstly, $f(0)=0$, so zero is attained at least once. For $z\neq0$, the solving equation $f(z)=0$ is equivalent to $g(z)=\sin z/z^2=1$. Since $g(z)$ has an essential singularity at infinity, Great Picard says that, in a deleted neighborhood of infinity, $g(z)$ attains every complex number, infinitely many times, with at most one possible exception. If there was no $z\in \C$ so that $g(z)=1$, then since $g(z)$ is odd, $g(-z)=-1$ would have no solution, which contradicts the theorem.
+\item
+\end{enumerate}
+\section{UW 2006}
+\begin{enumerate}
+\item Let $p(z)=z^n+c_{n-1}z^{n-1}+\cdots+c_0$. Let $f(z)=z^n$. We wish to compare $p(z)$ to $f(z)$. Let $R=\sqrt{1+|c_0|^2+\cdots+|c_{n-1}|^2}$, then on $|z|=R$, we have
+\begin{align*}
+|p(z)-f(z)|&\leq (|c_0|^2+\cdots+|c_{n-1}|^2)^{1/2}(1+|z|^2+\cdots+|z|^{2n-2})^{1/2} \\
+&= \sqrt{R^2-1}(1+R^2+\cdots+R^{2n-2})\\
+&= \sqrt{R^2-1}\sqrt{\dfrac{R^{2n}-1}{R^2-1}} \\
+&< \sqrt{R^{2n}}=|f(z)|,
+\end{align*}
+so that by Rouche's theorem all the zeros of $p(z)$ lie within the disk centered at zero of radius $\sqrt{|c_0|^2+\cdots+|c_{n-1}|^2+1}$, as required.
+\item 
+\item Let $r$ be the smallest disk centered at zero omitted by the map $f(z)$ and select $z_0$ in this disk. Then the function $g_1(z)=\frac{f(z)-z_0}{1-\overline{z_0}f(z)}:\D\to\D$ and is non vanishing on a simply connected domain. Hence we can define $g_2(z)=\sqrt{g_1(z)}$ to be analytic on $\D$. The function $h(z)=\frac{g_2(z)-g_2(0)}{1-\overline{g_2(0)}g_2(z)}\in H(\D)$ and furthermore $h(0)=0$ and $|h(z)|\leq 1$. By Schwarz' Lemma, $|h'(0)|<1$, and a computation shows, if we define $b=\sqrt{-z_0}$, that for this to happen we must have $1+|b^2|<14|b|$, which has solutions whenever $|b|<7-4\sqrt{3}$ (the other solution is outside the disk). Therefore as long as $|b|<7-4\sqrt{3}$ 
+\item
+\begin{proof}
+Assume not. Then there exists a $z_0\in\Omega$ and a radius $r>0$ so that \[
+|f(z_0)|=\int_0^{2\pi} |f(z_0+re^{i\theta})|d\theta/2\pi,\]
+and by the Cauchy integral formula for $f(z_0)$, we obtain
+\[
+|\int_0^{2\pi}f(z_0+re^{i\theta})d\theta| =\int_0^{2\pi} |f(z_0+re^{i\theta})|d\theta,
+\]
+which implies $f(z)=\alpha g(z)$ on $|z-z_0|=r$, where $g(z)$ is real valued and $|\alpha|=1$ (i.e., $f$ has constant argument on the circle). Define $g(z)=f(z)/\alpha$ in $\Omega$. Then $g(z)$ is evidently analytic and real valued on $|z-z_0|=r$. By the Poisson integral for $\Im g(z)$ for points $z\in D(z_0;r)$, we obtain $\Im g(z)\equiv 0$ within $\overline{D}(z_0;r)$. Therefore by open mapping (the image of the disk $D$ is sent to the real line, which isn't an open set), $g(z)$ is a real constant throughout $\overline{D}$, and since $\alpha g$ and $f$ agree on a set with a limit point, we obtain $f$ is identically constant on $\overline{D}$, and by isolated zeros $f$ is identically constant throughout $\Omega$, a contradiction.
+\end{proof}
+\item
+Let $f\in H(\C)$ with only finitely many zeros. Assume $m(r)=\min_{|z|=r}|f(z)|$ does not tend to 0 as $r\to \infty$. We negate the statement $(\forall\epsilon>0)(\exists\delta>0).(R>\delta\Rightarrow m(r)<\epsilon)$ to get $(\exists\epsilon>0)(\forall\delta>0).(R>\delta\Rightarrow m(r)\geq \epsilon)$. For $\delta=1,2,\dotsc,$ we may select $R_1,R_2,\dotsc$ and form a sequence of positive real numbers (we may further assume increasing by passing to a subsequence) with the property $m(R_n)\geq \epsilon$. Since $f(z)$ has only finitely many zeros, we may write $f(z)=\frac{(z-z_1)\cdots(z-z_n)}{g(z)}$, where $1/g\in H(\C)$ and is non vanishing. For large enough $R_n$ we may enclose all zeros of $f(z)$ in $|z|\leq R_n$. Now fix $z$ with $R_n<|z|<R_{n+1}$. We have $|g(z)|\leq \frac{|(z-z_1)\cdots(z-z_n)|}{\epsilon}\leq C|z|^n$. Indeed, $f(z)$ is nonzero and analytic in the annular region $R_n<|z|<R_{n+1}$ and thus satisfies the minimum modulus principle. By Cauchy's estimates $g(z)$ is necessarily a polynomial. But since $1/g\in H(\C)$, we arrive at a contradiction by the fundamental theorem of algebra.
+\item Let $\Omega=\{z:|z|\leq 2\}$ and $[0,1]$ be the line segment from 0 to 1.
+\begin{itemize} 
+\item We apply Morera's theorem and show that $\int_S f(z)dz=0$ for all rectangles $S$ contained in $\Omega$ whose sides are parallel to the coordinate axes (where the integral is taken with positive orientation). By the analyticity of $f$ on $\Omega\setminus[0,1]$, the only difficulty arises when the rectangles meet $[0,1]$. There are evidently two problems: the case when a subset of $[0,1]$ is completely within the of the rectangle except for possibly two points, and the case where a subset of $[0,1]$ is one of the sides of the rectangle. By writing the former case as the integral of the sum of two rectangles in the latter case, it is enough to prove that $\int_S f(z)dz=0$ for rectangles $S$ described by the latter case. Let $S$ be such a rectangle. Consider the function $f_{\epsilon}(z)=f(z+i\epsilon)$, where $\epsilon>0$. Since $\int_S f(z+i\epsilon)=0$ and since $f_{\epsilon}(z)\to f(z)$ uniformly for $z\in S$ (which follows since $S$ is compact), we may conclude $\int_S f(z)dz = \lim_{\epsilon\to 0}\int_S f_{\epsilon}(z)dz = 0$. By Morera's theorem, $f(z)$ extends to be analytic in $|z|<2$, as required.
+\item Define $f(z)=\sqrt z\sqrt{ z-1}$, where $0< \arg z < 2\pi$ and $0 < \arg (z-1) < 2\pi$. Clearly $f\in H^{\infty}(\Omega\setminus[0,2))$. The doubt arises across $(0,2)$, where there are branch cuts. Tending to points $x\in (0,1)$ from above, the product tends to $i\sqrt x\sqrt{x-1}$. Tending from below we obtain $-i\sqrt x\sqrt{x-1}$, so analyticity fails on $(0,1)$. Now we just need to show analyticity works on $(1,2)$. Indeed, tending to $x\in (1,2)$ above yields $\sqrt{x}\sqrt{x-1}$, and tending from below gives $(-\sqrt{x})(-\sqrt{x-1})=\sqrt{x}\sqrt{x-1}$, which is great! By the previous part, this function extends to be continuous on $(1,2)$. Therefore $f\in H^{\infty}(\Omega\setminus[0,1])$ and cannot be extended to an analytic function in $\Omega$.
+\end{itemize}
+\item
+\item
+\end{enumerate}
+\section{UW 2005}
+\begin{enumerate}
+\item We have $z^n=-1=exp\{i\pi+i2k\pi\}$, so that if $z=re^{i\theta}$, then $n\theta=\pi(2k+1)$, so that $\theta=\pi\frac{2k+1}{n}$. Now $n$ is an even integer, and we repeat whenever $2k=1\geq n$, so evidently $k\in\{0,1,\dotsc,n/2-1\}$. 
+\item Partial fractions yields $f(z)=\frac{1/(a-b)}{z-a}+\frac{1/(b-a)}{z-b}$. There are three regions to consider: $|z|<|a|, |a|<|z|<|b|, $and $|b|<|z|$. For the first case, we expand $\frac{1}{z-a}=\frac{1}{-a(1-z/a)}=\frac{-1}{a}\sum_{n=0}^\infty (\frac{z}{a})^n$, which is valid whenever $|z|<|a|$. Similarly, we write $\frac{1}{z-b}=\frac{-1}{b}\sum_{n=0}^\infty (\frac{z}{b})^n$, which is valid whenever $|z|<|b|$ and is in particular valid in the first region. Therefore we can say $f(z)=\frac{-1}{a-b}\sum_{n=0}^\infty \frac{z^n}{a^{n+1}} + \frac{-1}{b-a}\sum_{n=0}^\infty \frac{z^n}{b^{n+1}}$.
+\item By Montel's theorem, $g_n(z)$ is a normal family. Since the family $f_n-g_n$ omits at least three values, by Marty's theorem it is normal in the chordal metric. The limit function therefore is either analytic or identically infinity. But since $|g_n|\leq1$ and $f_n(z)$ converges for each $z$, it follows that $|f_n-g_n|\leq 1+|f_n(z)|$ so that the limit function is point wise bounded and thus the convergence is normal in the Euclidean metric. Therefore $f_n=g_n+(f_n-g_n)$ is a normal family as well. This follows more generally from the fact that $\{a_n\}$ and $\{b_n\}$ being normal families on a domain $G$ implies their sum is a normal family. Fix a compact $K$ and consider $\{f_{n_k}\}\to f$ uniformly on $G$. By considering the subsequence $\{g_{n_k}\}\subset\{g_n\}$ we may pass to a further subsequence $g_{n_{k_j}}$ and have this sequence converging on $K$. But since $f_{n_k}$ converges, any subsequence converges as well, so that $f_{n_{k_j}}+g_{n_{k_j}}$ converges on $K$, which is the condition of being normal. Now we show the sequence $f_n$ converges normally on $G$. Fix a compact set $K$. If $f_n$ does not converge normally on $K$, then the family is not uniformly Cauchy. Therefore there exists $\epsilon$ so that for all $N\in \N$ and $n,m\geq N$ $|f_n(z)-f_m(z)|>\epsilon$. Therefore we obtain two subsequences $f_{m_1}, f_{n_1}$ (where we choose $m_1,n_1\geq 1=N$ and so forth. Thus the inequality reads for all $k\in \N, |f_{n_k}-f_{m_k}|>\epsilon$. By normality, there is a subsequence of $\{f_{n_k}\}$ that converges normally on $K$ and similarly for $\{f_{m_k}\}$. Call the limit functions $f,g$. By Weierstrass, both are analytic functions as they are the normal limit of analytic functions. Moreover, since $f_n(z)$ converges point wise for each $z\in G$, we have $f(z)=g(z)$ for each $z\in K$ so that $f\equiv g$ by isolated zeros. But at this point we arrive at a contradiction, since (relabel and pass to the subsequences) $\epsilon<|f_n-f_m|\leq |f_n-f|+|f_m-g|$, and the right-most member can be made arbitrarily small. Therefore $f_n$ are uniformly Cauchy and thus $f_n$ converges normally on $G$.
+\item
+\item $f(z)$ extends to be continuous on $i\R$, and by Schwarz reflection principle, we reflect about the imaginary axis and define a function in the whole plane by the identity $F(z)=\begin{cases} f(z) & \text{if } \Re z > 0, \\ 0 & \text{if } \Re z = 0, \\ \overline{f(-\overline{z})} & \text{otherwise}.\end{cases}$
+\item
+\item
+\item Hi
+\begin{itemize}
+\item $u(z)=\frac{\log{|z|/r}}{\log{R/r}}$.
+\end{itemize}
+\end{enumerate}
+\section{UW 2004}
+\begin{enumerate}
+\item 
+\item
+\item
+\item
+\item 
+\item
+\item
+\item
+\end{enumerate}
+\section{UW 2003}
+\begin{enumerate}
+\item $\frac{1}{2\pi i}\int_{|\zeta|=1} \frac{f(\zeta)d\zeta}{\zeta-z}=\begin{cases} f(z) &\text{if } |z|<1 \\ 0 & \text{if } |z| >1\end{cases}$. The integral is not defined if $|z|=1$. This follows form Cauchy's theorem applied the holomorphic function $F(\zeta)=\frac{f(\zeta)-f(z)}{\zeta-z}$. $F(z)$ extends to be holomorphic at $\zeta=z$ by Riemann's theorem (define $F(z)=f'(z)$).
+\item
+\item
+\item
+\item 
+\item The angle of the two sectors to the right is $\pi/6$ by taking inverse tangents. Set $\alpha=\pi/4+\pi/6$. Then define $z^{\pi/(2\alpha)}$ to be analytic on $\D\setminus{\Re z\leq 0}$. Then we get to the right-half disk, and the map $-i\frac{z-i}{z+i}$ maps to the upper-half plane, and a Cayley finishes the job.
+\item
+\item
+\end{enumerate}
+\chapter{TAMU Prelims}
+\section{TAMU January 2013}
+\begin{enumerate}
+\item Put $f(z)=\frac{z}{1-z-z^2}$. Then $f(z)$ has a taylor development at zero, say, $f(z)=\sum_{n\geq0}a_nz^n$. Where the series converges in the largest open disk centered at zero that $f(z)$ is analytic. Note that $f(z)$ has poles at $z=-\frac{1}{2}\pm\frac{\sqrt{5}}{2}$. Therefore $z=(1-z-z^2)\sum_{n\geq0}a_nz^n$ and equating coefficients on both sides we obtain $a_{n+2}=a_{n+1}+a_{n}$ for $n\geq 0$. Furthermore, $f(0)=0=a_0$ and $1=a_1-a_0$ by equating coefficients (aka uniqueness of power series coefficients on both sides). Here we are only speaking of those z where $f(z)$ has this Taylor series. Here we can say $(1-z-z^2)\sum_{n\geq0}a_nz^n=\sum_{n\geq0}(a_n-a_{n+1}-a_{n+2})z^n$ since the series converges absolutely.
+\item
+\item
+\item Can only get an estimate for $|f'(0)|<4/\pi$.
+\item Just use Cauchy estimate and trap a compact set in a disk and do the integration over a slightly bigger disk. Just use the fact that this series converges! So yes it is normal.
+\item Assume $|\Re f(z)|\leq M$ for $z\in \D'$. Composing with a map $\varphi$ sending $|\Re z|\leq M$ to $\D$, we obtain a map $g(z)=(\varphi\circ f)(z):\D'\to \D$ which extends to be analytic at zero by Riemann's theorem. Therefore since $\varphi$ is a conformal map, $f(z)$ extends to be analytic at zero by setting $\varphi^{-1}\circ g(0)=f(0)$. 
+\item Write $f(z)=(g\circ h)(z)$ where $g(w)=w^3+w^2$ and $h(z)=e^z$. Then the composition is surjective since polynomials are surjective and so is the exponential function (except for zero). Therefore the function is surjective away from zero. But the function is obviously zero too so yeah.
+\item 
+\item Done in a UW prelim.
+\item 
+\end{enumerate}
+\section{TAMU August 2012}
+\begin{enumerate}
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\end{enumerate}
+\section{TAMU January 2009}
+hey
+
+Let $\Omega$ be the half-strip defined by $z=x+iy, x>0, 0<y<\pi$ and let $f$ be analytic on $\Omega$, continuous on $\overline{\Omega}$ (the closure of $\Omega$ in $\C$ - not the closure on the Riemann sphere), real on $\partial\Omega$ and suppose $f(z)e^{-z}\to 1$ uniformly in $y$ as $x\to +\infty$. Prove $f$ maps $\Omega$ one-to-one and conformally onto the upper half plane $\H$. (Hint: compare $f$ to a conformal map of $\Omega$ onto $\H$.)
+\begin{proof}
+Let $\varphi(z)=\frac{1}{2}(e^z+e^{-z})$ be a conformal map of $\Omega$ to $\H$. Then $f/\varphi=2f/(e^z+e^{-z})\to 2$ uniformly in $y$ as $x\to +\infty$ on $\Omega$ since $|e^{-2z}|=e^{-2x}\to0$ as $x\to+\infty$. Therefore for each $\epsilon_n$, there exists $R_n$ so that on $B_n=\{(x,y):R_n < x < \infty, 0<y<\pi/2\}$, $f/\varphi < 2 + R_n$. On $A_n=\Omega\setminus B_n$, $f/\varphi$ is also bounded. This is true by the maximum principle since $f$ and $\varphi$ are continuous on $\overline{\Omega}$ and therefore bounded on both upper and lower line segments of $A_n$ (note here we use that $\varphi\neq 0$ on this set. The only problem is on the line segment $x=0$, where $\varphi(z)=cos(y)$ has a zero at $y=\pi/2$. But by Lindelof's maximum principle, we may still conclude $f/\varphi$ is bounded inside $A_n$.
+\end{proof}
+Determine all entire functions $f$ satisfying $|f|=1$ on $\partial\D$.
+\begin{proof}
+Consider the number of zeros of $f$ in $\D$. If there are countably many in the disc, then they must accumulate. If they accumulate within the disc, then $f$ is identically zero. If they accumulate on the boundary, then the hypothesis is violated. (Actually one can just say $\overline{\D}\subset\C$ and $f$ entire implies there are only finitely many zeros in $\overline{\D}$ and they must all lie in the interior by the hypothesis.) Oops. Will need that other argument for the rational $f$ to be presented next. Now there are only finitely many zeros. List them as $a_1,\dotsc,a_n$ (possibly repeated). Let $B_{a_i}(z)$ denote the Blaschke factor with zero at $a_i$, i.e. the automorphism of the disc sending $a_i$ to zero. Then the quotient $g = f/\Pi B_{a_i}$ is analytic in $\D$ with removable singularity at each $a_i$. Now $g$ is a nonzero analytic function in $\D$ satisfying $|g|=1$ on $\partial\D$, so the minimum and maximum modulus principle applied to $g$ implies, $g\equiv \lambda$ for unimodular $\lambda$. Since $f$ is entire and agrees with $\lambda\Pi B_{a_i}(z)$ on a set with an accumulation point, isolated zeros implies $f\equiv \lambda\Pi B_{a_i}(z)$. The fact that $1-\overline a_iz=0$ is zero in $|z|>1$ implies $f$ has a pole. Therefore either $f$ has finitely many zeros all of whom are at $a_i=0$, or $f$ is nonzero. Therefore $f=\lambda z^n, n\geq0, |\lambda|=1$.
+\end{proof}
+Suppose $f\in H(\D)$ and assume that $|f(z)|\to 1$ as $|z|\to 1$. Show that $f$ is rational.
+\begin{proof}
+We take cases on the zeros of $f$. Assume $f$ has infinitely many zeros. If they accumulate to the boundary, then the hypothesis fails for that sequence of zeros $|z_j|$. If they accumulate inside, then $f$ is identically zero by isolated zeros. Here we used that an infinite subset of the compact set $\overline\D$ has an accumulation point (this is an equivalent form of compactness for metric spaces). Therefore there are only finitely many zeros. If there are NO zeros, then the limsup form of the maximum principle implies $1=\limsup_{z\to\partial\D} |f(z)| = \sup_{z\in\Omega}|f(z)|$ and similarly the minimum modulus principle applied to $1/f\in H(\D)$ implies $f$ is constant and so rational. Now if there are finitely many zeros, divide by the Blaschke factors to form a non vanishing analytic function in the disc. Again by maximum and minimum modulus, this quotient is a unimodular constant so that $f$ is a finite blaschke product. You might ask, well why don't we just factor out $(z-a_i)$ where $a_i$ are the zeros? The problem is that the Blaschke factors tend to 1 as $|z|\to1$ so we can still apply the hypothesis of the problem and the maximum principle; without it, we have no control on the analytic function we form.
+\end{proof}
+Gamelin IX.1.8. Let $f\in H(\D)$ with $f(0)=0, |f'(0)|<1$. Show that there is a $c_R$ so that on $|z|\leq r, |f(z)|<c|z|$.
+\begin{proof}
+Let $R$ be given. Since $|f(z)|<1$ in $\D$, it holds in particular for $|z|\leq R$. Define $g(z)=f(z)/z$. $g(z)$ has a removable singularity at 0 and we can define its value to be $f'(0)$, so $g\in H(D(0;R))$. Schwarz' lemma implies $|f(z)|\leq |z|$ for $|z|<1$. On $|z|=R$, we obtain $|f(z)|\leq R$. Let $C$ denote the maximum of $|f(z)|$ on $|z|=R$, which exists by continuity and compactness. Evidently, $C<R$ by the lemma, strict since otherwise $f=\lambda z$ (lambda unimodular), which violates the hypothesis on the derivative. Therefore $|g(z)|\leq C/R$, where $C/R<1$. Evidently the $n$th iterate satisfies $|f_n(z)|\leq c^n|z|$, so that $\lim |f_n(z)|\to 0$ and we deduce for disks $\overline{D}(0;R)$, $f_n(z)\to 0$ uniformly (this bound was independent of $z\in\overline{D}(0;R)$. Since this holds for disks, the convergence is normal. Indeed, any compact set $K\subset \D$ can be covered by disks whose closure lies completely within $\D$. The convergence is normal on these disks and we may reduce to a finite sub cover by disks whose closure lies in $\D$. Therefore the functions converge normally to 0.
+\end{proof}
+TAMU Jan 2009 \#10
+\begin{proof}
+The boundedness and connectedness of $\Omega$ implies that one of lies within the other. The Jordan curve theorem says they both separate into bounded components, and one bounded must intersect the other unbounded giving a bounded (clean this up). By relabeling, assume WLOG $\gamma_1$ is the interior curve. Let $f\in H(\Omega)$. We show $f$ has an analytic antiderivative if and only if $\int_{\gamma_1}fdz=0$. Note first that $\int_{\gamma_1}f=\int_{\gamma_2}f$. This follows since the curve $\gamma_2-\gamma_1\sim 0$. Indeed, points $z$ within the ``hole" created by $\gamma_1$ have zero winding number since the ray connecting a point $z$ to $\infty$ is zero (a negative 1 is picked up from $\gamma_1$ and canceled by the +1 from $\gamma_2)$. Points outside clearly lie in the unbounded component and their winding number is evidently zero. Therefore by Cauchy's theorem $\int_{\gamma_2-\gamma_1}f=0$. If $f$ has an analytic antiderivative, $F$, then the fundamental theorem of calculus implies $\int_{\gamma_1^{\epsilon}}fdz=0$ for this curve whose distance is uniformly $\epsilon$ away from $\gamma_1$ and entirely contained within $\Omega$. Such an $\epsilon>0$ can be chosen by considering $\inf_{s,t} d(\gamma_1(s),\gamma_2(t))\neq0$. Since the distance function is continuous in $s,t$ and $s,t\in [a_1,b_1]\times [a_2,b_2]$ is compact, this value is attained. If it were zero, then disjointness would fail. Taking $\epsilon$ smaller than this infimum yields a sequence of curves entirely within $\Omega$ converging to something I'm making up. I would like to rigorize this. Or at least use uniform continuity like Hart said. Instead of integrating over curves tending to $\gamma_1$, integrate instead over $\gamma_1$ of the function a little bit away from $\gamma_1$. Uniform continuity implies $|\int_{\gamma_1} f_{\epsilon}-f dz|\leq \ell(\gamma_1)\sup_{z}|f_{\epsilon}-f|$ which can be made arbitrarily small.
+\end{proof}
+\chapter{Other Prelims}
+\section{Temple January 2012}
+\begin{enumerate}
+\item 
+\begin{itemize}
+\item
+Compute Laplacian in polar coordinates:
+\[
+\Delta u(r,\theta) = \left(\frac{1}{r}\frac{\partial}{\partial r} + \frac{\partial^2}{\partial r^2} + \frac{1}{r^2}\frac{\partial^2}{\partial \theta^2}\right)u(r,\theta),
+\]
+which holds for all $r\neq 0$.
+\item Since $\Omega = \C\setminus \{x\in \R : x\geq0\}$ is simply connected and does not contain 0, we may define $\log z^2$ so as to be analytic on $\Omega$. Moreover, $\log z^2 = \log |z|^2 + i \arg z^2$, where $0 < \arg z < 2\pi$. Now $|z|^2 = x^2+y^2$, so that $u(x,y)=\Re \log z^2$, and it follows that $v(x,y):=\arg z^2$ is a harmonic conjugate of $u(x,y)$ in $\Omega$.
+\item Let $\tilde v(x,y)$ be the alleged harmonic conjugate in $\C\setminus\{0\}$. Denote by $f$ the analytic function $u+i\tilde v$ in $\C\setminus\{0\}$. Then $\log z^2 - f(z)$ is purely imaginary in $\Omega$. By open mapping, $\log z^2 - f(z)\equiv i\alpha$, an imaginary constant. Therefore $H(\C\setminus\{0\})\ni f(z)=\log z^2 + i\alpha$ in $\Omega$, therefore $\tilde v(x,y) = log|z|^2+i\alpha$ off a line. But by the formula we can then extend $\arg z^2$ to be $\tilde v - i\alpha$ which is analytic off $0$, which is a contradiction. ($\arg z^2$ will approach $4\pi i$ as you tend below and 0 as you tend above).   
+\end{itemize}
+\item $f\in H(\C)$.
+\begin{itemize}
+\item Assume this inequality holds for $|z|>R'$. Fix $z_0\in \C\setminus \{|z|\leq R'\}$. Choose $R$ large enough so that $z_0\in R'<|z|<R$. Let $C_{2R}$ be the curve $2Re^{it}, 0\leq t\leq 2\pi$. Then by Cauchy's integral formula, $|f^{(3)}(z_0)|\leq \frac{2\pi (2R)\left(\frac{(2R)^4}{1+(2R)^2}\right)}{2\pi R^4}$, and taking $R$ to infinity yields $|f^{(3)}(z_0)|=0$. This argument works for arbitrary $R'<|z_0|\in \C$, so that $f^{(3)}(z)\equiv 0$ by isolated zeros. By the same argument it follows that for $n\geq3$, $f^{(n)}(z)\equiv 0$, so that $f(z)$ is a polynomial of degree less than or equal to 2.
+\item Now assume the inequality holds for all $z\in \C$. From the previous part, $f(z)$ is at most a degree two polynomial. Let $f(z)=az^2+bz+c$, where not all of $a,b,c$ are zero. The inequality implies $f(0)=0$, so we conclude $c=0$. Therefore we may write $f(z)=zg(z)$, where $g(z)\in H(\C)$. Now $|g(z)|\leq \frac{|z|^3}{1+|z|^2}$ whenever $z\neq 0$, but by continuity as $|z|\to 0$, $|g(z)|\to 0$, so that $b=0$. it follows that $f(z)=az^2$, and the inequality reads $|a|(\frac{1}{|z|^2}+1)\leq 1$ for all $z\neq 0$, which is absurd. (can also note $|a|\leq 1/2$ by evaluating at 1.) 
+\end{itemize}
+\item $f,g\in H(D'(z_0;r))$, $r>0$.
+\begin{itemize}
+\item
+\end{itemize}
+\item asdf
+\begin{itemize}
+\item
+\end{itemize}
+\item
+\item
+\begin{itemize}
+\item Want to show given $\epsilon>0$ we can find $N$ so that $n\geq N$ implies $|f_n(z)-f(z)|<\epsilon$ for all $z\in \overline{D}(0;1)$. We have the result already for $|z|=1$. Consider some $z\in \D$. By Cauchy's integral formula, we have $|f_n(z)-f(z)|$
+\item Weierstrass' Theorem:
+\end{itemize}
+\item
+\begin{itemize}
+\item
+\item Choose $r>0$ and $n\geq 0$. We directly show there must exist $z$ on $|z|=r$ such that $|p_n(z)|=|e^z|$. 
+\end{itemize}
+\end{enumerate}
+\section{Temple August 2012}
+\begin{enumerate}
+\item
+\item
+\item 
+\begin{itemize}
+\item Consider $g(z)=e^{-f(z)}\in H(\C)$. $|g(z)|=e^{-Re f(z)}<1$, and by Liouville's theorem $g(z)$ is a constant. Now assume $f(z)$ is non constant. Then there are two points $z,w\in \C$ so that $f(z)\neq f(w)$. Since $f(\C)$ is connected, there necessarily exists an accumulation point in $f(\C)$ (else the set is discrete and thus disconnected). Therefore $\exp(z)$ is identically a constant on $f(\C)$ by the identity theorem and we can further say identically constant on $\C$, a contradiction. Alternatively, if $f$ is non constant then $f(\C)$ is open so $\exp(f(\C))$ is constant on an open set, which implies $\exp$ is a constant, a contradiction. 
+\item Let $u_1$ and $u_2$ be two harmonic functions in $\C$. Assume that $u_1-u_2$ is non constant and $u_1\neq u_2$ for all $z\in\C$. Then $u_1-u_2$ is harmonic and is either strictly positive or strictly negative by continuity, and since $\C$ is simply connected, $u_1-u_2$ is the real part of some analytic function $f(z)$. By the previous part $f(z)$ is a constant so $u_1-u_2=\Re f$ is constant, a contradiction.
+\end{itemize}
+\item
+\end{enumerate}
+\section{Stanford Problems}
+Let $f\in H(D(0;2))$, show $\int_0^1 f(x)dx = \frac{1}{2\pi i}\oint _{|z|=1} f(z)\log z dz$.
+\subsection{Fall 1998}
+\begin{enumerate}
+\item
+\item
+\item
+\item
+\item
+\item
+\end{enumerate}
+\subsection{Spring 1998}
+\begin{enumerate}
+\item
+\item 
+\begin{enumerate}
+\item Use the identity $f(z)-1=\frac{z}{2}f(z/4)$. Since $f(z)$ has an essential singularity, near the singularity $f(z)$ attains every value infinitely often, with one possible exception. If zero was that exception, then this identity says $f(z/4)$ would also attain 0 only finitely often, and thus $z/2f(z/4)$ would as well. Therefore $f(z)$ would attain 1 only finitely many times as well, which is a contradiction.
+\item Assume $f(z)$ is not a polynomial. We can factor out the zeros to write $f(z)=e(z)e^{g(z)}$, where $e(z)=(z-z_1)(z+z_1)\cdots (z-z_n)(z+z_n)$. By evenness, we must have $e^{g(z)}$ even .. we want to divide the $e(z)$ on both sides, but we can't. For sure it's even away  from the finitely many zeros, and since $e^g$ is entire and by continuity it's even there too! Now taking moduli and applying the hypothesis, we get a bound on $\Re g(z) \leq |z|$ for large enough $|z|$. Therefore $g(z)$ is linear, whence this shit aint even unless $g(z)$ is constant, which is a contradiction.
+\end{enumerate}
+\item
+\item
+\item
+\item
+\end{enumerate}
+\section{Wisconsin Problems}
+Compute $\int_{|z|=2} \frac{z^5}{z^7+3z-10}dz$. Substitute $z=1/w$, then $w^2dw=-dz$. The integral we obtain is $\int_{|w|=1/2} \frac{w^4}{1+3w^6-10w^7}dw$. By Rouche's theorem, let $g-h=10w^7-3w^6-1$ and $h=1$, then $|g|=|10w^7-3w^6| < 1 = |h|$ so that no zeros of the denominator are within the circle of radius 1/2. Therefore the integral is zero since the integrand is zero.
+\section{Columbia 1997}
+\begin{enumerate}
+\item Let $f$ be holomorphic on some open set $U$ of $\C$. Let $z_0\in U$ such that $f'(z_0)\neq 0$. Show that if $C$ is a circle of center $z_0$ and small enough radius, then:
+\[
+\frac{2\pi i}{f'(z_0)}=\int_C \frac{1}{f(z)-f(z_0)}dz.
+\]
+\item Suppose $f(x,z)$ is a continuous function on $\R\times\C$ such that, for each $x\in\R$, the function $z\mapsto f(x,z)$ is holomorphic. Show that the following function is holomorphic:
+\[
+F(z)=\int_0^1 f(x,z)dx.
+\]
+\item Show that if $a>0$ then
+\[
+\int_{-\infty}^{\infty}\frac{e^{iax}}{x^2+1}dx=\pi e^{-a}.
+\]
+\item Let $f$ be holomorphic on some open set $U$ containing a closed disk $D_R$ of center 0 and radius $R$. Let $z_1,z_2,\dotsc,z_N$ be the zeros of $f$ in the open disk, each zero being repeated according to its multiplicity. Prove that
+\[
+|f(0)|\leq\frac{|z_1\cdots z_N|}{R^N}\sup_{|z|=R}|f(z)|
+\]
+\item
+\item
+\end{enumerate}
+\section{Columbia Analysis}
+\begin{enumerate}
+\item The largest disk we can apply this formula to is a disk of radius $R=d(\partial\Omega,w)$, so we obtain $|f(w)|^2\leq\frac{1}{\pi^2 d(\partial\Omega,w)^2}||f||^2_{L^2(\Omega)}$. But since $d(\partial\Omega,w)\geq d(\partial\Omega,K)$, we obtain $|f(w)|^2\leq\frac{1}{\pi^2 d(\partial\Omega,K)^2}||f||^2_{L^2(\Omega)}$, taking sups on both sides gives what we wanted. ACTUALLY SUPREMUM IS ATTAINED. Take a disk about the sup, say it's attained at $z_0$.
+\end{enumerate}
+\chapter{Miscellaneous Problems}
+Prove that if $u(z)$ is a bounded harmonic function in $D'(z_0;R)$ then $u(z)$ extends to be harmonic in the full disc $D(z_0;R)$.
+Prove that if $f(z)\in H(D'(z_0;R))$ and $\Re f(z)$ has a removable singularity at $z_0$, then $f(z)$ extends to be analytic in $D(z_0;R)$.
+\\TAMU August 2008 \#9 Show that the range of $z^2+\cos(z)$ is all of $\C$.
+\\TAMU January 2009 \#9 Let $f(z)\in H(\D)$ be univalent and $f(0)=0$. Prove there exists $g(z)\in H(\D)$ such that $g(z)^2=f(z^2)$ for all $z\in\D$.
+\\ Fresnel Integrals
+\\ integrate $\log\sin\theta$
+\\ Show that if $f\in H(D'(z_0;R))$ and if $f'/f$ has a simple pole at $z_0$, then $f(z)$ has either a zero or a pole at $z_0$.
+\begin{proof}
+By composing with a linear map, assume $z_0=0$. First note that there is some deleted neighborhood about 0 where $f(z)\neq 0$. This follows from the fact that if $f(w)=0$, then $f(z)=(z-w)^kg(z), k\geq1$ and $g$ analytic. Then $f'/f = k/(z-w)+g'/g$, whence $f'/f$ has a pole at $w$. Since the poles are isolated, there must exist some deleted neighborhood about 0 where $f(z)\neq 0$. Choose such a neighborhood. We may define $\log f$ so as to be analytic off imaginary axis and 0. Then $\log f(z) - \log f(z_1) = \int_{z_1}^z f'/f dz = \alpha \int_{z_1}^z dz/z + H(z)$, where $H$ is analytic. The right-hand side follows from the fact that, near zero, $f'/f = \alpha/z + h(z)$, with $h(z)$ analytic and we take any polygonal path connecting $z_1$ to $z$, and the integral is independent of the path by simple connectedness. Exponentiating both sides, we obtain $f(z)=\frac{f(z_1)}{z_1^{\alpha}}z^{\alpha}e^{H(z)}$. Now $\alpha$ is a nonzero integer since ?
+\end{proof}
+\section{Notes to myself}
+Any nonzero entire $f\in H(\C)$ is of the form $f=\exp(g)$. $f'/f$ analytic in the whole plane, is the derivative of some $g(z)$. Therefore $f\exp(-g)$ has zero derivative so that $f=\exp(g)$ but the constant multiple is absorbed in $g(z)$.\\
+$\lim_{z\to0}\frac{\log{(1+z)}}{z}=1$.
+\\$\tan(\theta)\approx\theta,\sin\theta\approx\theta,\cos\theta\approx1-\theta^2/2$
+\\$\log x\leq x-1$
+\\ NOTE THAT THE RIEMANN SPHERE IS COMPACT! If I have an analytic function on the sphere, there can be only finitely many zeros by sequential compactness and the identity theorem. Moreover, the singularity at infinity is removable since we're analytic there too. Therefore if $f$ has a power series centered at zero, to have a removable singularity at infinity means that there can be no powers of $z^{-1}$ in the expansion of $f(1/z)$, which implies $f$ is a constant.
+\\ Let's talk about meromorphic functions on the sphere. There can be only finitely many zeros and poles by sequential compactness. Therefore it must be rational! After factoring out, we'd have a rational function times the quotient of nonzero analytic functions on the sphere, which we've just argued are constants. 
+\end{document}
